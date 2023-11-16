@@ -1,0 +1,923 @@
+Program.Sub.ScreenSU.Start
+Gui.FormPartReport..Create
+Gui.FormPartReport..Caption("Job Part Reporting")
+Gui.FormPartReport..Size(15405,10650)
+Gui.FormPartReport..MinX(0)
+Gui.FormPartReport..MinY(0)
+Gui.FormPartReport..Position(0,0)
+Gui.FormPartReport..BackColor(-2147483633)
+Gui.FormPartReport..MousePointer(0)
+Gui.FormPartReport..Event(UnLoad,FormPartReport_UnLoad)
+Gui.FormPartReport.lblWC.Create(Label,"Workcenter",True,1935,255,0,105,240,True,0,"Arial",8,-2147483633,0)
+Gui.FormPartReport.ddlWC.Create(DropDownList)
+Gui.FormPartReport.ddlWC.Size(2070,330)
+Gui.FormPartReport.ddlWC.Position(105,465)
+Gui.FormPartReport.ddlWC.Event(Click,ddlWC_Click)
+Gui.FormPartReport.lblActEmp.Create(Label,"Active Employee: ",True,6135,255,0,105,1005,True,0,"Arial",8,-2147483633,0)
+Gui.FormPartReport.lblScan.Create(Label,"Scan",True,1935,255,0,105,1695,True,0,"Arial",8,-2147483633,0)
+Gui.FormPartReport.txtScan.Create(TextBox,"",True,4155,300,0,105,1920,True,0,"Arial",8,-2147483643,1)
+Gui.FormPartReport.txtScan.Event(KeyPressEnter,txtScan_KeyPressEnter)
+Gui.FormPartReport.txtScan.PasswordChar("*")
+Gui.FormPartReport.GsGridControl1.Create(GsGridControl)
+Gui.FormPartReport.GsGridControl1.Size(15075,7935)
+Gui.FormPartReport.GsGridControl1.Position(105,2325)
+Gui.FormPartReport.chkScrap.Create(CheckBox)
+Gui.FormPartReport.chkScrap.Size(840,360)
+Gui.FormPartReport.chkScrap.Position(105,1230)
+Gui.FormPartReport.chkScrap.Caption("Scrap")
+Gui.FormPartReport.chkScrap.Event(Click,chkScrap_Click)
+Gui.FormPartReport.ddlScrap.Create(DropDownList)
+Gui.FormPartReport.ddlScrap.Size(3105,330)
+Gui.FormPartReport.ddlScrap.Position(1155,1260)
+Gui.FormPartReport.ddlScrap.Event(Click,ddlScrap_Click)
+Gui.FormPartReport.lblPrinter.Create(Label,"Printer",True,1935,255,0,2430,240,True,0,"Arial",8,-2147483633,0)
+Gui.FormPartReport.ddlPrinter.Create(DropDownList)
+Gui.FormPartReport.ddlPrinter.Size(2835,330)
+Gui.FormPartReport.ddlPrinter.Position(2430,465)
+Gui.FormPartReport.ddlPrinter.Event(Click,ddlPrinter_Click)
+Gui.FormPartReport.pic1.Create(PictureBox)
+Gui.FormPartReport.pic1.Size(4590,1110)
+Gui.FormPartReport.pic1.Position(7620,615)
+Gui.FormPartReport.pic1.Anchor(1)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.sEmp.Declare(String,"")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.sLastSeq.Declare(Strin,"")
+	V.Local.sImage.Declare(String,"")
+
+	F.Intrinsic.Control.SelectCase(V.Caller.Hook)
+		F.Intrinsic.Control.Case(15030)
+			F.Intrinsic.Control.If(V.Passed.000087.Trim,<>,"")
+				'check if seq is last seq on router if so the WIPTOFG
+				F.Intrinsic.String.Build("Select Top 1 Seq From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and Seq < '995000' and LMO = 'L' Order by Seq Desc",V.Local.sJob,V.Local.sSuffix,V.Local.sSql)
+				F.ODBC.Connection!Con.OpenCompanyConnection
+				F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSql,V.Local.sLastSeq)
+				F.ODBC.Connection!Con.Close
+				
+				F.Intrinsic.Control.If(V.Local.sLastSeq.Trim,=,V.Passed.000090.Trim)
+					'print Inventory Label
+					F.Intrinsic.Control.CallSub(Print_Inv_Label,"Job",V.Passed.000087.Trim,"Suffix",V.Passed.000088.Trim,"Seq",V.Passed.000090.Trim,"Qty",V.Passed.000139.Long)
+				F.Intrinsic.Control.Else
+					'Print Move Ticket
+					F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+						F.Intrinsic.Control.CallSub(Print_Move_Ticket,"Job",V.Passed.000087.Trim,"Suffix",V.Passed.000088.Trim,"Seq",V.Passed.000090.Trim,"Qty",V.Passed.000139.Long,"SQty",V.Passed.000141.Long)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.Control.CallSub(Print_Move_Ticket,"Job",V.Passed.000087.Trim,"Suffix",V.Passed.000088.Trim,"Seq",V.Passed.000090.Trim,"Qty",V.Passed.000139.Long,"SQty",V.Passed.000141.Long)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+				
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Control.End
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.Case(15710)
+			'setting scrpt 3 button text
+			V.Passed.000021.Set("Good Pieces")
+				
+		F.Intrinsic.Control.CaseElse
+			'from menu item an scrpt 3 on gui. hook 15780
+			F.Intrinsic.Control.CallSub(Get_Data)
+			F.Intrinsic.Control.CallSub(Set_Properties)
+'			F.Intrinsic.String.Build("{0}\big-logo.jpg",V.Caller.GasDir,V.Local.sImage)
+'			Gui.FormPartReport.pic1.Picture(V.Local.sImage)
+			Gui.FormPartReport..Show
+			Gui.FormPartReport.txtScan.SetFocus
+	F.Intrinsic.Control.EndSelect
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.txtScan_KeyPressEnter.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sScan.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.sMsg.Declare(String,"")
+	V.Local.sJob.Declare(String,"")
+	V.Local.sSuffix.Declare(String,"")
+	V.Local.sSeq.Declare(String,"")
+	V.Local.sFilter.Declare(String,"")
+	V.Local.iRept.Declare(Long,0)
+	V.Local.sRem.Declare(String,0)
+	V.Local.sPart.Declare(String,"")
+	V.Local.sLastSeq.Declare(String,"")
+	v.Local.fEstimate.Declare(Float,0)
+	V.Local.sStart.Declare(String,"")
+	V.Local.sEnd.Declare(String,"")
+	V.Local.dEnd.Declare(Date)
+	V.Local.sUpdateDate.Declare(String,"")
+	V.Local.sFile.Declare(String,"")
+	V.Local.sLine.Declare(String,"")
+	V.Local.sScrapCode.Declare(String,"")
+	V.Local.iScrap.Declare(Long,0)
+	V.Local.sEst.Declare(String,"")
+	
+	V.Local.sScan.Set(V.Screen.FormPartReport!txtScan.Text)
+	V.Local.sScan.Set(V.Local.sScan.Trim)
+	
+	Gui.FormPartReport.txtScan.Enabled(False)
+	Gui.FormPartReport..Enabled(False)
+	F.Intrinsic.UI.InvokeWaitDialog("Processing Scan..................................")
+	F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,1)
+		F.Intrinsic.Control.If(V.Screen.FormPartReport!ddlScrap.Text,=,"")
+			F.Intrinsic.UI.Msgbox("Select Scrap Reason and Rescan............")
+			Gui.FormPartReport.txtScan.Enabled(True)
+			Gui.FormPartReport..Enabled(True)
+			F.Intrinsic.UI.CloseWaitDialog
+			F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.EndIf
+		F.Data.Dictionary.ReturnKeyFromValue("Scrap",V.Screen.FormPartReport!ddlScrap.Text,V.Local.sScrapCode)
+	F.Intrinsic.Control.Else
+		V.Local.sScrapCode.Set("")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.If(V.Local.sScan.Left2,=,"%$")
+		'setting active employee
+		F.Intrinsic.String.Split(V.Local.sScan,"%$",V.Local.sScan)
+		
+		F.Intrinsic.Control.If(V.Local.sScan(1).Length,=,5)
+			F.Intrinsic.String.Build("Select Employee, Name From V_Employee_Mstr Where Employee = '{0}'",V.Local.sScan(1).Trim,V.Local.sSql)
+			F.ODBC.Connection!con.OpenCompanyConnection
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sSql)
+			F.ODBC.Connection!Con.Close
+			F.Intrinsic.Control.If(V.Local.sSql.Length,=,0)
+				F.Intrinsic.UI.Msgbox("Scanned Employee Not Found.  Contact System Admin","Attention")
+				Gui.FormPartReport.lblActEmp.Caption("Active Employee: ")
+				V.Global.sEmp.Set("")
+				Gui.FormPartReport.txtScan.Text("")
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Split(V.Local.sSql,"*!*",V.Local.sSql)
+				F.Intrinsic.String.Build("Active Employee: {0}",V.Local.sSql(1).Trim,V.Local.sMsg)
+				Gui.FormPartReport.lblActEmp.Caption(V.Local.sMsg)
+				V.Global.sEmp.Set(V.Local.sSql(0).Trim)
+				Gui.FormPartReport.txtScan.Text("")
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		'job suffix seq scan
+		F.Intrinsic.Control.If(V.Global.sEmp.Trim,<>,"")
+			F.Intrinsic.String.Split(V.Local.sScan,"$%",V.Local.sScan)
+			F.Intrinsic.Control.If(V.Local.sScan.UBound,>,0)
+				F.Intrinsic.String.Right(V.Local.sScan(1).Trim,6,V.Local.sSeq)
+				F.Intrinsic.String.Mid(V.Local.sScan(1).Trim,7,3,V.Local.sSuffix)
+				F.Intrinsic.String.Left(V.Local.sScan(1).Trim,6,V.Local.sJob)
+				
+				F.Intrinsic.String.Build("[Job#] = '{0}'",V.Local.sScan(1).Trim,V.Local.sFilter)
+				F.Data.DataView.Create("Job","VJob",22,V.Local.sFilter,"")
+				
+				F.Intrinsic.Control.If(V.DataView.Job!VJob.RowCount--,<>,-1)
+					F.Intrinsic.Math.Add(V.DataView.Job!VJob(V.DataView.Job!VJob.RowCount--).Parts_Reported!FieldValLong,1,V.Local.iRept)
+					F.Intrinsic.String.Build("Select Units_Open - Units_Complete From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and Seq = '{2}'",V.Local.sJob,V.Local.sSuffix,V.Local.sSeq,V.Local.sSql)
+					F.ODBC.Connection!con.OpenCompanyConnection
+					F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSql,V.Local.sRem)
+					F.ODBC.Connection!Con.Close
+					F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+'						F.Intrinsic.Math.Sub(V.Local.sRem.Long,1,V.Local.sRem.Long)
+						F.Intrinsic.Math.Sub(V.DataView.Job!VJob(V.DataView.Job!VJob.RowCount--).Parts_Remaining!FieldValLong,1,V.Local.sRem.Long)
+						F.Data.DataView.SetValue("Job","VJob",-1,"Parts_Reported",V.Local.iRept,"Parts_Remaining",V.Local.sRem.Long)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.Math.Add(V.DataView.Job!VJob(V.DataView.Job!VJob.RowCount--).Scrap_Reported!FieldValLong,1,V.Local.iScrap)
+						F.Data.DataView.SetValue("Job","VJob",-1,"Scrap_Reported",V.Local.iScrap)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.Else
+					F.Intrinsic.String.Build("Select Units_Open - Units_Complete From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and Seq = '{2}'",V.Local.sJob,V.Local.sSuffix,V.Local.sSeq,V.Local.sSql)
+					F.ODBC.Connection!con.OpenCompanyConnection
+					F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSql,V.Local.sRem)
+					F.Intrinsic.String.Build("Select Part From V_Job_Header Where Job = '{0}' and Suffix = '{1}'",V.Local.sJob,V.Local.sSuffix,V.Local.sSql)
+					F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSql,V.Local.sPart)
+					F.ODBC.Connection!Con.Close
+					F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+						F.Intrinsic.Math.Sub(V.Local.sRem.Long,1,V.Local.sRem.Long)
+						F.Intrinsic.Control.If(V.Local.sRem.Long,<,0)
+							V.Local.sRem.Set("0")
+						F.Intrinsic.Control.EndIf
+						F.Data.DataTable.AddRow("Job","Job#",V.Local.sScan(1).Trim,"Part#",V.Local.sPart.Trim,"Parts_Reported",1,"Parts_Remaining",V.Local.sRem.Long)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.Control.If(V.Local.sRem.Long,<,0)
+							V.Local.sRem.Set("0")
+						F.Intrinsic.Control.EndIf
+						F.Data.DataTable.AddRow("Job","Job#",V.Local.sScan(1).Trim,"Part#",V.Local.sPart.Trim,"Parts_Reported",0,"Parts_Remaining",V.Local.sRem.Long,"Scrap_Reported",1)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+			
+				F.ODBC.Connection!con.OpenCompanyConnection
+				
+				'check if seq is last seq on router if so the WIPTOFG
+				F.Intrinsic.String.Build("Select Top 1 Seq From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and Seq < '995000' and LMO = 'L' Order by Seq Desc",V.Local.sJob,V.Local.sSuffix,V.Local.sSql)
+				F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSql,V.Local.sLastSeq)
+				
+				'report good pieces
+				F.Intrinsic.String.Build("Select Hours_Estimated/Units_Open From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and Seq = '{2}'",V.Local.sJob,V.Local.sSuffix,V.Local.sSeq,V.Local.sSql)
+				f.ODBC.Connection!con.ExecuteAndReturn(v.local.sSql,v.Local.fEstimate)
+				F.ODBC.Connection!Con.Close
+'				V.Local.sStart.Set(V.Ambient.Time)
+'				V.Local.sEnd.Set(v.Local.sStart)
+				F.Intrinsic.String.Format(V.Local.sStart,"HhNn",V.Local.sStart)
+'				f.Intrinsic.Math.Mult(v.Local.fEstimate,60,v.Local.fEstimate)
+				F.Intrinsic.String.Format(V.Local.fEstimate.String,"##0.00##",V.Local.sEst)
+				
+'				f.Intrinsic.Date.DateAdd("N",v.Local.fEstimate,V.Ambient.Now.Left22,v.Local.dEnd)
+'				
+'				F.Intrinsic.String.Format(v.Local.dEnd,"HhNn",V.Local.sEnd)
+				
+				F.Intrinsic.String.Format(V.Ambient.Date,"MMDDYY",V.Local.sUpdateDate)
+				
+				'checking to close seq or not
+				F.Intrinsic.Control.If(V.Local.sRem.Long,>,0)
+					F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+						F.Intrinsic.String.Build("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}{0}{9}{0}{10}{0}{11}{0}{12}{0}{13}{0}{14}{0}{15}",V.Ambient.Tab,V.Local.sUpdateDate.Trim,V.Global.sEmp,V.Local.sJob,V.Local.sSuffix,V.Local.sSeq,V.Screen.FormPartReport!ddlWC.Text,V.Local.sEst,"N","D","","","R","1.00","0","",V.Local.sLine)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.String.Build("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}{0}{9}{0}{10}{0}{11}{0}{12}{0}{13}{0}{14}{0}{15}",V.Ambient.Tab,V.Local.sUpdateDate.Trim,V.Global.sEmp,V.Local.sJob,V.Local.sSuffix,V.Local.sSeq,V.Screen.FormPartReport!ddlWC.Text,V.Local.sEst,"N","D","","","R","0","1.00",V.Local.sScrapCode,V.Local.sLine)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+						F.Intrinsic.String.Build("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}{0}{9}{0}{10}{0}{11}{0}{12}{0}{13}{0}{14}{0}{15}",V.Ambient.Tab,V.Local.sUpdateDate.Trim,V.Global.sEmp,V.Local.sJob,V.Local.sSuffix,V.Local.sSeq,V.Screen.FormPartReport!ddlWC.Text,V.Local.sEst,"Y","D","","","R","1.00","0","",V.Local.sLine)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.String.Build("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}{0}{9}{0}{10}{0}{11}{0}{12}{0}{13}{0}{14}{0}{15}",V.Ambient.Tab,V.Local.sUpdateDate.Trim,V.Global.sEmp,V.Local.sJob,V.Local.sSuffix,V.Local.sSeq,V.Screen.FormPartReport!ddlWC.Text,V.Local.sEst,"Y","D","","","R","0","1.00",V.Local.sScrapCode,V.Local.sLine)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+				
+				F.Intrinsic.String.Build("{0}\{1}{2}MOPEN.txt",V.Caller.FilesDir,V.Caller.CompanyCode,V.Caller.Terminal,V.Local.sFile)
+				F.Intrinsic.File.String2File(V.Local.sFile,V.Local.sLine)
+	
+				F.Intrinsic.Task.LaunchGSSSync("JB0455","-c",V.Local.sFile)
+	
+				F.Intrinsic.Control.If(V.Local.sLastSeq.Trim,=,V.Local.sSeq)
+					'print Inventory Label
+					F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+						F.Intrinsic.Control.CallSub(Print_Inv_Label,"Job",V.Local.sJob,"Suffix",V.Local.sSuffix,"Seq",V.Local.sSeq,"Qty","1.00")
+					F.Intrinsic.Control.Else
+						F.Intrinsic.Control.CallSub(Print_Scrap,"Job",V.Local.sJob,"Suffix",V.Local.sSuffix,"Seq",V.Local.sSeq)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.Else
+					'Print Move Ticket
+					F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+						F.Intrinsic.Control.CallSub(Print_Move_Ticket,"Job",V.Local.sJob,"Suffix",V.Local.sSuffix,"Seq",V.Local.sSeq,"Qty","1.00","SQty","0")
+					F.Intrinsic.Control.Else
+						F.Intrinsic.Control.CallSub(Print_Move_Ticket,"Job",V.Local.sJob,"Suffix",V.Local.sSuffix,"Seq",V.Local.sSeq,"Qty","0","SQty","1.00")
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+					
+				F.Data.DataView.Close("Job","VJob")
+				
+				Gui.FormPartReport.txtScan.Text("")
+				Gui.FormPartReport.txtScan.SetFocus
+				
+			F.Intrinsic.Control.Else
+				F.Intrinsic.UI.Msgbox("Current Scan is neither a Employee or Work Order..........")
+				Gui.FormPartReport.txtScan.Text("")
+				Gui.FormPartReport.txtScan.SetFocus
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Else
+			F.Intrinsic.UI.Msgbox("No Active Employee Scanned................")
+			Gui.FormPartReport.txtScan.Text("")
+			Gui.FormPartReport.txtScan.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.BlockEvents
+	gui.FormPartReport.chkScrap.Value(0)
+	Gui.FormPartReport.ddlScrap.Text("")
+	F.Intrinsic.Control.UnBlockEvents
+	Gui.FormPartReport.txtScan.Enabled(True)
+	Gui.FormPartReport.txtScan.Enabled(True)
+	Gui.FormPartReport..Enabled(True)
+	
+	Gui.FormPartReport.txtScan.SetFocus
+	
+	F.Intrinsic.UI.CloseWaitDialog
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.txtScan_KeyPressEnter.End
+
+Program.Sub.FormPartReport_UnLoad.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+
+	F.Intrinsic.Control.End
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.FormPartReport_UnLoad.End
+
+Program.Sub.ddlWC_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sWC.Declare(String,"")
+	
+	V.Local.sWC.Set(V.Screen.FormPartReport!ddlWC.Text)
+	V.Local.sWC.Set(V.Local.sWC.Trim)
+	
+	F.Data.DataTable.SetValue("WC",-1,"Workcenter",V.Local.sWC)
+	
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	
+	F.Data.DataTable.SaveToDB("WC","con","GCG_5639_Workcenter","Terminal",256,"Terminal@!@Terminal*!*WorkCenter@!@WorkCenter")
+	
+	F.Data.DataTable.AcceptChanges("WC")
+	
+	F.ODBC.Connection!con.Close
+	
+	Gui.FormPartReport.txtScan.SetFocus
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.ddlWC_Click.End
+
+Program.Sub.Get_Data.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.bTable.Declare(Boolean,False)
+	
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	
+'	F.ODBC.Connection!con.TableExists("GAB_5455_MVE_TKT_SU",V.Local.bTable)
+'	F.Intrinsic.Control.If(V.Local.bTable,=,False)
+'		F.ODBC.Connection!Con.Execute("CREATE TABLE GAB_5455_MVE_TKT_SU (TRMNL CHAR(3) NOT NULL, COMMENTS LONGVARCHAR NOT NULL, PRINTER CHAR(100), SCRAPPRINTER CHAR(100) );")
+'		F.ODBC.Connection!Con.Execute("CREATE INDEX GAB_5455_MVE_TKT_01 USING 1 ON GAB_5455_MVE_TKT_SU(PRINTER);")
+
+'	F.Intrinsic.Control.EndIf
+'	V.Local.sSql.Set("")
+'	F.ODBC.Connection!con.TableExists("GAB_5455_WIP_OP_LABL",V.Local.bTable)
+'	F.Intrinsic.Control.If(V.Local.bTable,=,False)
+'		f.Intrinsic.String.Concat(v.Local.sSQL,"CREATE TABLE GAB_5455_WIP_OP_LABL ( Trmnl CHAR(3) NOT NULL, Job CHAR(6) NOT NULL,Suffix CHAR(3) NOT NULL,Cur_Seq CHAR(6) NOT NULL,",v.Local.sSQL)
+'		f.Intrinsic.String.Concat(v.Local.sSQL,"Cur_Part CHAR(20),Cur_Descr CHAR(30),Qty NUMERIC(12,4),Qty_Completed NUMERIC(12,4),Workcenter CHAR(30),Employee CHAR(30),",v.Local.sSQL)
+'		f.Intrinsic.String.Concat(v.Local.sSQL,"Quality_No CHAR(7),Scrap_Qty NUMERIC(10,2),Close_Flag CHAR(1),Part CHAR(20),Part_Descr CHAR(30),Customer CHAR(6),Name CHAR(50),",v.Local.sSQL)
+'		f.Intrinsic.String.Concat(v.Local.sSQL,"Next_Seq CHAR(6),Next_Part CHAR(20),Next_Descr CHAR(30),Next_Seq_Start DATE,Next_Seq_Due DATE,WO_Qty NUMERIC(12,4),",v.Local.sSQL)
+'		f.Intrinsic.String.Concat(v.Local.sSQL,"WO_Customer_Qty NUMERIC(12,4),WO_Due_Date DATE,WO_Priority CHAR(3),LMO CHAR(1),SCRAP_CODE CHAR(4),SCRAP_CODE_DESC CHAR(50),",v.Local.sSQL)
+'		f.Intrinsic.String.Concat(v.Local.sSQL,"TOP_Parent_Part CHAR(20),TOP_Parent_Job CHAR(6),TOP_Parent_Suffix CHAR(3),TOP_Parent_Descr CHAR(30),Parent_Part CHAR(20),",v.Local.sSQL)
+'		f.Intrinsic.String.Concat(v.Local.sSQL,"Parent_Descr CHAR(30),Parent_Job CHAR(6),Parent_Suffix CHAR(3),Parent_InitWC CHAR(30),LastOpWC CHAR(20),Comments LONGVARCHAR );",v.Local.sSQL)
+'		F.ODBC.Connection!Con.Execute(v.Local.sSQL)
+'		F.ODBC.Connection!Con.Execute("CREATE INDEX GAB_5455_WIP_OP_LA01 USING 1 ON GAB_5455_WIP_OP_LABL(TRMNL);")
+
+'	F.Intrinsic.Control.EndIf
+	
+	F.ODBC.Connection!con.TableExists("GCG_5639_Workcenter",V.Local.bTable)
+	F.Intrinsic.Control.If(V.Local.bTable,=,False)
+		F.ODBC.Connection!Con.Execute("CREATE TABLE GCG_5639_Workcenter (Terminal CHAR(3) NOT NULL, WorkCenter CHAR(4), PRINTER CHAR(100));")
+		F.ODBC.Connection!Con.Execute("CREATE INDEX GCG_5639_Workcenter USING 1 ON GCG_5639_Workcenter(Terminal);")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("Select Terminal, WorkCenter From GCG_5639_Workcenter Where Terminal = '{0}'",V.Caller.Terminal,V.Local.sSql)
+	
+	F.Data.DataTable.CreateFromSQL("WC","con",V.Local.sSql,True)
+	
+	F.Intrinsic.String.Build("Select rtrim(Machine),rtrim(Machine) From V_WorkCenters Order by Machine","",V.Local.sSql)
+	F.Data.Dictionary.CreateFromSQL("Machine","con",V.Local.sSql)
+	Gui.FormPartReport.ddlWC.AddItem("")
+	Gui.FormPartReport.ddlWC.AddItems("Dictionary","Machine")
+	
+	F.Intrinsic.String.Build("Select Code, Descr From V_Rejected_Code","",V.Local.sSql)
+	F.Data.Dictionary.CreateFromSQL("Scrap","con",V.Local.sSql)
+	Gui.FormPartReport.ddlScrap.AddItem("")
+	Gui.FormPartReport.ddlScrap.AddItems("Dictionary","Scrap")
+	
+	F.ODBC.Connection!Conc.OpenCommonConnection
+	F.Intrinsic.String.Build("Select rtrim(Sentinelalias),rtrim(Sentinelalias) From Server_Printers Where Sentinelenabled = 1 Order by Sentinelalias","",V.Local.sSql)
+	F.Data.Dictionary.CreateFromSQL("PRINTER","conC",V.Local.sSql)
+	Gui.FormPartReport.ddlPrinter.AddItem("")
+	Gui.FormPartReport.ddlPrinter.AddItems("Dictionary","PRINTER")
+	F.Data.Dictionary.Close("Printer")
+	
+	F.ODBC.Connection!ConC.Close
+	
+	F.Intrinsic.String.Build("Select Terminal, Printer From GCG_5639_Workcenter Where Terminal = '{0}'",V.Caller.Terminal,V.Local.sSql)
+	F.Data.DataTable.CreateFromSQL("Printer","con",V.Local.sSql,True)
+
+	F.ODBC.Connection!Con.Close
+	
+	F.Intrinsic.Control.If(V.DataTable.Printer.RowCount--,=,-1)
+		F.Data.DataTable.AddRow("Printer","Terminal",V.Caller.Terminal)
+	F.Intrinsic.Control.Else
+		Gui.FormPartReport.ddlPrinter.Text(V.DataTable.Printer(V.DataTable.Printer.RowCount--).Printer!FieldValTrim)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.If(V.DataTable.WC.RowCount--,=,-1)
+		F.Data.DataTable.AddRow("WC","Terminal",V.Caller.Terminal)
+	F.Intrinsic.Control.Else
+		Gui.FormPartReport.ddlWC.Text(V.DataTable.WC(V.DataTable.WC.RowCount--).WorkCenter!FieldValTrim)
+	F.Intrinsic.Control.EndIf
+
+	F.Data.DataTable.Create("Job",True)
+	F.Data.DataTable.AddColumn("Job","Job#","String")
+	F.Data.DataTable.AddColumn("Job","Part#","String")
+	F.Data.DataTable.AddColumn("Job","Parts_Reported","Integer")
+	F.Data.DataTable.AddColumn("Job","Parts_Remaining","Integer")
+	F.Data.DataTable.AddColumn("Job","Scrap_Reported","Integer")
+	
+	F.Data.DataTable.Create("MoveTicket",True)
+	F.Data.DataTable.AddColumn("MoveTicket","TRMNL","String")
+	F.Data.DataTable.AddColumn("MoveTicket","JOB","String")
+	F.Data.DataTable.AddColumn("MoveTicket","SUFFIX","String")
+	F.Data.DataTable.AddColumn("MoveTicket","CUR_SEQ","String")
+	F.Data.DataTable.AddColumn("MoveTicket","CUR_PART","String")
+	F.Data.DataTable.AddColumn("MoveTicket","CUR_DESCR","String")
+	F.Data.DataTable.AddColumn("MoveTicket","LMO","String")
+	F.Data.DataTable.AddColumn("MoveTicket","QTY","String")
+	F.Data.DataTable.AddColumn("MoveTicket","WORKCENTER","String")
+	F.Data.DataTable.AddColumn("MoveTicket","EMPLOYEE","String")
+	F.Data.DataTable.AddColumn("MoveTicket","QUALITY_NO","String")
+	F.Data.DataTable.AddColumn("MoveTicket","SCRAP_CODE","String")
+	F.Data.DataTable.AddColumn("MoveTicket","SCRAP_CODE_DESC","String")
+	F.Data.DataTable.AddColumn("MoveTicket","SCRAP_QTY","String")
+	F.Data.DataTable.AddColumn("MoveTicket","CLOSE_FLAG","String")
+	F.Data.DataTable.AddColumn("MoveTicket","PART","String")
+	F.Data.DataTable.AddColumn("MoveTicket","CUSTOMER","String")
+	F.Data.DataTable.AddColumn("MoveTicket","NAME","String")
+	F.Data.DataTable.AddColumn("MoveTicket","NEXT_SEQ","String")
+	F.Data.DataTable.AddColumn("MoveTicket","NEXT_PART","String")
+	F.Data.DataTable.AddColumn("MoveTicket","NEXT_DESCR","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Parent_Job","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Parent_Suffix","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Parent_Part","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Parent_Descr","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Top_Parent_Job","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Top_Parent_Suffix","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Top_Parent_Part","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Top_Parent_Descr","String")
+	F.Data.DataTable.AddColumn("MoveTicket","NEXT_SEQ_START","String")
+	F.Data.DataTable.AddColumn("MoveTicket","NEXT_SEQ_DUE","String")
+	F.Data.DataTable.AddColumn("MoveTicket","WO_PRIORITY","String")
+	F.Data.DataTable.AddColumn("MoveTicket","PART_DESCR","String")
+	F.Data.DataTable.AddColumn("MoveTicket","WO_QTY","String")
+	F.Data.DataTable.AddColumn("MoveTicket","WO_CUSTOMER_QTY","String")
+	F.Data.DataTable.AddColumn("MoveTicket","WO_DUE_DATE","String")
+	F.Data.DataTable.AddColumn("MoveTicket","QTY_COMPLETED","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Parent_InitWC","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Comments","String")
+	F.Data.DataTable.AddColumn("MoveTicket","Scrapflag","String")
+	F.Data.DataTable.AddColumn("MoveTicket","ADD_BARCODE_SEQ","String")
+	
+	F.Data.DataTable.Create("InvLabel",True)
+	
+	F.Data.DataTable.AddColumn("InvLabel","BIRUNID","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","PO_FROM_WO","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","SEQ","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","QTY_ON_LABEL","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","LBL_CREATE_DATE","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","PART","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","LOCN","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","INV_QTY_REC","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","DESCR","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","INV_UM","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","PROD_LINE","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","LOT","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","BIN","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","HEAT","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","SERIAL","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","WO","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","WO_SUFFIX","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","WO_SEQ","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","WO_DUE_DATE","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","SO","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","SO_LINE","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","USER_ID","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","CUST_PO_FROM_SO","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","CUSTOMER","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","CUSTOMER_NAME","String")
+ 	F.Data.DataTable.AddColumn("InvLabel","CUST_PART","String")
+ 
+ 	F.Data.DataTable.Create("Scrap",True)
+ 	F.Data.DataTable.AddColumn("Scrap","Code","String")
+ 	F.Data.DataTable.AddColumn("Scrap","Part","String")
+ 	F.Data.DataTable.AddColumn("Scrap","Date","String")
+ 	F.Data.DataTable.AddColumn("Scrap","Time","String")
+ 	F.Data.DataTable.AddColumn("Scrap","WC","String")
+ 	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.Get_Data.End
+
+Program.Sub.Set_Properties.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	F.Intrinsic.Control.BlockEvents
+	Gui.FormPartReport.chkScrap.Value(0)
+	Gui.FormPartReport.ddlScrap.Visible(False)
+	F.Intrinsic.Control.UnBlockEvents
+	
+	Gui.FormPartReport.GsGridControl1.Anchor(15)
+	Gui.FormPartReport.lblStatus.Caption("")
+	
+	Gui.FormPartReport.GsGridControl1.AddGridviewFromDatatable("GJob","Job")
+	
+	Gui.FormPartReport.GsGridControl1.SetGridviewProperty("GJob","Editable",False)
+	Gui.FormPartReport.GsGridControl1.SetGridviewProperty("GJob","ReadOnly",True)
+	
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Job#","HeaderBackColor","Green")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Job#","HeaderForeColor","White")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Part#","HeaderBackColor","Green")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Part#","HeaderForeColor","White")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Parts_Reported","HeaderBackColor","Green")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Parts_Reported","HeaderForeColor","White")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Parts_Reported","Caption","Parts Reported")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Parts_Remaining","HeaderBackColor","Green")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Parts_Remaining","HeaderForeColor","White")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Parts_Remaining","Caption","Parts Remaining")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Scrap_Reported","HeaderBackColor","Green")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Scrap_Reported","HeaderForeColor","White")
+	Gui.FormPartReport.GsGridControl1.SetColumnProperty("GJob","Scrap_Reported","Caption","Scrap Reported")
+	
+	Gui.FormPartReport.GsGridControl1.MainView("GJob")
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.Set_Properties.End
+
+Program.Sub.Print_Inv_Label.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.i.Declare(Long,0)
+	V.Local.sCreateDate.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.sRptLoc.Declare(String,"")
+	V.Local.iRptId.Declare(Long,0)
+	V.Local.iBIRunID.Declare(Long,0)
+	V.Local.iLogID.Declare(Long,0)
+	V.Local.sTprinter.Declare(String,"")
+	
+	F.Data.DataTable.DeleteRow("InvLabel")
+	F.Data.DataTable.AcceptChanges("InvLabel")
+	
+'	"BIRUNID","PO_FROM_WO","SEQ","QTY_ON_LABEL","LBL_CREATE_DATE","PART"
+' 	,"LOCN","INV_QTY_REC","DESCR","INV_UM","PROD_LINE","LOT","BIN"
+' 	,"HEAT","SERIAL","WO","WO_SUFFIX","WO_SEQ","WO_DUE_DATE"
+' 	,"SO","SO_LINE","USER_ID","CUST_PO_FROM_SO","CUSTOMER","CUSTOMER_NAME","CUST_PART"
+ 	
+ 	F.Intrinsic.String.Format(V.Ambient.Date,"MM/DD/YYYY",V.Local.sCreateDate)
+ 	
+ 	F.Intrinsic.Control.If(V.Args.Qty.Long,<>,0)
+ 		F.Data.DataTable.AddRow("InvLabel","WO",V.Args.Job,"WO_SUFFIX",V.Args.Suffix,"WO_SEQ",V.Args.Seq,"QTY_ON_LABEL","1.00","USER_ID",V.Caller.User,"LBL_CREATE_DATE",V.Local.sCreateDate,"INV_QTY_REC","1.00","INV_UM","EA")
+ 		
+ 		F.Intrinsic.String.Build("Select Part, Location, Product_Line, Description, Customer, Customer_PO, Part_Customer, Sales_Order, Sales_Order_Line from V_JOB_Header where JOB = '{0}' and Suffix = '{1}'",V.Args.Job,V.Args.Suffix,V.Local.sSql)
+ 		
+ 		F.ODBC.Connection!Con.OpenCompanyConnection
+ 		
+ 		F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+			F.Data.DataTable.SetValue("InvLabel",-1,"PART",V.ODBC.Con!rstSel.FieldValTrim!Part,"Locn",V.ODBC.Con!rstSel.FieldValTrim!Location,"Customer",V.ODBC.Con!rstSel.FieldValTrim!Customer,"PO_FROM_WO",V.ODBC.Con!rstSel.FieldValTrim!Customer_PO)
+			F.Data.DataTable.SetValue("InvLabel",-1,"DESCR",V.ODBC.Con!rstSel.FieldValTrim!Description,"PROD_LINE",V.ODBC.Con!rstSel.FieldValTrim!Product_Line,"SO",V.ODBC.Con!rstSel.FieldValTrim!Sales_Order,"SO_LINE",V.ODBC.Con!rstSel.FieldValTrim!Sales_Order_Line)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Con!rstSel.Close
+	
+		F.Intrinsic.String.Build("Select Name_Customer From V_Customer_Master Where Customer = '{0}'",V.DataTable.InvLabel(V.DataTable.InvLabel.RowCount--).Customer!FieldValTrim,V.Local.sSql)
+		F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+			F.Data.DataTable.SetValue("InvLabel",-1,"CUSTOMER_NAME",V.ODBC.Con!rstSel.FieldValTrim!Name_Customer)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Con!rstSel.Close
+		
+		F.Intrinsic.String.Build("Select Customer_PO From V_Order_Header Where Order_No = '{0}'",V.DataTable.InvLabel(V.DataTable.InvLabel.RowCount--).SO!FieldValTrim,V.Local.sSql)
+		F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+			F.Data.DataTable.SetValue("InvLabel",-1,"CUST_PO_FROM_SO",V.ODBC.Con!rstSel.FieldValTrim!Customer_PO)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Con!rstSel.Close
+		
+		F.Intrinsic.String.Build("Select Bin From V_Inventory_Mstr Where Part = '{0}' and Location = '{1}'",V.DataTable.InvLabel(V.DataTable.InvLabel.RowCount--).Part!FieldValTrim,V.DataTable.InvLabel(V.DataTable.InvLabel.RowCount--).Locn!FieldValTrim,V.Local.sSql)
+		F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+			F.Data.DataTable.SetValue("InvLabel",-1,"Bin",V.ODBC.Con!rstSel.FieldValTrim!Bin)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Con!rstSel.Close
+		
+		F.Intrinsic.String.Build("{0}\Labels\Custom\GCG_5639_WIP_FG.lab",V.Caller.BusintDir,V.Local.sRptLoc)
+		F.Global.BI.InitializeReport("GCG_5639_WIP_FG",V.Local.sRptLoc,V.Local.iRptId)
+	
+'		F.Intrinsic.String.Build("Select Printer, ScrapPrinter From GAB_5455_MVE_TKT_SU where TRMNL = '{0}'",V.Caller.Terminal,V.Local.sSql)
+'		F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+'		F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+'			V.Local.sTprinter.Set(V.ODBC.Con!rstSel.FieldValTrim!Printer)
+'		F.Intrinsic.Control.EndIf
+'		F.ODBC.Con!rstSel.Close
+		V.Local.sTprinter.Set(V.Screen.FormPartReport!ddlPrinter.Text)
+		V.Local.sTprinter.Set(V.Local.sTprinter.Trim)
+	
+		F.ODBC.Connection!Con.Close
+		
+		F.Global.BI.GetIDFromName("GCG_5639_WIP_FG.lab",V.Local.iRptId)
+		F.Intrinsic.Control.For(V.Local.i,1,V.Args.Qty.Long,1)
+			F.Global.BI.GetRunID(V.Local.iBIrunID)
+			F.Global.BI.StartLogging(V.Local.iBIrunID,V.Local.iRptId,0,"",V.Local.iLogID)
+			F.Global.BI.PrintCodesoftLabelFromDataTable(V.Local.iBIRunID,V.Local.iLogID,"InvLabel",V.Local.sTprinter,True)
+			F.Global.BI.StopLogging(V.Local.iLogID)
+		F.Intrinsic.Control.Next(V.Local.i)
+
+ 	F.Intrinsic.Control.EndIf
+ 	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.Print_Inv_Label.End
+
+Program.Sub.Print_Move_Ticket.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.sRptLoc.Declare(String,"")
+	V.Local.iRptId.Declare(Long,0)
+	V.Local.sTprinter.Declare(String,"")
+	V.Local.sScrapPrinter.Declare(String,"")
+	V.Local.iBIrunID.Declare(Long,0)
+	V.Local.iLogID.Declare(Long,0)
+	V.Local.sScrapCode.Declare(String,"")
+	V.Local.i.Declare(Long,0)
+	
+	F.Data.DataTable.DeleteRow("MoveTicket")
+	F.Data.DataTable.AcceptChanges("MoveTicket")
+	
+	F.Data.DataTable.AddRow("MoveTicket","TRMNL",V.Caller.Terminal,"Job",V.Args.Job,"Suffix",V.Args.Suffix,"CUR_SEQ",V.Args.Seq,"QTY",V.Args.Qty,"SCRAP_QTY",V.Args.SQty)
+	
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	F.Intrinsic.String.Build("Select PART,DESCRIPTION,UNITS_COMPLETE from V_JOB_OPERATIONS where JOB = '{0}' and Suffix = '{1}' and Seq = '{2}'",V.Args.Job,V.Args.Suffix,V.Args.Seq,V.Local.sSql)
+	
+	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"CUR_PART",V.ODBC.Con!rstSel.FieldValTrim!PART,"CUR_DESCR",V.ODBC.Con!rstSel.FieldValTrim!DESCRIPTION,"QTY_COMPLETED",V.ODBC.Con!rstSel.FieldValTrim!UNITS_COMPLETE)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Con!rstSel.Close
+	
+	F.Intrinsic.String.Build("select Top 1 SEQ,PART,DESCRIPTION,LMO,DATE_START,DATE_DUE,UNITS_COMPLETE from V_JOB_OPERATIONS where JOB = '{0}' and Suffix = '{1}' and Seq > '{2}' and Seq < '995000' and LMO <> 'C'  and LMO <> 'M'  and Task_Seq <> 'T' order by SEQ",V.Args.Job,V.Args.Suffix,V.Args.Seq,V.Local.sSql)
+
+	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"NEXT_SEQ",V.ODBC.Con!rstSel.FieldValTrim!SEQ,"NEXT_PART",V.ODBC.Con!rstSel.FieldValTrim!PART,"NEXT_DESCR",V.ODBC.Con!rstSel.FieldValTrim!DESCRIPTION,"LMO",V.ODBC.Con!rstSel.FieldValTrim!LMO,"NEXT_SEQ_START",V.ODBC.Con!rstSel.FieldValTrim!DATE_START,"NEXT_SEQ_DUE",V.ODBC.Con!rstSel.FieldValTrim!DATE_DUE)
+		F.Intrinsic.Control.If(V.ODBC.Con!rstSel.FieldValTrim!LMO,=,"C")
+			F.Intrinsic.String.Build("select Top 1 '$%'+ Job + Suffix + SEQ as JSS from V_JOB_OPERATIONS where JOB = '{0}' and Suffix = '{1}' and Seq > '{2}' and Seq < '995000' and LMO <> 'C'  and LMO <> 'M'  and Task_Seq <> 'T' order by SEQ",V.Args.Job,V.Args.Suffix,V.Args.Seq,V.Local.sSql)
+			F.ODBC.Connection!Con.OpenRecordSetRO("rstJSS",V.Local.sSql)
+			F.Data.DataTable.SetValue("MoveTicket",-1,"ADD_BARCODE_SEQ",V.ODBC.Con!rstSel.FieldValTrim!JSS)
+			F.ODBC.Con!rstJSS.Close
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Con!rstSel.Close
+	
+	F.Intrinsic.String.Build("select PART,LOCATION,CUSTOMER,PRIORITY,PART_DESCRIPTION,QTY_ORDER,QTY_CUSTOMER,DATE_DUE  from V_JOB_HEADER where JOB = '{0}' and Suffix = '{1}'",V.Args.Job,V.Args.Suffix,V.Local.sSql)
+	
+	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"Part",V.ODBC.Con!rstSel.FieldValTrim!PART,"Customer",V.ODBC.Con!rstSel.FieldValTrim!CUSTOMER,"WO_PRIORITY",V.ODBC.Con!rstSel.FieldValTrim!PRIORITY,"PART_DESCR",V.ODBC.Con!rstSel.FieldValTrim!PART_DESCRIPTION,"WO_QTY",V.ODBC.Con!rstSel.FieldValTrim!QTY_ORDER,"WO_CUSTOMER_QTY",V.ODBC.Con!rstSel.FieldValTrim!QTY_CUSTOMER,"WO_DUE_DATE",V.ODBC.Con!rstSel.FieldValTrim!DATE_DUE)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Con!rstSel.Close
+	
+	F.Intrinsic.String.Build("select NAME_CUSTOMER from V_CUSTOMER_MASTER where CUSTOMER = '{0}'",V.DataTable.MoveTicket(V.DataTable.MoveTicket.RowCount--).Customer!FieldValTrim,V.Local.sSql)
+	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"Name",V.ODBC.Con!rstSel.FieldValTrim!NAME_CUSTOMER)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Con!rstSel.Close
+	
+	F.Intrinsic.String.Build("select Parent_WO,Parent_Suffix_Parent from V_JOB_HEADER where JOB = '{0}' and Suffix = '{1}'",V.Args.Job,V.Args.Suffix,V.Local.sSql)
+	
+	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"Parent_Job",V.ODBC.Con!rstSel.FieldValTrim!Parent_WO,"Parent_Suffix",V.ODBC.Con!rstSel.FieldValTrim!Parent_Suffix_Parent)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Con!rstSel.Close
+	
+	F.Intrinsic.String.Build("select Job,Suffix,Part, Part_Description from V_JOB_HEADER where JOB = '{0}' and Suffix = '{1}'",V.DataTable.MoveTicket(V.DataTable.MoveTicket.RowCount--).Parent_Job!FieldValTrim,V.DataTable.MoveTicket(V.DataTable.MoveTicket.RowCount--).Parent_Suffix!FieldValTrim,V.Local.sSql)
+	
+	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"Top_Parent_Job",V.ODBC.Con!rstSel.FieldValTrim!Job,"Top_Parent_Suffix",V.ODBC.Con!rstSel.FieldValTrim!Suffix,"Top_Parent_Part",V.ODBC.Con!rstSel.FieldValTrim!Part,"Top_Parent_Descr",V.ODBC.Con!rstSel.FieldValTrim!Part_Description)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Con!rstSel.Close
+	
+	F.Intrinsic.String.Build("select PART from V_JOB_OPERATIONS where Job = '{0}' and Suffix = '{1}' and LMO = 'L' Order by Seq",V.Args.Job,V.Args.Suffix,V.Local.sSql)
+	
+	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"Parent_InitWC",V.ODBC.Con!rstSel.FieldValTrim!PART)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Con!rstSel.Close
+	
+	F.Intrinsic.String.Build("{0}\Labels\Custom\GCG_5639_WIP_Opertation_Label.lab",V.Caller.BusintDir,V.Local.sRptLoc)
+	F.Global.BI.InitializeReport("GCG_5639_WIP_Opertation_Label",V.Local.sRptLoc,V.Local.iRptId)
+	
+'	F.Intrinsic.String.Build("Select Printer, ScrapPrinter From GAB_5455_MVE_TKT_SU where TRMNL = '{0}'",V.Caller.Terminal,V.Local.sSql)
+'	F.ODBC.Connection!Con.OpenRecordSetRO("rstSel",V.Local.sSql)
+'	F.Intrinsic.Control.If(V.ODBC.con!rstSel.EOF,=,False)
+'		V.Local.sTprinter.Set(V.ODBC.Con!rstSel.FieldValTrim!Printer)
+'		F.Intrinsic.Control.If(V.ODBC.Con!rstSel.FieldValTrim!ScrapPrinter,=,"")
+'			V.Local.sScrapPrinter.Set(V.Local.sTprinter)
+'		F.Intrinsic.Control.Else
+'			V.Local.sScrapPrinter.Set(V.ODBC.Con!rstSel.FieldValTrim!ScrapPrinter)
+'		F.Intrinsic.Control.EndIf
+'	F.Intrinsic.Control.EndIf
+'	F.ODBC.Con!rstSel.Close
+	V.Local.sTprinter.Set(V.Screen.FormPartReport!ddlPrinter.Text)
+	V.Local.sTprinter.Set(V.Local.sTprinter.Trim)
+	V.Local.sScrapPrinter.Set(V.Local.sTprinter)
+	
+	F.Intrinsic.Control.If(V.Args.Qty.Long,<>,0)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"Scrapflag","N")
+		
+		F.Global.BI.GetIDFromName("GCG_5639_WIP_Opertation_Label.lab",V.Local.iRptId)
+		F.Intrinsic.Control.For(V.Local.i,1,V.Args.Qty.Long,1)
+			F.Global.BI.GetRunID(V.Local.iBIrunID)
+			F.Global.BI.StartLogging(V.Local.iBIrunID,V.Local.iRptId,0,"",V.Local.iLogID)
+			F.Global.BI.PrintCodesoftLabelFromDataTable(V.Local.iBIRunID,V.Local.iLogID,"MoveTicket",V.Local.sTprinter,True)
+			F.Global.BI.StopLogging(V.Local.iLogID)
+		F.Intrinsic.Control.Next(V.Local.i)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.If(V.Args.SQty.Long,<>,0)
+		F.Data.Dictionary.ReturnKeyFromValue("Scrap",V.Screen.FormPartReport!ddlScrap.Text,V.Local.sScrapCode)
+		F.Data.DataTable.SetValue("MoveTicket",-1,"Scrapflag","Y","QUALITY_NO","1.00","SCRAP_CODE",V.Local.sScrapCode,"SCRAP_CODE_DESC",V.Screen.FormPartReport!ddlScrap.Text,"SCRAP_QTY","1.00")
+		
+		F.Global.BI.GetIDFromName("GCG_5639_WIP_Opertation_Label.lab",V.Local.iRptId)
+		F.Intrinsic.Control.For(V.Local.i,1,V.Args.SQty.Long,1)
+			F.Global.BI.GetRunID(V.Local.iBIrunID)
+			F.Global.BI.StartLogging(V.Local.iBIrunID,V.Local.iRptId,0,"",V.Local.iLogID)
+			F.Global.BI.PrintCodesoftLabelFromDataTable(V.Local.iBIRunID,V.Local.iLogID,"MoveTicket",V.Local.sTprinter,True)
+			F.Global.BI.StopLogging(V.Local.iLogID)
+		F.Intrinsic.Control.Next(V.Local.i)
+		
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataTable.DeleteRow("MoveTicket")
+	F.Data.DataTable.AcceptChanges("MoveTicket")
+	
+	F.ODBC.Connection!con.Close
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.Print_Move_Ticket.End
+
+Program.Sub.chkScrap_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	F.Intrinsic.Control.If(V.Screen.FormPartReport!chkScrap.Value,=,0)
+		Gui.FormPartReport.ddlScrap.Visible(False)
+	F.Intrinsic.Control.Else
+		Gui.FormPartReport.ddlScrap.Visible(True)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.chkScrap_Click.End
+
+Program.Sub.ddlPrinter_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sPrinter.Declare(String,"")
+	
+	V.Local.sPrinter.Set(V.Screen.FormPartReport!ddlPrinter.Text)
+	V.Local.sPrinter.Set(V.Local.sPrinter.Trim)
+	
+	F.Data.DataTable.SetValue("Printer",-1,"Printer",V.Local.sPrinter)
+	
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	
+	F.Data.DataTable.SaveToDB("Printer","con","GCG_5639_Workcenter","Terminal",256,"Terminal@!@Terminal*!*Printer@!@Printer")
+	
+	F.Data.DataTable.AcceptChanges("Printer")
+	
+	Gui.FormPartReport.txtScan.SetFocus
+	
+	F.ODBC.Connection!con.Close
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.ddlPrinter_Click.End
+
+Program.Sub.ddlScrap_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	Gui.FormPartReport.txtScan.SetFocus
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.ddlScrap_Click.End
+
+Program.Sub.Print_Scrap.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.sDate.Declare(String,"")
+	V.Local.sTime.Declare(String,"")
+	V.Local.iRptId.Declare(Long,0)
+	V.Local.iBIrunID.Declare(Long,0)
+	V.Local.iLogID.Declare(Long,0)
+	V.Local.sTprinter.Declare(String,"")
+	
+	F.Intrinsic.String.Format(V.Ambient.Date,"MM/DD/YYYY",V.Local.sDate)
+	V.Local.sTime.Set(V.Ambient.Time)
+	V.Local.sTprinter.Set(V.Screen.FormPartReport!ddlPrinter.Text)
+	
+	F.ODBC.Connection!con.OpenCompanyConnection
+	
+	F.Intrinsic.String.Build("Select Part from V_JOB_Header where JOB = '{0}' and Suffix = '{1}'",V.Args.Job,V.Args.Suffix,V.Local.sSql)
+	
+	F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sSql)
+	F.Data.DataTable.AddRow("Scrap","Part",V.Local.sSql,"Code",V.Screen.FormPartReport!ddlScrap.Text,"Date",V.Local.sDate,"Time",V.Local.sTime,"WC",V.Screen.FormPartReport!ddlWC.Text)
+	
+	F.ODBC.Connection!Con.Close
+	
+	F.Global.BI.GetIDFromName("GCG_5639_Scrap.lab",V.Local.iRptId)
+	F.Global.BI.GetRunID(V.Local.iBIrunID)
+	F.Global.BI.StartLogging(V.Local.iBIrunID,V.Local.iRptId,0,"",V.Local.iLogID)
+	F.Global.BI.PrintCodesoftLabelFromDataTable(V.Local.iBIRunID,V.Local.iLogID,"Scrap",V.Local.sTprinter.Trim,True)
+	F.Global.BI.StopLogging(V.Local.iLogID)
+	
+	F.Data.DataTable.DeleteRow("Scrap")
+	F.Data.DataTable.AcceptChanges("Scrap")
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","GCG_5639_Job_Reporting.g2u",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormPartReport_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.Print_Scrap.End
