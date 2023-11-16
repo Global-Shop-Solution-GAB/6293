@@ -1,0 +1,483 @@
+Program.Sub.ScreenSU.Start
+Gui.FormEstVsAct..Create
+Gui.FormEstVsAct..Caption("Earned Hours VS Actual Hours Comparison Report")
+Gui.FormEstVsAct..Size(6195,6390)
+Gui.FormEstVsAct..MinX(0)
+Gui.FormEstVsAct..MinY(0)
+Gui.FormEstVsAct..Position(0,0)
+Gui.FormEstVsAct..BackColor(-2147483633)
+Gui.FormEstVsAct..MousePointer(0)
+Gui.FormEstVsAct..Event(UnLoad,FormEstVsAct_UnLoad)
+Gui.FormEstVsAct.dtpBegDate.Create(DatePicker)
+Gui.FormEstVsAct.dtpBegDate.Size(1935,285)
+Gui.FormEstVsAct.dtpBegDate.Position(105,420)
+Gui.FormEstVsAct.lblBegDate.Create(Label,"Beginning Date",True,1935,255,0,105,195,True,0,"Arial",8,-2147483633,0)
+Gui.FormEstVsAct.lblBegWG.Create(Label,"Beginning Work Group",True,1935,255,0,105,960,True,0,"Arial",8,-2147483633,0)
+Gui.FormEstVsAct.cmdPrint.Create(Button)
+Gui.FormEstVsAct.cmdPrint.Size(1170,540)
+Gui.FormEstVsAct.cmdPrint.Position(105,5415)
+Gui.FormEstVsAct.cmdPrint.Caption("Print")
+Gui.FormEstVsAct.cmdPrint.Event(Click,cmdPrint_Click)
+Gui.FormEstVsAct.dtpEndDate.Create(DatePicker)
+Gui.FormEstVsAct.dtpEndDate.Size(1935,285)
+Gui.FormEstVsAct.dtpEndDate.Position(2280,420)
+Gui.FormEstVsAct.lblEndDate.Create(Label,"Ending Date",True,1935,255,0,2280,195,True,0,"Arial",8,-2147483633,0)
+Gui.FormEstVsAct.txtBegWG.Create(TextBox,"",True,1215,300,0,105,1185,True,0,"Arial",8,-2147483643,1)
+Gui.FormEstVsAct.txtBegWG.Event(GotFocus,txtBegWG_GotFocus)
+Gui.FormEstVsAct.txtBegWG.Event(LostFocus,txtBegWG_LostFocus)
+Gui.FormEstVsAct.cmdBegWG.Create(Button)
+Gui.FormEstVsAct.cmdBegWG.Size(420,375)
+Gui.FormEstVsAct.cmdBegWG.Position(1440,1140)
+Gui.FormEstVsAct.cmdBegWG.Caption("^")
+Gui.FormEstVsAct.cmdBegWG.Event(Click,cmdBegWG_Click)
+Gui.FormEstVsAct.txtEndWG.Create(TextBox,"",True,1215,300,0,2250,1185,True,0,"Arial",8,-2147483643,1)
+Gui.FormEstVsAct.txtEndWG.Event(GotFocus,txtEndWG_GotFocus)
+Gui.FormEstVsAct.cmdEndWG.Create(Button)
+Gui.FormEstVsAct.cmdEndWG.Size(420,375)
+Gui.FormEstVsAct.cmdEndWG.Position(3585,1140)
+Gui.FormEstVsAct.cmdEndWG.Caption("^")
+Gui.FormEstVsAct.cmdEndWG.Event(Click,cmdEndWG_Click)
+Gui.FormEstVsAct.lvwWG.Create(ListView)
+Gui.FormEstVsAct.lvwWG.Size(5820,2850)
+Gui.FormEstVsAct.lvwWG.Position(105,1920)
+Gui.FormEstVsAct.lvwWG.View(0)
+Gui.FormEstVsAct.cmdAdd.Create(Button)
+Gui.FormEstVsAct.cmdAdd.Size(855,375)
+Gui.FormEstVsAct.cmdAdd.Position(4260,1140)
+Gui.FormEstVsAct.cmdAdd.Caption("Add")
+Gui.FormEstVsAct.cmdAdd.Event(Click,cmdAdd_Click)
+Gui.FormEstVsAct.lblEndWG.Create(Label,"Ending Work Group",True,1935,255,0,2265,960,True,0,"Arial",8,-2147483633,0)
+Gui.FormEstVsAct.cmdDel.Create(Button)
+Gui.FormEstVsAct.cmdDel.Size(855,375)
+Gui.FormEstVsAct.cmdDel.Position(105,4860)
+Gui.FormEstVsAct.cmdDel.Caption("Delete")
+Gui.FormEstVsAct.cmdDel.Event(Click,cmdDel_Click)
+Gui.FormEstVsAct.cmdClear.Create(Button)
+Gui.FormEstVsAct.cmdClear.Size(855,375)
+Gui.FormEstVsAct.cmdClear.Position(1080,4860)
+Gui.FormEstVsAct.cmdClear.Caption("Clear")
+Gui.FormEstVsAct.cmdClear.Event(Click,cmdClear_Click)
+Gui.FormEstVsAct.chkWG.Create(CheckBox)
+Gui.FormEstVsAct.chkWG.Size(2250,360)
+Gui.FormEstVsAct.chkWG.Position(105,1545)
+Gui.FormEstVsAct.chkWG.Caption("All Work Groups")
+Gui.FormEstVsAct.chkWG.Event(Click,chkWG_Click1)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.iKey.Declare(Long,0)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	Gui.FormEstVsAct..Show
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormEstVsAct_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.cmdPrint_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sWC.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.sDate.Declare(String,"")
+	V.Local.lBIRunID.Declare(Long,0)
+	V.Local.lLogID.Declare(Long,0)
+	V.Local.iRptID.Declare(Long,0)
+	V.Local.sValues.Declare(String,"")
+	V.Local.iRet.Declare(Long,0)
+	V.Local.sParams.Declare(String,"")
+	V.Local.sBegDate.Declare(String,"")
+	V.Local.sEndDate.Declare(String,"")
+	V.Local.sWG.Declare(String,"")
+	V.Local.i.Declare(Long,0)
+	V.Local.sRows.Declare(String,"")
+	V.local.iOrd.Declare(Long,0)
+	V.Local.sRange.Declare(String,"")
+	
+	V.Local.sDate.Set(V.Screen.FormEstVsAct!dtpBegDate.Value)
+	
+	V.Local.sBegDate.Set(V.Screen.FormEstVsAct!dtpBegDate.Value)
+	V.Local.sEndDate.Set(V.Screen.FormEstVsAct!dtpEndDate.Value)
+	
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	
+	F.Global.BI.GetRunID(V.Local.lBIRunID)
+	F.Global.BI.StartLogging(V.Local.lBIRunID,-1,-1,"",V.Local.lLogID)
+	
+	F.Intrinsic.Control.If(V.Screen.FormEstVsAct!chkWG.Value,=,1)
+		'getting list of all workgroups
+		F.ODBC.Connection!Con.ExecuteAndReturn("Select rtrim(Work_Group) From V_WorkGroup_Head Order by Work_Group",V.Local.sWG)
+		F.Intrinsic.String.Split(V.Local.sWG,"#$#",V.Local.sWG)
+		F.Intrinsic.Control.For(V.Local.i,0,V.Local.sWG.UBound,1)
+			F.Intrinsic.String.Build("Select '{0}' as WorkGroup, Job, Suffix, Seq, Part, sum(hours_worked) as Est_Hours_Worked, sum(pieces_compltd) as Pieces_Compltd From V_Job_Detail Where Machine In (Select Workcenter From V_Workgroup_Line Where WorkGroup = '{0}') and Date_Sequence Between '{1}' and '{2}' Group by Job,Suffix,Seq,Part",V.Local.sWG(V.Local.i).Trim,V.Local.sBegDate.PervasiveDate,V.Local.sEndDate.PervasiveDate,V.Local.sSql)
+		
+			F.Intrinsic.Control.If(V.DataTable.Est.Exists)
+				F.Data.DataTable.CreateFromSQL("TempEst","con",V.Local.sSql,True)
+				F.Data.DataTable.Merge("TempEst","Est",False,4)
+				F.Data.DataTable.Close("TempEst")
+			F.Intrinsic.Control.Else
+				F.Data.DataTable.CreateFromSQL("Est","con",V.Local.sSql,True)
+			F.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.String.Build("Select Top 1 Seq From V_Job_Operations Where right(rtrim(description),4) = '{0}'",V.Local.sWG(V.Local.i).Trim,V.Local.sSql)
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sSql)
+		
+			F.Intrinsic.String.Build("Select '{3}' as WorkGroup, Empl, '' as Name, sum(hours_worked) as Hours_Worked From V_Job_Detail Where Seq = '{0}' and Date_Sequence Between '{1}' and '{2}' Group by Job,Suffix,Seq,Empl",V.Local.sSql.Trim,V.Local.sBegDate.PervasiveDate,V.Local.sEndDate.PervasiveDate,V.Local.sWG(V.Local.i).Trim,V.Local.sSql)
+		
+			F.Intrinsic.Control.If(V.DataTable.Act.Exists)
+				F.Data.DataTable.CreateFromSQL("TempAct","con",V.Local.sSql,True)
+				F.Data.DataTable.Merge("TempAct","Act",False,4)
+				F.Data.DataTable.Close("TempAct")
+			F.Intrinsic.Control.Else
+				F.Data.DataTable.CreateFromSQL("Act","con",V.Local.sSql,True)
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.Next(V.Local.i)
+	
+	F.Intrinsic.Control.Else
+		Gui.FormEstVsAct.lvwWG.RetrieveSelectedListitems(v.Local.sRows)
+		F.Intrinsic.Control.If(V.Local.sRows,<>,"***NORETURN***")
+			F.Intrinsic.String.Split(V.Local.sRows,"*!*",V.Local.sRows)
+				
+			F.Intrinsic.Control.For(V.Local.i,0,V.Local.sRows.UBound,1)
+				Gui.FormEstVsAct.lvwWG.RetrieveItemOrdinal(V.Local.sRows(V.Local.i),V.Local.iOrd)
+				V.Local.sRange.Set(V.Screen.FormEstVsAct!lvwWG.ListItemTextExtended(V.Local.iOrd))
+				F.Intrinsic.String.Split(V.Local.sRange,"*!*",V.Local.sRange)
+				F.Intrinsic.Control.If(V.Local.sWG.Trim,=,"")
+					F.Intrinsic.String.Build("Where Work_Group Between '{0}' and '{1}'",V.Local.sRange(0).Trim,V.Local.sRange(1).Trim,V.Local.sWG)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.String.Build("{0} and Work_Group Between '{1}' and '{2}'",V.Local.sWG,V.Local.sRange(0).Trim,V.Local.sRange(1).Trim,V.Local.sWG)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Next(V.Local.i)
+			
+			F.Intrinsic.String.Build("Select rtrim(Work_Group) From V_WorkGroup_Head {0} Order by Work_Group",V.Local.sWG,V.Local.sSql)
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sWG)
+			
+			F.Intrinsic.String.Split(V.Local.sWG,"#$#",V.Local.sWG)
+			F.Intrinsic.Control.For(V.Local.i,0,V.Local.sWG.UBound,1)
+				F.Intrinsic.String.Build("Select '{0}' as WorkGroup, Job, Suffix, Seq, Part, sum(hours_worked) as Est_Hours_Worked, sum(pieces_compltd) as Pieces_Compltd From V_Job_Detail Where Machine In (Select Workcenter From V_Workgroup_Line Where WorkGroup = '{0}') and Date_Sequence Between '{1}' and '{2}' Group by Job,Suffix,Seq,Part",V.Local.sWG(V.Local.i).Trim,V.Local.sBegDate.PervasiveDate,V.Local.sEndDate.PervasiveDate,V.Local.sSql)
+			
+				F.Intrinsic.Control.If(V.DataTable.Est.Exists)
+					F.Data.DataTable.CreateFromSQL("TempEst","con",V.Local.sSql,True)
+					F.Data.DataTable.Merge("TempEst","Est",False,4)
+					F.Data.DataTable.Close("TempEst")
+				F.Intrinsic.Control.Else
+					F.Data.DataTable.CreateFromSQL("Est","con",V.Local.sSql,True)
+				F.Intrinsic.Control.EndIf
+			
+				F.Intrinsic.String.Build("Select Top 1 Seq From V_Job_Operations Where right(rtrim(description),4) = '{0}'",V.Local.sWG(V.Local.i).Trim,V.Local.sSql)
+				F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sSql)
+			
+				F.Intrinsic.String.Build("Select '{3}' as WorkGroup, Empl, '' as Name, sum(hours_worked) as Hours_Worked From V_Job_Detail Where Seq = '{0}' and Date_Sequence Between '{1}' and '{2}' Group by Job,Suffix,Seq,Empl",V.Local.sSql.Trim,V.Local.sBegDate.PervasiveDate,V.Local.sEndDate.PervasiveDate,V.Local.sWG(V.Local.i).Trim,V.Local.sSql)
+			
+				F.Intrinsic.Control.If(V.DataTable.Act.Exists)
+					F.Data.DataTable.CreateFromSQL("TempAct","con",V.Local.sSql,True)
+					F.Data.DataTable.Merge("TempAct","Act",False,4)
+					F.Data.DataTable.Close("TempAct")
+				F.Intrinsic.Control.Else
+					F.Data.DataTable.CreateFromSQL("Act","con",V.Local.sSql,True)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Next(V.Local.i)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.Dictionary.CreateFromSQL("Emp","con","Select Employee, Name From V_Employee_Mstr")
+	F.Data.Dictionary.SetDefaultReturn("Emp","")
+	F.Data.DataTable.FillFromDictionary("Act","Emp","Empl","Name")
+	
+	F.Data.DataTable.AddColumn("Est","BIRUNID",Long)
+	F.Data.DataTable.AddColumn("Act","BIRUNID",Long)
+	
+	F.Intrinsic.Control.If(V.DataTable.Act.RowCount--,<>,-1)
+		F.Data.DataTable.SetValue("EST",-1,"BIRUNID",V.Local.lBIRunID)
+		F.Data.DataTable.SaveToDB("EST","con","GCG_5639_Earned","BirunID",128,"BirunID@!@BirunID*!*Job@!@Job*!*Suffix@!@Suffix*!*Seq@!@Seq*!*Part@!@Part*!*Est_Hours_Worked@!@Est_Hours_Worked*!*Pieces_Compltd@!@Pieces_Compltd")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.If(V.DataTable.Est.RowCount--,<>,-1)
+		F.Data.DataTable.SetValue("Act",-1,"BIRUNID",V.Local.lBIRunID)
+		F.Data.DataTable.SaveToDB("Act","con","GCG_5639_Actual","BirunID",128,"BirunID@!@BirunID*!*Empl@!@Empl*!*Name@!@Name*!*Hours_Worked@!@Hours_Worked")
+	F.Intrinsic.Control.EndIf
+	
+	F.Global.BI.StopLogging(V.Local.lLogID)
+	
+	F.Intrinsic.String.Format(V.Local.sDate,"MM/DD/YYYY",V.Local.sDate)
+	
+	V.Local.sParams.Set("WorkGroup*!*Date*!*BIRunID")
+	F.Intrinsic.String.Build("{0}*!*{1}",V.Local.sWC,V.Local.sDate,V.Local.lBIRunID,V.Local.sValues)
+
+	F.Global.BI.RunReportPreProcessor(V.Local.lBIRunID,V.Local.lLogID,V.Local.sParams,V.Local.sValues,"",-1,True,"",-1,"",-1,"","",V.Local.iRet)
+
+	F.ODBC.Connection!Con.Close
+	
+	F.Intrinsic.Control.CallSub(FormEstVsAct_UnLoad)
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(FormEstVsAct_UnLoad)
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.cmdPrint_Click.End
+
+Program.Sub.FormEstVsAct_UnLoad.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+
+	F.Intrinsic.Control.End
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.FormEstVsAct_UnLoad.End
+
+Program.Sub.txtBegWG_GotFocus.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	Gui.FormEstVsAct.txtBegWG.SelectAll
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.txtBegWG_GotFocus.End
+
+Program.Sub.txtBegWG_LostFocus.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	Gui.FormEstVsAct.txtEndWG.Text(V.Screen.FormEstVsAct!txtBegWG.Text)
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.txtBegWG_LostFocus.End
+
+Program.Sub.cmdAdd_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	F.Intrinsic.Control.If(V.Screen.FormEstVsAct!txtBegWG.Text,<," ","AND",V.Screen.FormEstVsAct!txtEndWG,<," ")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Math.Add(V.Global.iKey,1,V.Global.iKey)
+	Gui.FormEstVsAct.lvwWG.AddListItem(V.Global.iKey,V.Screen.FormEstVsAct!txtBegWG.Text)
+	Gui.FormEstVsAct.lvwWG.SetListItemSubItemText(V.Global.iKey,1,V.Screen.FormEstVsAct!txtEndWG.Text)
+	Gui.SS_Form1.txt1_BegWC.Text(" ")
+	Gui.SS_Form1.txt2_EndWC.Text(" ")
+
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.cmdAdd_Click.End
+
+Program.Sub.chkWG_Click1.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	F.Intrinsic.Control.If(V.Screen.FormEstVsAct!lvwWG.Value,=,1)
+		'disable entry of workcenter range
+		Gui.FormEstVsAct.txtBegWG.Text("")
+		Gui.FormEstVsAct.txtEndWG.Text("")
+		Gui.FormEstVsAct.cmdAdd.Enabled(False)
+		Gui.FormEstVsAct.cmdBegWG.Enabled(False)
+		Gui.FormEstVsAct.cmdClear.Enabled(False)
+		Gui.FormEstVsAct.cmdDel.Enabled(False)
+		Gui.FormEstVsAct.cmdEndWG.Enabled(Fasle)
+		Gui.FormEstVsAct.lvwWG.ClearItems
+	
+	F.Intrinsic.Control.Else
+		'enable entry of workcenter range
+		Gui.FormEstVsAct.txtBegWG.Text("")
+		Gui.FormEstVsAct.txtEndWG.Text("")
+		Gui.FormEstVsAct.cmdAdd.Enabled(True)
+		Gui.FormEstVsAct.cmdBegWG.Enabled(True)
+		Gui.FormEstVsAct.cmdClear.Enabled(True)
+		Gui.FormEstVsAct.cmdDel.Enabled(True)
+		Gui.FormEstVsAct.cmdEndWG.Enabled(True)
+		Gui.FormEstVsAct.lvwWG.ClearItems
+	
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.chkWG_Click1.End
+
+Program.Sub.txtEndWG_GotFocus.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	Gui.FormEstVsAct.txtEndWG.SelectAll
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.txtEndWG_GotFocus.End
+
+Program.Sub.cmdEndWG_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sSql.Declare(String)
+	V.Local.sTitles.Declare(String)
+	V.Local.sWidths.Declare(String)
+	V.Local.sRet.Declare(String)
+	
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	
+	F.Data.Dictionary.CreateFromSQL("Select Distinct rtrim(Work_Group),rtrim(Descr) From WorkGroup_Head Order by Work_Group")
+	
+	V.Local.sTitles.Set("Work Group*!*Description")
+	V.Local.sWidths.Set("2000*!*5000")
+
+	F.Intrinsic.String.Split(V.Local.sTitles,"*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split(V.Local.sWidths,"*!*",V.Local.sWidths)
+
+	'browser list is parsed for the type-ahead substring as it is being typed
+	F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+
+	'Opening browser for beginning description
+	F.Intrinsic.UI.Browser("Select Work Group","conx",V.Local.sSql,V.Local.sTitles,V.Local.sWidths,7000,8000,V.Local.sRet)
+	F.ODBC.Connection!Con.Close
+	F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		Gui.FormEstVsAct.txtEndWG.Text(V.Local.sRet.Trim)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.cmdEndWG_Click.End
+
+Program.Sub.cmdDel_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.iKey.Declare(Long)
+
+	V.Local.iKey.Set(V.Screen.FormEstVsAct!lvwWG.SelecteItemKey)
+	Gui.FormEstVsAct.lvwWG.RemoveItem(V.Local.iKey)
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.cmdDel_Click.End
+
+Program.Sub.cmdClear_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	
+	Gui.FormEstVsAct.lvwWG.ClearItems
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.cmdClear_Click.End
+
+Program.Sub.cmdBegWG_Click.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sSql.Declare(String)
+	V.Local.sTitles.Declare(String)
+	V.Local.sWidths.Declare(String)
+	V.Local.sRet.Declare(String)
+	
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	
+	F.Data.Dictionary.CreateFromSQL("Select Distinct rtrim(Work_Group),rtrim(Descr) From WorkGroup_Head Order by Work_Group")
+	
+	V.Local.sTitles.Set("Work Group*!*Description")
+	V.Local.sWidths.Set("2000*!*5000")
+
+	F.Intrinsic.String.Split(V.Local.sTitles,"*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split(V.Local.sWidths,"*!*",V.Local.sWidths)
+
+	'browser list is parsed for the type-ahead substring as it is being typed
+	F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+
+	'Opening browser for beginning description
+	F.Intrinsic.UI.Browser("Select Work Group","conx",V.Local.sSql,V.Local.sTitles,V.Local.sWidths,7000,8000,V.Local.sRet)
+	F.ODBC.Connection!Con.Close
+	F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		Gui.FormEstVsAct.txtBegWG.Text(V.Local.sRet.Trim)
+		Gui.FormEstVsAct.txtEndWG.Text(V.Local.sRet.Trim)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+		F.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}","",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+Function.Intrinsic.Control.EndTry
+Program.Sub.cmdBegWG_Click.End
