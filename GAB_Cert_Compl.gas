@@ -1,0 +1,2446 @@
+Program.Sub.ScreenSU.Start
+gui.frmMTR_Entry..create
+gui.frmMTR_Entry..caption("Material Test Report Entry Form")
+gui.frmMTR_Entry..size(13185,7260)
+gui.frmMTR_Entry..position(0,0)
+gui.frmMTR_Entry..alwaysontop(False)
+gui.frmMTR_Entry..fontname("Arial")
+gui.frmMTR_Entry..fontsize(8)
+gui.frmMTR_Entry..forecolor(0)
+gui.frmMTR_Entry..fontstyle(,,,,)
+gui.frmMTR_Entry..BackColor(-2147483633)
+gui.frmMTR_Entry..controlbox(False)
+gui.frmMTR_Entry..maxbutton(True)
+gui.frmMTR_Entry..minbutton(True)
+gui.frmMTR_Entry..mousepointer(0)
+gui.frmMTR_Entry..moveable(True)
+gui.frmMTR_Entry..sizeable(True)
+gui.frmMTR_Entry..ShowInTaskBar(True)
+gui.frmMTR_Entry..titlebar(True)
+gui.frmMTR_Entry.lblMill.create(label,"Mill",True,495,255,1,255,630,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtMill.create(textbox,"",True,1320,300,0,700,560,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtMill.event(lostfocus,F_AutoSelMill)
+gui.frmMTR_Entry.lblMillTestONo.create(label,"Mill/Test Order No.",True,900,495,1,2600,460,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtOrderNo.create(textbox,"",True,1215,300,0,3500,560,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.lblGrade.create(label,"Grade",True,630,255,1,4985,605,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtGrade.create(textbox,"",True,1215,300,0,5535,560,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtGrade.numericonly(0)
+gui.frmMTR_Entry.lblOD.create(label,"OD",True,585,255,1,7265,605,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtOD.create(textbox,"",True,1215,300,0,7650,545,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtOD.numericonly(1)
+gui.frmMTR_Entry.txtOD.maxLength(10)
+gui.frmMTR_Entry.txtOD.event(lostfocus,Val_OD)
+gui.frmMTR_Entry.lblWallThick.create(label,"Wall Thickness",True,900,555,1,9170,370,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtWall.create(textbox,"",True,870,300,0,10130,535,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtWall.numericonly(1)
+gui.frmMTR_Entry.lblIn1.create(label,"in.",True,330,255,1,11075,580,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblLinHeat.create(label,"Lincoln Heat Number",True,1155,495,1,170,1220,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.lblMillHeatNo.create(label,"Mill Heat Number",True,1410,225,1,1305,1340,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.txtLinHeatNo.create(textbox,"",True,1080,300,0,200,1710,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtLinHeatNo.maxLength(10)
+gui.frmMTR_Entry.txtHeatNo.create(textbox,"",True,1215,300,0,1420,1710,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHeatNo.maxLength(20)
+gui.frmMTR_Entry.lblYieldStreng.create(label,"Yield Strength (psi)",True,855,675,1,3005,1010,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.lblTensileStreng.create(label,"Tensile Strength (psi)",True,840,615,1,5420,1010,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.txtYieldStrength.create(textbox,"",True,1095,300,0,2890,1715,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtYieldStrength.numericonly(2)
+gui.frmMTR_Entry.txtYieldStrength.maxLength(6)
+gui.frmMTR_Entry.txtYieldStrength.event(lostfocus,Val_YieldStrength)
+gui.frmMTR_Entry.txtTensileStrength.create(textbox,"",True,1080,300,0,5280,1715,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtTensileStrength.numericonly(2)
+gui.frmMTR_Entry.txtTensileStrength.maxLength(6)
+gui.frmMTR_Entry.txtTensileStrength.event(lostfocus,Val_TensileStrength)
+gui.frmMTR_Entry.lblPercElog.create(label,"Percent Elongation",True,1050,465,1,6455,1110,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.lblGrainSize.create(label,"Grain Size",True,570,450,1,7650,1120,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.txtPercElong.create(textbox,"",True,720,300,0,6645,1715,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtPercElong.event(lostfocus,Val_PerctElong)
+gui.frmMTR_Entry.txtGrainSize.create(textbox,"",True,585,300,0,7610,1715,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtGrainSize.numericonly(2)
+gui.frmMTR_Entry.txtGrainSize.maxLength(2)
+gui.frmMTR_Entry.txtGrainSize.event(lostfocus,Val_GrainSize)
+gui.frmMTR_Entry.lblDirection.create(label,"Direction",True,780,255,1,300,3765,True,0,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.comboDirection.create(combobox)
+gui.frmMTR_Entry.comboDirection.text("")
+gui.frmMTR_Entry.comboDirection.visible(True)
+gui.frmMTR_Entry.comboDirection.size(1095,330)
+gui.frmMTR_Entry.comboDirection.zorder(0)
+gui.frmMTR_Entry.comboDirection.position(240,4020)
+gui.frmMTR_Entry.comboDirection.enabled(True)
+gui.frmMTR_Entry.comboDirection.fontname("Arial")
+gui.frmMTR_Entry.comboDirection.fontsize(10)
+gui.frmMTR_Entry.lblSize.create(label,"Size",True,705,255,1,275,4485,True,0,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.comboSize.create(combobox)
+gui.frmMTR_Entry.comboSize.text("")
+gui.frmMTR_Entry.comboSize.visible(True)
+gui.frmMTR_Entry.comboSize.size(1830,330)
+gui.frmMTR_Entry.comboSize.zorder(0)
+gui.frmMTR_Entry.comboSize.position(235,4710)
+gui.frmMTR_Entry.comboSize.enabled(True)
+gui.frmMTR_Entry.comboSize.fontname("Arial")
+gui.frmMTR_Entry.comboSize.fontsize(10)
+gui.frmMTR_Entry.lblNotch.create(label,"Notch",True,555,255,1,240,5290,True,0,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.txtNotch.create(textbox,"V",True,390,300,0,280,5610,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.lblTemp.create(label,"Temp",True,525,255,1,1005,5300,True,0,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.txtTemp.create(textbox,"",True,660,300,0,880,5615,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.lblTempScale.create(label,"Temp Scale",True,645,390,1,1670,5155,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.comboTempScale.create(combobox)
+gui.frmMTR_Entry.comboTempScale.text("")
+gui.frmMTR_Entry.comboTempScale.visible(True)
+gui.frmMTR_Entry.comboTempScale.size(630,330)
+gui.frmMTR_Entry.comboTempScale.zorder(0)
+gui.frmMTR_Entry.comboTempScale.position(1690,5615)
+gui.frmMTR_Entry.comboTempScale.enabled(True)
+gui.frmMTR_Entry.comboTempScale.fontname("Arial")
+gui.frmMTR_Entry.comboTempScale.fontsize(10)
+gui.frmMTR_Entry.lblCharpy.create(label,"Charpy",True,690,255,1,2865,4650,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblAVG.create(label,"AVG",True,465,255,1,2310,6245,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblImpTest1.create(label,"1",True,270,255,1,2580,4990,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblImpTest2.create(label,"2",True,210,255,1,2625,5355,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblImpTest3.create(label,"3",True,240,255,1,2615,5710,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblLine1.create(label,"___________________",True,1725,255,1,2535,5900,True,0,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.lblShear.create(label,"Shear",True,630,255,1,3655,4650,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtCharpy1.create(textbox,"",True,660,300,0,2860,4950,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtCharpy1.numericonly(1)
+gui.frmMTR_Entry.txtCharpy1.event(lostfocus,F_Calc_CharpyAVG)
+gui.frmMTR_Entry.txtCharpy2.create(textbox,"",True,660,300,0,2860,5295,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtCharpy2.numericonly(1)
+gui.frmMTR_Entry.txtCharpy2.event(lostfocus,F_Calc_CharpyAVG)
+gui.frmMTR_Entry.txtCharpy3.create(textbox,"",True,660,300,0,2865,5655,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtCharpy3.numericonly(1)
+gui.frmMTR_Entry.txtCharpy3.event(lostfocus,F_Calc_CharpyAVG)
+gui.frmMTR_Entry.txtCharpyAvg.create(textbox,"",True,660,300,0,2860,6175,False,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtShear1.create(textbox,"",True,660,300,0,3555,4955,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtShear1.numericonly(1)
+gui.frmMTR_Entry.txtShear1.event(lostfocus,F_Calc_ShearAVG)
+gui.frmMTR_Entry.txtShear2.create(textbox,"",True,660,300,0,3555,5295,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtShear2.numericonly(1)
+gui.frmMTR_Entry.txtShear2.event(lostfocus,F_Calc_ShearAVG)
+gui.frmMTR_Entry.txtShear3.create(textbox,"",True,660,300,0,3555,5655,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtShear3.numericonly(1)
+gui.frmMTR_Entry.txtShear3.event(lostfocus,F_Calc_ShearAVG)
+gui.frmMTR_Entry.txtShearAVG.create(textbox,"",True,660,300,0,3550,6185,False,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.lblImpTesting.create(label,"Impact Testing",True,1200,255,1,2895,4315,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.lblQuadrant.create(label,"QUADRANT",True,1110,255,1,4445,4340,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblQuadrant.fontstyle(True,False,False,False)
+gui.frmMTR_Entry.lblHTOd.create(label,"OD",True,390,255,1,5190,4655,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblHTMidwall.create(label,"MIDWALL",True,930,255,1,4590,4980,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblHT.create(label,"ID",True,240,255,1,5280,5305,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lbl1HT.create(label,"1",True,270,255,1,5720,4330,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lbl2HT.create(label,"2",True,210,255,1,6370,4330,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lbl3HT.create(label,"3",True,240,255,1,6920,4340,True,2,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtHTOD1.create(textbox,"",True,570,300,0,5595,4610,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTOD2.create(textbox,"",True,570,300,0,6185,4600,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTOD3.create(textbox,"",True,570,300,0,6750,4610,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTMW1.create(textbox,"",True,570,300,0,5595,4925,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTMW2.create(textbox,"",True,570,300,0,6175,4925,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTMW3.create(textbox,"",True,570,300,0,6750,4925,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTID1.create(textbox,"",True,570,300,0,5595,5250,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTID2.create(textbox,"",True,570,300,0,6175,5250,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtHTID3.create(textbox,"",True,570,300,0,6755,5250,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.lblAvgHardness.create(label,"Average Hardness",True,735,510,1,5035,5685,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.lblHardnessScale.create(label,"Hardness Scale",True,735,510,1,6305,5670,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.txtAvgHardness.create(textbox,"",True,825,300,0,4960,6200,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtAvgHardness.event(gotfocus,F_Calc_AvgHardness)
+gui.frmMTR_Entry.comboHardnessScale.create(combobox)
+gui.frmMTR_Entry.comboHardnessScale.text("")
+gui.frmMTR_Entry.comboHardnessScale.visible(True)
+gui.frmMTR_Entry.comboHardnessScale.size(840,330)
+gui.frmMTR_Entry.comboHardnessScale.zorder(0)
+gui.frmMTR_Entry.comboHardnessScale.position(6305,6170)
+gui.frmMTR_Entry.comboHardnessScale.enabled(True)
+gui.frmMTR_Entry.comboHardnessScale.fontname("Arial")
+gui.frmMTR_Entry.comboHardnessScale.fontsize(10)
+gui.frmMTR_Entry.cmdNSSVM.create(button)
+gui.frmMTR_Entry.cmdNSSVM.caption("NSS/VM")
+gui.frmMTR_Entry.cmdNSSVM.visible(True)
+gui.frmMTR_Entry.cmdNSSVM.size(900,375)
+gui.frmMTR_Entry.cmdNSSVM.zorder(0)
+gui.frmMTR_Entry.cmdNSSVM.position(200,0)
+gui.frmMTR_Entry.cmdNSSVM.enabled(True)
+gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+gui.frmMTR_Entry.cmdNSSVM.fontsize(8)
+gui.frmMTR_Entry.cmdNSSVM.event(click,cmdNSSVM)
+gui.frmMTR_Entry.cmdKoppel.create(button)
+gui.frmMTR_Entry.cmdKoppel.caption("Koppel")
+gui.frmMTR_Entry.cmdKoppel.visible(True)
+gui.frmMTR_Entry.cmdKoppel.size(900,375)
+gui.frmMTR_Entry.cmdKoppel.zorder(0)
+gui.frmMTR_Entry.cmdKoppel.position(1100,0)
+gui.frmMTR_Entry.cmdKoppel.enabled(True)
+gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+gui.frmMTR_Entry.cmdKoppel.fontsize(8)
+gui.frmMTR_Entry.cmdKoppel.event(click,cmdKoppel)
+gui.frmMTR_Entry.lblC.create(label,"C",True,270,255,1,315,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtC.create(textbox,"",True,630,300,0,100,2550,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtC.numericonly(1)
+gui.frmMTR_Entry.txtC.maxLength(5)
+gui.frmMTR_Entry.txtC.event(lostfocus,Val_C)
+gui.frmMTR_Entry.cmdExit.create(button)
+gui.frmMTR_Entry.cmdExit.caption("Exit")
+gui.frmMTR_Entry.cmdExit.visible(True)
+gui.frmMTR_Entry.cmdExit.size(975,375)
+gui.frmMTR_Entry.cmdExit.zorder(0)
+gui.frmMTR_Entry.cmdExit.position(11705,5990)
+gui.frmMTR_Entry.cmdExit.enabled(True)
+gui.frmMTR_Entry.cmdExit.fontname("Arial")
+gui.frmMTR_Entry.cmdExit.fontsize(8)
+gui.frmMTR_Entry.cmdExit.event(click,cmdEnd)
+gui.frmMTR_Entry.cmdNippon.create(button)
+gui.frmMTR_Entry.cmdNippon.caption("Nippon")
+gui.frmMTR_Entry.cmdNippon.visible(True)
+gui.frmMTR_Entry.cmdNippon.size(900,375)
+gui.frmMTR_Entry.cmdNippon.zorder(0)
+gui.frmMTR_Entry.cmdNippon.position(1990,0)
+gui.frmMTR_Entry.cmdNippon.enabled(True)
+gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+gui.frmMTR_Entry.cmdNippon.fontsize(8)
+gui.frmMTR_Entry.cmdNippon.event(click,cmdNippon)
+gui.frmMTR_Entry.cmdPetroTub.create(button)
+gui.frmMTR_Entry.cmdPetroTub.caption("PetroTub")
+gui.frmMTR_Entry.cmdPetroTub.visible(True)
+gui.frmMTR_Entry.cmdPetroTub.size(900,375)
+gui.frmMTR_Entry.cmdPetroTub.zorder(0)
+gui.frmMTR_Entry.cmdPetroTub.position(2895,0)
+gui.frmMTR_Entry.cmdPetroTub.enabled(True)
+gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+gui.frmMTR_Entry.cmdPetroTub.fontsize(8)
+gui.frmMTR_Entry.cmdPetroTub.event(click,cmdPetroTub)
+gui.frmMTR_Entry.cmdSilcoTub.create(button)
+gui.frmMTR_Entry.cmdSilcoTub.caption("SilcoTub")
+gui.frmMTR_Entry.cmdSilcoTub.visible(True)
+gui.frmMTR_Entry.cmdSilcoTub.size(900,375)
+gui.frmMTR_Entry.cmdSilcoTub.zorder(0)
+gui.frmMTR_Entry.cmdSilcoTub.position(3795,0)
+gui.frmMTR_Entry.cmdSilcoTub.enabled(True)
+gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+gui.frmMTR_Entry.cmdSilcoTub.fontsize(8)
+gui.frmMTR_Entry.cmdSilcoTub.event(click,cmdSilcoTub)
+gui.frmMTR_Entry.cmdTAMSA.create(button)
+gui.frmMTR_Entry.cmdTAMSA.caption("TAMSA")
+gui.frmMTR_Entry.cmdTAMSA.visible(True)
+gui.frmMTR_Entry.cmdTAMSA.size(900,375)
+gui.frmMTR_Entry.cmdTAMSA.zorder(0)
+gui.frmMTR_Entry.cmdTAMSA.position(4700,0)
+gui.frmMTR_Entry.cmdTAMSA.enabled(True)
+gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+gui.frmMTR_Entry.cmdTAMSA.fontsize(8)
+gui.frmMTR_Entry.cmdTAMSA.event(click,cmdTAMSA)
+gui.frmMTR_Entry.cmdUSS.create(button)
+gui.frmMTR_Entry.cmdUSS.caption("USS")
+gui.frmMTR_Entry.cmdUSS.visible(True)
+gui.frmMTR_Entry.cmdUSS.size(900,375)
+gui.frmMTR_Entry.cmdUSS.zorder(0)
+gui.frmMTR_Entry.cmdUSS.position(5600,0)
+gui.frmMTR_Entry.cmdUSS.enabled(True)
+gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+gui.frmMTR_Entry.cmdUSS.fontsize(8)
+gui.frmMTR_Entry.cmdUSS.event(click,cmdUSS)
+gui.frmMTR_Entry.cmdFlame.create(button)
+gui.frmMTR_Entry.cmdFlame.caption("Flame")
+gui.frmMTR_Entry.cmdFlame.visible(True)
+gui.frmMTR_Entry.cmdFlame.size(900,375)
+gui.frmMTR_Entry.cmdFlame.zorder(0)
+gui.frmMTR_Entry.cmdFlame.position(6490,0)
+gui.frmMTR_Entry.cmdFlame.enabled(True)
+gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+gui.frmMTR_Entry.cmdFlame.fontsize(8)
+gui.frmMTR_Entry.cmdFlame.event(click,cmdFlame)
+gui.frmMTR_Entry.lblNi.create(label,"Ni",True,270,255,1,2230,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblMn.create(label,"Mn",True,270,255,1,1595,2270,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblSi.create(label,"Si",True,270,255,1,980,2270,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblV.create(label,"V",True,270,255,1,6050,2270,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblCu.create(label,"Cu",True,270,255,1,5345,2270,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblMo.create(label,"Mo",True,270,255,1,4740,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblP.create(label,"P",True,270,255,1,4165,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblS.create(label,"S",True,270,255,1,3495,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblCr.create(label,"Cr",True,270,255,1,2870,2270,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblB.create(label,"B",True,270,255,1,10425,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblCa.create(label,"Ca:",True,270,255,1,9730,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblAs.create(label,"As:",True,270,255,1,9140,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblTi.create(label,"Ti",True,270,255,1,8520,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblNb.create(label,"Nb",True,270,255,1,7875,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblSn.create(label,"Sn",True,270,255,1,7270,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblAl.create(label,"Al",True,270,255,1,6630,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.txtNb.create(textbox,"",True,630,300,0,7670,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtNb.numericonly(1)
+gui.frmMTR_Entry.txtNb.maxLength(5)
+gui.frmMTR_Entry.txtNb.event(lostfocus,Val_Nb)
+gui.frmMTR_Entry.txtSn.create(textbox,"",True,630,300,0,7040,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtSn.numericonly(1)
+gui.frmMTR_Entry.txtSn.maxLength(5)
+gui.frmMTR_Entry.txtSn.event(lostfocus,Val_Sn)
+gui.frmMTR_Entry.txtAl.create(textbox,"",True,630,300,0,6410,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtAl.numericonly(1)
+gui.frmMTR_Entry.txtAl.maxLength(5)
+gui.frmMTR_Entry.txtAl.event(lostfocus,Val_Al)
+gui.frmMTR_Entry.txtV.create(textbox,"",True,630,300,0,5780,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtV.numericonly(1)
+gui.frmMTR_Entry.txtV.maxLength(5)
+gui.frmMTR_Entry.txtV.event(lostfocus,Val_V)
+gui.frmMTR_Entry.txtCu.create(textbox,"",True,630,300,0,5150,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtCu.numericonly(1)
+gui.frmMTR_Entry.txtCu.maxLength(5)
+gui.frmMTR_Entry.txtCu.event(lostfocus,Val_Cu)
+gui.frmMTR_Entry.txtMo.create(textbox,"",True,630,300,0,4520,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtMo.numericonly(1)
+gui.frmMTR_Entry.txtMo.maxLength(5)
+gui.frmMTR_Entry.txtMo.event(lostfocus,Val_Mo)
+gui.frmMTR_Entry.txtP.create(textbox,"",True,630,300,0,3890,2545,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtP.numericonly(1)
+gui.frmMTR_Entry.txtP.maxLength(5)
+gui.frmMTR_Entry.txtP.event(lostfocus,Val_P)
+gui.frmMTR_Entry.txtS.create(textbox,"",True,630,300,0,3260,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtS.numericonly(1)
+gui.frmMTR_Entry.txtS.maxLength(5)
+gui.frmMTR_Entry.txtS.event(lostfocus,Val_S)
+gui.frmMTR_Entry.txtCr.create(textbox,"",True,630,300,0,2630,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtCr.numericonly(1)
+gui.frmMTR_Entry.txtCr.maxLength(5)
+gui.frmMTR_Entry.txtCr.event(lostfocus,Val_Cr)
+gui.frmMTR_Entry.txtNi.create(textbox,"",True,630,300,0,2000,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtNi.numericonly(1)
+gui.frmMTR_Entry.txtNi.maxLength(5)
+gui.frmMTR_Entry.txtNi.event(lostfocus,Val_Ni)
+gui.frmMTR_Entry.txtMn.create(textbox,"",True,630,300,0,1370,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtMn.numericonly(1)
+gui.frmMTR_Entry.txtMn.maxLength(5)
+gui.frmMTR_Entry.txtMn.event(lostfocus,Val_Mn)
+gui.frmMTR_Entry.txtSi.create(textbox,"",True,630,300,0,740,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtSi.numericonly(1)
+gui.frmMTR_Entry.txtSi.maxLength(5)
+gui.frmMTR_Entry.txtSi.event(lostfocus,Val_Si)
+gui.frmMTR_Entry.txtBsol.create(textbox,"",True,630,300,0,8300,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtBsol.numericonly(1)
+gui.frmMTR_Entry.txtBsol.maxLength(5)
+gui.frmMTR_Entry.txtBsol.event(lostfocus,Val_Bsol)
+gui.frmMTR_Entry.txtO.create(textbox,"",True,630,300,0,8930,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtO.numericonly(1)
+gui.frmMTR_Entry.txtO.maxLength(5)
+gui.frmMTR_Entry.txtO.event(lostfocus,Val_O)
+gui.frmMTR_Entry.txtMg.create(textbox,"",True,630,300,0,9560,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtMg.numericonly(1)
+gui.frmMTR_Entry.txtMg.maxLength(5)
+gui.frmMTR_Entry.txtMg.event(lostfocus,Val_Mg)
+gui.frmMTR_Entry.txtH.create(textbox,"",True,630,300,0,10190,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtH.numericonly(1)
+gui.frmMTR_Entry.txtH.maxLength(5)
+gui.frmMTR_Entry.txtH.event(lostfocus,Val_H)
+gui.frmMTR_Entry.txtCo.create(textbox,"",True,630,300,0,10820,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtCo.numericonly(1)
+gui.frmMTR_Entry.txtCo.maxLength(5)
+gui.frmMTR_Entry.txtCo.event(lostfocus,Val_Co)
+gui.frmMTR_Entry.txtN.create(textbox,"",True,630,300,0,10820,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtN.numericonly(1)
+gui.frmMTR_Entry.txtN.maxLength(5)
+gui.frmMTR_Entry.txtN.event(lostfocus,Val_N)
+gui.frmMTR_Entry.txtB.create(textbox,"",True,630,300,0,10190,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtB.numericonly(1)
+gui.frmMTR_Entry.txtB.maxLength(5)
+gui.frmMTR_Entry.txtB.event(lostfocus,Val_B)
+gui.frmMTR_Entry.txtCa.create(textbox,"",True,630,300,0,9560,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtCa.numericonly(1)
+gui.frmMTR_Entry.txtCa.maxLength(5)
+gui.frmMTR_Entry.txtCa.event(lostfocus,Val_Ca)
+gui.frmMTR_Entry.txtAs.create(textbox,"",True,630,300,0,8930,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtAs.numericonly(1)
+gui.frmMTR_Entry.txtAs.maxLength(5)
+gui.frmMTR_Entry.txtAs.event(lostfocus,Val_As)
+gui.frmMTR_Entry.txtTi.create(textbox,"",True,630,300,0,8300,2555,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtTi.numericonly(1)
+gui.frmMTR_Entry.txtTi.maxLength(5)
+gui.frmMTR_Entry.txtTi.event(lostfocus,Val_Ti)
+gui.frmMTR_Entry.txtAlinSol.create(textbox,"",True,630,300,0,5780,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtAlinSol.numericonly(1)
+gui.frmMTR_Entry.txtAlinSol.maxLength(5)
+gui.frmMTR_Entry.txtAlinSol.event(lostfocus,Val_AlinSol)
+gui.frmMTR_Entry.txtPb.create(textbox,"",True,630,300,0,6410,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtPb.numericonly(1)
+gui.frmMTR_Entry.txtPb.maxLength(5)
+gui.frmMTR_Entry.txtPb.event(lostfocus,Val_Pb)
+gui.frmMTR_Entry.txtSb.create(textbox,"",True,630,300,0,7040,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtSb.numericonly(1)
+gui.frmMTR_Entry.txtSb.maxLength(5)
+gui.frmMTR_Entry.txtSb.event(lostfocus,Val_Sb)
+gui.frmMTR_Entry.txtBi.create(textbox,"",True,630,300,0,7670,3230,True,0,Arial,10,-2147483643,1)
+gui.frmMTR_Entry.txtBi.numericonly(1)
+gui.frmMTR_Entry.txtBi.maxLength(5)
+gui.frmMTR_Entry.txtBi.event(lostfocus,Val_Bi)
+gui.frmMTR_Entry.lblCo.create(label,"Co:",True,270,255,1,11015,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblH.create(label,"H:",True,270,255,1,10415,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblMg.create(label,"Mg:",True,270,255,1,9730,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblO.create(label,"O:",True,270,255,1,9145,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblBsol.create(label,"B sol:",True,555,255,1,8375,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblBi.create(label,"Bi:",True,270,255,1,7900,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblSb.create(label,"Sb:",True,270,255,1,7245,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblPb.create(label,"Pb:",True,270,255,1,6600,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblAlinSol.create(label,"Al in sol:",True,780,255,1,5690,2975,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblN.create(label,"N",True,270,255,1,11060,2260,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lbChem.create(label,"Chemical Composition (HEAT)",True,2145,255,1,200,2900,True,0,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.lblHardTest.create(label,"Hardness Test",True,1725,255,1,5095,3895,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.cmdBrwMill.create(button)
+gui.frmMTR_Entry.cmdBrwMill.caption("v")
+gui.frmMTR_Entry.cmdBrwMill.visible(True)
+gui.frmMTR_Entry.cmdBrwMill.size(345,285)
+gui.frmMTR_Entry.cmdBrwMill.zorder(0)
+gui.frmMTR_Entry.cmdBrwMill.position(2010,560)
+gui.frmMTR_Entry.cmdBrwMill.enabled(True)
+gui.frmMTR_Entry.cmdBrwMill.fontname("Arial")
+gui.frmMTR_Entry.cmdBrwMill.fontsize(8)
+gui.frmMTR_Entry.cmdBrwMill.event(click,brwMill)
+gui.frmMTR_Entry.cmdBrwGrade.create(button)
+gui.frmMTR_Entry.cmdBrwGrade.caption("v")
+gui.frmMTR_Entry.cmdBrwGrade.visible(True)
+gui.frmMTR_Entry.cmdBrwGrade.size(315,300)
+gui.frmMTR_Entry.cmdBrwGrade.zorder(0)
+gui.frmMTR_Entry.cmdBrwGrade.position(6735,545)
+gui.frmMTR_Entry.cmdBrwGrade.enabled(True)
+gui.frmMTR_Entry.cmdBrwGrade.fontname("Arial")
+gui.frmMTR_Entry.cmdBrwGrade.fontsize(8)
+gui.frmMTR_Entry.cmdBrwGrade.event(click,brwGrade)
+gui.frmMTR_Entry.cmdSave.create(button)
+gui.frmMTR_Entry.cmdSave.caption("Save")
+gui.frmMTR_Entry.cmdSave.visible(True)
+gui.frmMTR_Entry.cmdSave.size(960,375)
+gui.frmMTR_Entry.cmdSave.zorder(0)
+gui.frmMTR_Entry.cmdSave.position(11700,4655)
+gui.frmMTR_Entry.cmdSave.enabled(True)
+gui.frmMTR_Entry.cmdSave.fontname("Arial")
+gui.frmMTR_Entry.cmdSave.fontsize(8)
+gui.frmMTR_Entry.cmdSave.event(click,cmdSelSaveUpd)
+gui.frmMTR_Entry.lblReclbl.create(label,"Record No:",True,1050,255,1,8180,95,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblReclbl.fontstyle(True,False,False,False)
+gui.frmMTR_Entry.lblRecord.create(label,"-",True,1005,240,1,9300,95,True,0,Arial,10,-2147483633,0)
+gui.frmMTR_Entry.lblRecord.fontstyle(True,False,False,False)
+gui.frmMTR_Entry.cmdSearch.create(button)
+gui.frmMTR_Entry.cmdSearch.caption("Search")
+gui.frmMTR_Entry.cmdSearch.visible(True)
+gui.frmMTR_Entry.cmdSearch.size(855,375)
+gui.frmMTR_Entry.cmdSearch.zorder(0)
+gui.frmMTR_Entry.cmdSearch.position(11800,0)
+gui.frmMTR_Entry.cmdSearch.enabled(True)
+gui.frmMTR_Entry.cmdSearch.fontname("Arial")
+gui.frmMTR_Entry.cmdSearch.fontsize(8)
+gui.frmMTR_Entry.cmdSearch.event(click,brwRecord)
+gui.frmMTR_Entry.cmdNew.create(button)
+gui.frmMTR_Entry.cmdNew.caption("New")
+gui.frmMTR_Entry.cmdNew.visible(True)
+gui.frmMTR_Entry.cmdNew.size(960,375)
+gui.frmMTR_Entry.cmdNew.zorder(0)
+gui.frmMTR_Entry.cmdNew.position(11700,5360)
+gui.frmMTR_Entry.cmdNew.enabled(True)
+gui.frmMTR_Entry.cmdNew.fontname("Arial")
+gui.frmMTR_Entry.cmdNew.fontsize(8)
+gui.frmMTR_Entry.cmdNew.event(click,F_New_Form)
+gui.frmMTR_Entry.cmdMaint.create(button)
+gui.frmMTR_Entry.cmdMaint.caption("Maint.")
+gui.frmMTR_Entry.cmdMaint.visible(True)
+gui.frmMTR_Entry.cmdMaint.size(555,285)
+gui.frmMTR_Entry.cmdMaint.zorder(0)
+gui.frmMTR_Entry.cmdMaint.position(11900,600)
+gui.frmMTR_Entry.cmdMaint.enabled(True)
+gui.frmMTR_Entry.cmdMaint.fontname("Arial")
+gui.frmMTR_Entry.cmdMaint.fontsize(8)
+gui.frmMTR_Entry.cmdMaint.event(click,cmdMaint)
+gui.frmMTR_Entry.lblYieldStrengV.create(label,"Yield Strength",True,765,450,1,4205,1125,True,2,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.comboYieldStrengV.create(combobox)
+gui.frmMTR_Entry.comboYieldStrengV.text("")
+gui.frmMTR_Entry.comboYieldStrengV.visible(True)
+gui.frmMTR_Entry.comboYieldStrengV.size(870,330)
+gui.frmMTR_Entry.comboYieldStrengV.zorder(0)
+gui.frmMTR_Entry.comboYieldStrengV.position(4185,1695)
+gui.frmMTR_Entry.comboYieldStrengV.enabled(True)
+gui.frmMTR_Entry.comboYieldStrengV.fontname("Arial")
+gui.frmMTR_Entry.comboYieldStrengV.fontsize(10)
+gui.frmMTR_Entry.lblComments.create(label,"Comments:",True,930,255,1,7575,4245,True,0,Arial,8,-2147483633,0)
+gui.frmMTR_Entry.mltxtComments.create(textboxm)
+gui.frmMTR_Entry.mltxtComments.text("")
+gui.frmMTR_Entry.mltxtComments.visible(True)
+gui.frmMTR_Entry.mltxtComments.size(3990,1830)
+gui.frmMTR_Entry.mltxtComments.zorder(0)
+gui.frmMTR_Entry.mltxtComments.position(7500,4605)
+gui.frmMTR_Entry.mltxtComments.enabled(True)
+gui.frmMTR_Entry.mltxtComments.alignment(0)
+gui.frmMTR_Entry.mltxtComments.fontname("Arial")
+gui.frmMTR_Entry.mltxtComments.fontsize(8)
+gui.frmMTR_Entry.mltxtComments.maxLength(250)
+gui.frmMTR_Entry.mltxtComments.BackColor(-2147483643)
+gui.frmMTR_Entry.cmdSearch.tabstop(True)
+gui.frmMTR_Entry.cmdSearch.tabindex(1)
+gui.frmMTR_Entry.cmdNSSVM.tabstop(True)
+gui.frmMTR_Entry.cmdNSSVM.tabindex(2)
+gui.frmMTR_Entry.cmdKoppel.tabstop(True)
+gui.frmMTR_Entry.cmdKoppel.tabindex(3)
+gui.frmMTR_Entry.cmdNippon.tabstop(True)
+gui.frmMTR_Entry.cmdNippon.tabindex(4)
+gui.frmMTR_Entry.cmdPetroTub.tabstop(True)
+gui.frmMTR_Entry.cmdPetroTub.tabindex(5)
+gui.frmMTR_Entry.cmdSilcoTub.tabstop(True)
+gui.frmMTR_Entry.cmdSilcoTub.tabindex(6)
+gui.frmMTR_Entry.cmdTAMSA.tabstop(True)
+gui.frmMTR_Entry.cmdTAMSA.tabindex(7)
+gui.frmMTR_Entry.cmdUSS.tabstop(True)
+gui.frmMTR_Entry.cmdUSS.tabindex(8)
+gui.frmMTR_Entry.cmdFlame.tabstop(True)
+gui.frmMTR_Entry.cmdFlame.tabindex(9)
+gui.frmMTR_Entry.txtMill.tabstop(True)
+gui.frmMTR_Entry.txtMill.tabindex(10)
+gui.frmMTR_Entry.cmdBrwMill.tabstop(True)
+gui.frmMTR_Entry.cmdBrwMill.tabindex(11)
+gui.frmMTR_Entry.txtOrderNo.tabstop(True)
+gui.frmMTR_Entry.txtOrderNo.tabindex(12)
+gui.frmMTR_Entry.txtGrade.tabstop(True)
+gui.frmMTR_Entry.txtGrade.tabindex(13)
+gui.frmMTR_Entry.cmdBrwGrade.tabstop(True)
+gui.frmMTR_Entry.cmdBrwGrade.tabindex(14)
+gui.frmMTR_Entry.txtOD.tabstop(True)
+gui.frmMTR_Entry.txtOD.tabindex(15)
+gui.frmMTR_Entry.txtWall.tabstop(True)
+gui.frmMTR_Entry.txtWall.tabindex(16)
+gui.frmMTR_Entry.txtLinHeatNo.tabstop(True)
+gui.frmMTR_Entry.txtLinHeatNo.tabindex(17)
+gui.frmMTR_Entry.txtHeatNo.tabstop(True)
+gui.frmMTR_Entry.txtHeatNo.tabindex(18)
+gui.frmMTR_Entry.txtYieldStrength.tabstop(True)
+gui.frmMTR_Entry.txtYieldStrength.tabindex(19)
+gui.frmMTR_Entry.comboYieldStrengV.tabstop(True)
+gui.frmMTR_Entry.comboYieldStrengV.tabindex(20)
+gui.frmMTR_Entry.txtTensileStrength.tabstop(True)
+gui.frmMTR_Entry.txtTensileStrength.tabindex(21)
+gui.frmMTR_Entry.txtPercElong.tabstop(True)
+gui.frmMTR_Entry.txtPercElong.tabindex(22)
+gui.frmMTR_Entry.txtGrainSize.tabstop(True)
+gui.frmMTR_Entry.txtGrainSize.tabindex(23)
+gui.frmMTR_Entry.txtC.tabstop(True)
+gui.frmMTR_Entry.txtC.tabindex(24)
+gui.frmMTR_Entry.txtSi.tabstop(True)
+gui.frmMTR_Entry.txtSi.tabindex(25)
+gui.frmMTR_Entry.txtMn.tabstop(True)
+gui.frmMTR_Entry.txtMn.tabindex(26)
+gui.frmMTR_Entry.txtNi.tabstop(True)
+gui.frmMTR_Entry.txtNi.tabindex(27)
+gui.frmMTR_Entry.txtCr.tabstop(True)
+gui.frmMTR_Entry.txtCr.tabindex(28)
+gui.frmMTR_Entry.txtS.tabstop(True)
+gui.frmMTR_Entry.txtS.tabindex(29)
+gui.frmMTR_Entry.txtP.tabstop(True)
+gui.frmMTR_Entry.txtP.tabindex(30)
+gui.frmMTR_Entry.txtMo.tabstop(True)
+gui.frmMTR_Entry.txtMo.tabindex(31)
+gui.frmMTR_Entry.txtCu.tabstop(True)
+gui.frmMTR_Entry.txtCu.tabindex(32)
+gui.frmMTR_Entry.txtV.tabstop(True)
+gui.frmMTR_Entry.txtV.tabindex(33)
+gui.frmMTR_Entry.txtAl.tabstop(True)
+gui.frmMTR_Entry.txtAl.tabindex(34)
+gui.frmMTR_Entry.txtSn.tabstop(True)
+gui.frmMTR_Entry.txtSn.tabindex(35)
+gui.frmMTR_Entry.txtNb.tabstop(True)
+gui.frmMTR_Entry.txtNb.tabindex(36)
+gui.frmMTR_Entry.txtTi.tabstop(True)
+gui.frmMTR_Entry.txtTi.tabindex(37)
+gui.frmMTR_Entry.txtAs.tabstop(True)
+gui.frmMTR_Entry.txtAs.tabindex(38)
+gui.frmMTR_Entry.txtCa.tabstop(True)
+gui.frmMTR_Entry.txtCa.tabindex(39)
+gui.frmMTR_Entry.txtB.tabstop(True)
+gui.frmMTR_Entry.txtB.tabindex(40)
+gui.frmMTR_Entry.txtN.tabstop(True)
+gui.frmMTR_Entry.txtN.tabindex(41)
+gui.frmMTR_Entry.txtAlinSol.tabstop(True)
+gui.frmMTR_Entry.txtAlinSol.tabindex(42)
+gui.frmMTR_Entry.txtPb.tabstop(True)
+gui.frmMTR_Entry.txtPb.tabindex(43)
+gui.frmMTR_Entry.txtSb.tabstop(True)
+gui.frmMTR_Entry.txtSb.tabindex(44)
+gui.frmMTR_Entry.txtBi.tabstop(True)
+gui.frmMTR_Entry.txtBi.tabindex(45)
+gui.frmMTR_Entry.txtBsol.tabstop(True)
+gui.frmMTR_Entry.txtBsol.tabindex(46)
+gui.frmMTR_Entry.txtO.tabstop(True)
+gui.frmMTR_Entry.txtO.tabindex(47)
+gui.frmMTR_Entry.txtMg.tabstop(True)
+gui.frmMTR_Entry.txtMg.tabindex(48)
+gui.frmMTR_Entry.txtH.tabstop(True)
+gui.frmMTR_Entry.txtH.tabindex(49)
+gui.frmMTR_Entry.txtCo.tabstop(True)
+gui.frmMTR_Entry.txtCo.tabindex(50)
+gui.frmMTR_Entry.comboDirection.tabstop(True)
+gui.frmMTR_Entry.comboDirection.tabindex(51)
+gui.frmMTR_Entry.comboSize.tabstop(True)
+gui.frmMTR_Entry.comboSize.tabindex(52)
+gui.frmMTR_Entry.txtNotch.tabstop(True)
+gui.frmMTR_Entry.txtNotch.tabindex(53)
+gui.frmMTR_Entry.txtTemp.tabstop(True)
+gui.frmMTR_Entry.txtTemp.tabindex(54)
+gui.frmMTR_Entry.comboTempScale.tabstop(True)
+gui.frmMTR_Entry.comboTempScale.tabindex(55)
+gui.frmMTR_Entry.txtCharpy1.tabstop(True)
+gui.frmMTR_Entry.txtCharpy1.tabindex(56)
+gui.frmMTR_Entry.txtCharpy2.tabstop(True)
+gui.frmMTR_Entry.txtCharpy2.tabindex(57)
+gui.frmMTR_Entry.txtCharpy3.tabstop(True)
+gui.frmMTR_Entry.txtCharpy3.tabindex(58)
+gui.frmMTR_Entry.txtShear1.tabstop(True)
+gui.frmMTR_Entry.txtShear1.tabindex(59)
+gui.frmMTR_Entry.txtShear2.tabstop(True)
+gui.frmMTR_Entry.txtShear2.tabindex(60)
+gui.frmMTR_Entry.txtShear3.tabstop(True)
+gui.frmMTR_Entry.txtShear3.tabindex(61)
+gui.frmMTR_Entry.txtHTMW1.tabstop(True)
+gui.frmMTR_Entry.txtHTMW1.tabindex(62)
+gui.frmMTR_Entry.txtHTMW2.tabstop(True)
+gui.frmMTR_Entry.txtHTMW2.tabindex(63)
+gui.frmMTR_Entry.txtHTMW3.tabstop(True)
+gui.frmMTR_Entry.txtHTMW3.tabindex(64)
+gui.frmMTR_Entry.txtHTOD1.tabstop(True)
+gui.frmMTR_Entry.txtHTOD1.tabindex(65)
+gui.frmMTR_Entry.txtHTOD2.tabstop(True)
+gui.frmMTR_Entry.txtHTOD2.tabindex(66)
+gui.frmMTR_Entry.txtHTOD3.tabstop(True)
+gui.frmMTR_Entry.txtHTOD3.tabindex(67)
+gui.frmMTR_Entry.txtHTID1.tabstop(True)
+gui.frmMTR_Entry.txtHTID1.tabindex(68)
+gui.frmMTR_Entry.txtHTID2.tabstop(True)
+gui.frmMTR_Entry.txtHTID2.tabindex(69)
+gui.frmMTR_Entry.txtHTID3.tabstop(True)
+gui.frmMTR_Entry.txtHTID3.tabindex(70)
+gui.frmMTR_Entry.txtAvgHardness.tabstop(True)
+gui.frmMTR_Entry.txtAvgHardness.tabindex(71)
+gui.frmMTR_Entry.comboHardnessScale.tabstop(True)
+gui.frmMTR_Entry.comboHardnessScale.tabindex(72)
+gui.frmMTR_Entry.mltxtComments.tabstop(True)
+gui.frmMTR_Entry.mltxtComments.tabindex(73)
+gui.frmMTR_Entry.cmdSave.tabstop(True)
+gui.frmMTR_Entry.cmdSave.tabindex(74)
+gui.frmMTR_Entry.cmdNew.tabstop(True)
+gui.frmMTR_Entry.cmdNew.tabindex(75)
+gui.frmMTR_Entry.cmdExit.tabstop(True)
+gui.frmMTR_Entry.cmdExit.tabindex(76)
+gui.frmMTR_Entry.cmdMaint.tabstop(True)
+gui.frmMTR_Entry.cmdMaint.tabindex(77)
+
+
+gui.FormMaint..create
+gui.FormMaint..caption("Maintenance Screen")
+gui.FormMaint..size(7545,2265)
+gui.FormMaint..position(0,0)
+gui.FormMaint..alwaysontop(False)
+gui.FormMaint..fontname("Arial")
+gui.FormMaint..fontsize(8)
+gui.FormMaint..forecolor(0)
+gui.FormMaint..fontstyle(,,,,)
+gui.FormMaint..BackColor(-2147483633)
+gui.FormMaint..controlbox(True)
+gui.FormMaint..maxbutton(True)
+gui.FormMaint..minbutton(True)
+gui.FormMaint..mousepointer(0)
+gui.FormMaint..moveable(True)
+gui.FormMaint..sizeable(True)
+gui.FormMaint..ShowInTaskBar(True)
+gui.FormMaint..titlebar(True)
+gui.FormMaint.cmdExtMaint.create(button)
+gui.FormMaint.cmdExtMaint.caption("Exit")
+gui.FormMaint.cmdExtMaint.visible(True)
+gui.FormMaint.cmdExtMaint.size(855,375)
+gui.FormMaint.cmdExtMaint.zorder(0)
+gui.FormMaint.cmdExtMaint.position(6200,100)
+gui.FormMaint.cmdExtMaint.enabled(True)
+gui.FormMaint.cmdExtMaint.fontname("Arial")
+gui.FormMaint.cmdExtMaint.fontsize(8)
+gui.FormMaint.cmdExtMaint.event(click,cmdMaintExit)
+gui.FormMaint.txtMMill.create(textbox,"",True,2340,300,0,800,145,True,0,Arial,10,-2147483643,1)
+gui.FormMaint.lblMMill.create(label,"Mill:",True,645,255,1,200,200,True,0,Arial,10,-2147483633,0)
+gui.FormMaint.cmdBrwMMaill.create(button)
+gui.FormMaint.cmdBrwMMaill.caption("V")
+gui.FormMaint.cmdBrwMMaill.visible(True)
+gui.FormMaint.cmdBrwMMaill.size(450,360)
+gui.FormMaint.cmdBrwMMaill.zorder(0)
+gui.FormMaint.cmdBrwMMaill.position(3120,115)
+gui.FormMaint.cmdBrwMMaill.enabled(True)
+gui.FormMaint.cmdBrwMMaill.fontname("Arial")
+gui.FormMaint.cmdBrwMMaill.fontsize(8)
+gui.FormMaint.cmdBrwMMaill.event(click,cmdMaintBrwMill)
+gui.FormMaint.cmdMMillSave.create(button)
+gui.FormMaint.cmdMMillSave.caption("Save")
+gui.FormMaint.cmdMMillSave.visible(True)
+gui.FormMaint.cmdMMillSave.size(855,375)
+gui.FormMaint.cmdMMillSave.zorder(0)
+gui.FormMaint.cmdMMillSave.position(3760,115)
+gui.FormMaint.cmdMMillSave.enabled(True)
+gui.FormMaint.cmdMMillSave.fontname("Arial")
+gui.FormMaint.cmdMMillSave.fontsize(8)
+gui.FormMaint.cmdMMillSave.event(click,cmdMaintSaveMill)
+gui.FormMaint.cmdMMillDelete.create(button)
+gui.FormMaint.cmdMMillDelete.caption("Delete")
+gui.FormMaint.cmdMMillDelete.visible(True)
+gui.FormMaint.cmdMMillDelete.size(855,375)
+gui.FormMaint.cmdMMillDelete.zorder(0)
+gui.FormMaint.cmdMMillDelete.position(4980,115)
+gui.FormMaint.cmdMMillDelete.enabled(True)
+gui.FormMaint.cmdMMillDelete.fontname("Arial")
+gui.FormMaint.cmdMMillDelete.fontsize(8)
+gui.FormMaint.cmdMMillDelete.event(click,cmdMaintDelMill)
+gui.FormMaint.lblMGrade.create(label,"Grade:",True,630,255,1,185,745,True,0,Arial,10,-2147483633,0)
+gui.FormMaint.txtMGrade.create(textbox,"",True,2340,300,0,800,690,True,0,Arial,10,-2147483643,1)
+gui.FormMaint.cmd5.create(button)
+gui.FormMaint.cmd5.caption("V")
+gui.FormMaint.cmd5.visible(True)
+gui.FormMaint.cmd5.size(450,300)
+gui.FormMaint.cmd5.zorder(0)
+gui.FormMaint.cmd5.position(3125,695)
+gui.FormMaint.cmd5.enabled(True)
+gui.FormMaint.cmd5.fontname("Arial")
+gui.FormMaint.cmd5.fontsize(8)
+gui.FormMaint.cmd5.event(click,cmdMaintBrwGrade)
+gui.FormMaint.cmdMGradeSave.create(button)
+gui.FormMaint.cmdMGradeSave.caption("Save")
+gui.FormMaint.cmdMGradeSave.visible(True)
+gui.FormMaint.cmdMGradeSave.size(855,375)
+gui.FormMaint.cmdMGradeSave.zorder(0)
+gui.FormMaint.cmdMGradeSave.position(3775,635)
+gui.FormMaint.cmdMGradeSave.enabled(True)
+gui.FormMaint.cmdMGradeSave.fontname("Arial")
+gui.FormMaint.cmdMGradeSave.fontsize(8)
+gui.FormMaint.cmdMGradeSave.event(click,cmdMaintSaveGrade)
+gui.FormMaint.cmdMGradeDelete.create(button)
+gui.FormMaint.cmdMGradeDelete.caption("Delete")
+gui.FormMaint.cmdMGradeDelete.visible(True)
+gui.FormMaint.cmdMGradeDelete.size(855,375)
+gui.FormMaint.cmdMGradeDelete.zorder(0)
+gui.FormMaint.cmdMGradeDelete.position(4985,620)
+gui.FormMaint.cmdMGradeDelete.enabled(True)
+gui.FormMaint.cmdMGradeDelete.fontname("Arial")
+gui.FormMaint.cmdMGradeDelete.fontsize(8)
+gui.FormMaint.cmdMGradeDelete.event(click,cmdMaintDelGrade)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Coded by: Ricardo Rodriguez
+'Project Start Date: 4/27/2011
+
+V.Global.fmatC.Declare(Float)
+V.Global.fmatSi.Declare(Float)
+V.Global.fmatMn.Declare(Float)
+V.Global.fmatNi.Declare(Float)
+V.Global.fmatCr.Declare(Float)
+V.Global.fmatS.Declare(Float)
+V.Global.fmatP.Declare(Float)
+V.Global.fmatMo.Declare(Float)
+V.Global.fmatCu.Declare(Float)
+V.Global.fmatV.Declare(Float)
+V.Global.fmatAl.Declare(Float)
+V.Global.fmatSn.Declare(Float)
+V.Global.fmatNb.Declare(Float)
+V.Global.fmatTi.Declare(Float)
+V.Global.fmatAs.Declare(Float)
+V.Global.fmatCa.Declare(Float)
+V.Global.fmatB.Declare(Float)
+V.Global.fmatN.Declare(Float)
+V.Global.fmatAlinSol.Declare(Float)
+V.Global.fmatPb.Declare(Float)
+V.Global.fmatSb.Declare(Float)
+V.Global.fmatBsol.Declare(Float)
+V.Global.fmatO.Declare(Float)
+V.Global.fmatMa.Declare(Float)
+V.Global.fmatH.Declare(Float)
+
+Gui.frmMTR_Entry.comboDirection.AddItem("TRAN")
+Gui.frmMTR_Entry.comboDirection.AddItem("LONG")
+Gui.frmMTR_Entry.comboDirection.Text("TRAN")
+
+Gui.frmMTR_Entry.comboSize.AddItem("10mmX10mm")
+Gui.frmMTR_Entry.comboSize.AddItem("7.5mmX7.5mm")
+Gui.frmMTR_Entry.comboSize.AddItem("5mmX5mm")
+Gui.frmMTR_Entry.comboSize.AddItem("2.5mmX2.5mm")
+Gui.frmMTR_Entry.comboSize.Text("10mmX10mm")
+
+Gui.frmMTR_Entry.comboHardnessScale.AddItem("HRB")
+Gui.frmMTR_Entry.comboHardnessScale.AddItem("HRC")
+Gui.frmMTR_Entry.comboHardnessScale.AddItem("BHN")
+Gui.frmMTR_Entry.comboHardnessScale.Text("HRC")
+
+Gui.frmMTR_Entry.comboTempScale.AddItem("F")
+Gui.frmMTR_Entry.comboTempScale.AddItem("C")
+Gui.frmMTR_Entry.comboTempScale.Text("F")
+
+Gui.frmMTR_Entry.comboYieldStrengV.AddItem("0.50")
+Gui.frmMTR_Entry.comboYieldStrengV.AddItem("0.60")
+Gui.frmMTR_Entry.comboYieldStrengV.AddItem("0.65")
+Gui.frmMTR_Entry.comboYieldStrengV.Text("0.50")
+
+
+F.Intrinsic.Control.CallSub("cmdNSSVM")
+Gui.frmMTR_Entry..Show
+
+Program.Sub.Main.End
+
+Program.Sub.cmdNSSVM.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial Black")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+
+F.Intrinsic.Control.CallSub(F_enablecomp)
+Gui.frmMTR_Entry.txtAs.Enabled(False)
+Gui.frmMTR_Entry.txtAs.BackColor(15658734)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(False)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtPb.Enabled(False)
+Gui.frmMTR_Entry.txtPb.BackColor(15658734)
+Gui.frmMTR_Entry.txtSb.Enabled(False)
+Gui.frmMTR_Entry.txtSb.BackColor(15658734)
+Gui.frmMTR_Entry.txtBi.Enabled(False)
+Gui.frmMTR_Entry.txtBi.BackColor(15658734)
+Gui.frmMTR_Entry.txtBsol.Enabled(False)
+Gui.frmMTR_Entry.txtBSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtO.Enabled(False)
+Gui.frmMTR_Entry.txtO.BackColor(15658734)
+Gui.frmMTR_Entry.txtMg.Enabled(False)
+Gui.frmMTR_Entry.txtMg.BackColor(15658734)
+Gui.frmMTR_Entry.txtH.Enabled(False)
+Gui.frmMTR_Entry.txtH.BackColor(15658734)
+Gui.frmMTR_Entry.txtCo.Enabled(False)
+Gui.frmMTR_Entry.txtCo.BackColor(15658734)
+
+
+
+
+
+
+
+
+
+Program.Sub.cmdNSSVM.End
+
+Program.Sub.cmdKoppel.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial Black")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+
+F.Intrinsic.Control.CallSub(F_EnableComp)
+Gui.frmMTR_Entry.txtSn.Enabled(False)
+Gui.frmMTR_Entry.txtSn.BackColor(15658734)
+Gui.frmMTR_Entry.txtNb.Enabled(False)
+Gui.frmMTR_Entry.txtNb.BackColor(15658734)
+Gui.frmMTR_Entry.txtTi.Enabled(False)
+Gui.frmMTR_Entry.txtTi.BackColor(15658734)
+Gui.frmMTR_Entry.txtAs.Enabled(False)
+Gui.frmMTR_Entry.txtAs.BackColor(15658734)
+Gui.frmMTR_Entry.txtCa.Enabled(False)
+Gui.frmMTR_Entry.txtCa.BackColor(15658734)
+Gui.frmMTR_Entry.txtB.Enabled(False)
+Gui.frmMTR_Entry.txtB.BackColor(15658734)
+Gui.frmMTR_Entry.txtN.Enabled(False)
+Gui.frmMTR_Entry.txtN.BackColor(15658734)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(False)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtPb.Enabled(False)
+Gui.frmMTR_Entry.txtPb.BackColor(15658734)
+Gui.frmMTR_Entry.txtSb.Enabled(False)
+Gui.frmMTR_Entry.txtSb.BackColor(15658734)
+Gui.frmMTR_Entry.txtBi.Enabled(False)
+Gui.frmMTR_Entry.txtBi.BackColor(15658734)
+Gui.frmMTR_Entry.txtBsol.Enabled(False)
+Gui.frmMTR_Entry.txtBSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtO.Enabled(False)
+Gui.frmMTR_Entry.txtO.BackColor(15658734)
+Gui.frmMTR_Entry.txtMg.Enabled(False)
+Gui.frmMTR_Entry.txtMg.BackColor(15658734)
+Gui.frmMTR_Entry.txtH.Enabled(False)
+Gui.frmMTR_Entry.txtH.BackColor(15658734)
+Gui.frmMTR_Entry.txtCo.Enabled(False)
+Gui.frmMTR_Entry.txtCo.BackColor(15658734)
+
+
+Program.Sub.cmdKoppel.End
+
+Program.Sub.cmdEnd.Start
+F.Intrinsic.Control.End
+
+Program.Sub.cmdEnd.End
+
+Program.Sub.cmdNippon.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial Black")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+
+F.Intrinsic.Control.CallSub(F_EnableComp)
+Gui.frmMTR_Entry.txtNi.Enabled(False)
+Gui.frmMTR_Entry.txtNi.BackColor(15658734)
+Gui.frmMTR_Entry.txtCr.Enabled(False)
+Gui.frmMTR_Entry.txtCr.BackColor(15658734)
+Gui.frmMTR_Entry.txtMo.Enabled(False)
+Gui.frmMTR_Entry.txtMo.BackColor(15658734)
+Gui.frmMTR_Entry.txtCu.Enabled(False)
+Gui.frmMTR_Entry.txtCu.BackColor(15658734)
+Gui.frmMTR_Entry.txtV.Enabled(False)
+Gui.frmMTR_Entry.txtV.BackColor(15658734)
+Gui.frmMTR_Entry.txtAl.Enabled(False)
+Gui.frmMTR_Entry.txtAl.BackColor(15658734)
+Gui.frmMTR_Entry.txtSn.Enabled(False)
+Gui.frmMTR_Entry.txtSn.BackColor(15658734)
+Gui.frmMTR_Entry.txtNb.Enabled(False)
+Gui.frmMTR_Entry.txtNb.BackColor(15658734)
+Gui.frmMTR_Entry.txtTi.Enabled(False)
+Gui.frmMTR_Entry.txtTi.BackColor(15658734)
+Gui.frmMTR_Entry.txtAs.Enabled(False)
+Gui.frmMTR_Entry.txtAs.BackColor(15658734)
+Gui.frmMTR_Entry.txtCa.Enabled(False)
+Gui.frmMTR_Entry.txtCa.BackColor(15658734)
+Gui.frmMTR_Entry.txtB.Enabled(False)
+Gui.frmMTR_Entry.txtB.BackColor(15658734)
+Gui.frmMTR_Entry.txtN.Enabled(False)
+Gui.frmMTR_Entry.txtN.BackColor(15658734)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(False)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtPb.Enabled(False)
+Gui.frmMTR_Entry.txtPb.BackColor(15658734)
+Gui.frmMTR_Entry.txtSb.Enabled(False)
+Gui.frmMTR_Entry.txtSb.BackColor(15658734)
+Gui.frmMTR_Entry.txtBi.Enabled(False)
+Gui.frmMTR_Entry.txtBi.BackColor(15658734)
+Gui.frmMTR_Entry.txtBsol.Enabled(False)
+Gui.frmMTR_Entry.txtBSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtO.Enabled(False)
+Gui.frmMTR_Entry.txtO.BackColor(15658734)
+Gui.frmMTR_Entry.txtMg.Enabled(False)
+Gui.frmMTR_Entry.txtMg.BackColor(15658734)
+Gui.frmMTR_Entry.txtH.Enabled(False)
+Gui.frmMTR_Entry.txtH.BackColor(15658734)
+Gui.frmMTR_Entry.txtCo.Enabled(False)
+Gui.frmMTR_Entry.txtCo.BackColor(15658734)
+
+
+
+
+Program.Sub.cmdNippon.End
+
+Program.Sub.cmdPetroTub.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial Black")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+
+
+F.Intrinsic.Control.CallSub(F_EnableComp)
+Gui.frmMTR_Entry.txtAl.Enabled(False)
+Gui.frmMTR_Entry.txtAl.BackColor(15658734)
+Gui.frmMTR_Entry.txtSn.Enabled(False)
+Gui.frmMTR_Entry.txtSn.BackColor(15658734)
+Gui.frmMTR_Entry.txtNb.Enabled(False)
+Gui.frmMTR_Entry.txtNb.BackColor(15658734)
+Gui.frmMTR_Entry.txtTi.Enabled(False)
+Gui.frmMTR_Entry.txtTi.BackColor(15658734)
+Gui.frmMTR_Entry.txtAs.Enabled(False)
+Gui.frmMTR_Entry.txtAs.BackColor(15658734)
+Gui.frmMTR_Entry.txtCa.Enabled(False)
+Gui.frmMTR_Entry.txtCa.BackColor(15658734)
+Gui.frmMTR_Entry.txtB.Enabled(False)
+Gui.frmMTR_Entry.txtB.BackColor(15658734)
+Gui.frmMTR_Entry.txtN.Enabled(False)
+Gui.frmMTR_Entry.txtN.BackColor(15658734)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(False)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtPb.Enabled(False)
+Gui.frmMTR_Entry.txtPb.BackColor(15658734)
+Gui.frmMTR_Entry.txtSb.Enabled(False)
+Gui.frmMTR_Entry.txtSb.BackColor(15658734)
+Gui.frmMTR_Entry.txtBi.Enabled(False)
+Gui.frmMTR_Entry.txtBi.BackColor(15658734)
+Gui.frmMTR_Entry.txtBsol.Enabled(False)
+Gui.frmMTR_Entry.txtBSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtO.Enabled(False)
+Gui.frmMTR_Entry.txtO.BackColor(15658734)
+Gui.frmMTR_Entry.txtMg.Enabled(False)
+Gui.frmMTR_Entry.txtMg.BackColor(15658734)
+Gui.frmMTR_Entry.txtH.Enabled(False)
+Gui.frmMTR_Entry.txtH.BackColor(15658734)
+Gui.frmMTR_Entry.txtCo.Enabled(False)
+Gui.frmMTR_Entry.txtCo.BackColor(15658734)
+
+
+
+Program.Sub.cmdPetroTub.End
+
+Program.Sub.cmdSilcoTub.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial Black")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+
+F.Intrinsic.Control.CallSub(F_EnableComp)
+Gui.frmMTR_Entry.txtSn.Enabled(False)
+Gui.frmMTR_Entry.txtSn.BackColor(15658734)
+Gui.frmMTR_Entry.txtNb.Enabled(False)
+Gui.frmMTR_Entry.txtNb.BackColor(15658734)
+Gui.frmMTR_Entry.txtTi.Enabled(False)
+Gui.frmMTR_Entry.txtTi.BackColor(15658734)
+Gui.frmMTR_Entry.txtAs.Enabled(False)
+Gui.frmMTR_Entry.txtAs.BackColor(15658734)
+Gui.frmMTR_Entry.txtCa.Enabled(False)
+Gui.frmMTR_Entry.txtCa.BackColor(15658734)
+Gui.frmMTR_Entry.txtB.Enabled(False)
+Gui.frmMTR_Entry.txtB.BackColor(15658734)
+Gui.frmMTR_Entry.txtN.Enabled(False)
+Gui.frmMTR_Entry.txtN.BackColor(15658734)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(False)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtPb.Enabled(False)
+Gui.frmMTR_Entry.txtPb.BackColor(15658734)
+Gui.frmMTR_Entry.txtSb.Enabled(False)
+Gui.frmMTR_Entry.txtSb.BackColor(15658734)
+Gui.frmMTR_Entry.txtBi.Enabled(False)
+Gui.frmMTR_Entry.txtBi.BackColor(15658734)
+Gui.frmMTR_Entry.txtBsol.Enabled(False)
+Gui.frmMTR_Entry.txtBSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtO.Enabled(False)
+Gui.frmMTR_Entry.txtO.BackColor(15658734)
+Gui.frmMTR_Entry.txtMg.Enabled(False)
+Gui.frmMTR_Entry.txtMg.BackColor(15658734)
+Gui.frmMTR_Entry.txtH.Enabled(False)
+Gui.frmMTR_Entry.txtH.BackColor(15658734)
+Gui.frmMTR_Entry.txtCo.Enabled(False)
+Gui.frmMTR_Entry.txtCo.BackColor(15658734)
+
+
+
+Program.Sub.cmdSilcoTub.End
+
+Program.Sub.cmdTAMSA.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial Black")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+
+F.Intrinsic.Control.CallSub(F_EnableComp)
+Gui.frmMTR_Entry.txtCo.Enabled(False)
+Gui.frmMTR_Entry.txtCo.BackColor(15658734)
+
+
+
+Program.Sub.cmdTAMSA.End
+
+Program.Sub.cmdUSS.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial Black")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial")
+
+F.Intrinsic.Control.CallSub(F_enablecomp)
+Gui.frmMTR_Entry.txtSn.Enabled(False)
+Gui.frmMTR_Entry.txtSn.BackColor(15658734)
+Gui.frmMTR_Entry.txtNb.Enabled(False)
+Gui.frmMTR_Entry.txtNb.BackColor(15658734)
+Gui.frmMTR_Entry.txtAs.Enabled(False)
+Gui.frmMTR_Entry.txtAs.BackColor(15658734)
+Gui.frmMTR_Entry.txtCa.Enabled(False)
+Gui.frmMTR_Entry.txtCa.BackColor(15658734)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(False)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtPb.Enabled(False)
+Gui.frmMTR_Entry.txtPb.BackColor(15658734)
+Gui.frmMTR_Entry.txtSb.Enabled(False)
+Gui.frmMTR_Entry.txtSb.BackColor(15658734)
+Gui.frmMTR_Entry.txtBi.Enabled(False)
+Gui.frmMTR_Entry.txtBi.BackColor(15658734)
+Gui.frmMTR_Entry.txtBsol.Enabled(False)
+Gui.frmMTR_Entry.txtBSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtO.Enabled(False)
+Gui.frmMTR_Entry.txtO.BackColor(15658734)
+Gui.frmMTR_Entry.txtMg.Enabled(False)
+Gui.frmMTR_Entry.txtMg.BackColor(15658734)
+Gui.frmMTR_Entry.txtH.Enabled(False)
+Gui.frmMTR_Entry.txtH.BackColor(15658734)
+
+Program.Sub.cmdUSS.End
+
+Program.Sub.cmdFlame.Start
+Gui.frmMTR_Entry.cmdKoppel.fontname("Arial")
+Gui.frmMTR_Entry.cmdNSSVM.fontname("Arial")
+Gui.frmMTR_Entry.cmdNippon.fontname("Arial")
+Gui.frmMTR_Entry.cmdPetroTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdSilcoTub.fontname("Arial")
+Gui.frmMTR_Entry.cmdTAMSA.fontname("Arial")
+Gui.frmMTR_Entry.cmdUSS.fontname("Arial")
+Gui.frmMTR_Entry.cmdFlame.fontname("Arial Black")
+
+F.Intrinsic.Control.CallSub(F_EnableComp)
+Gui.frmMTR_Entry.txtNi.Enabled(False)
+Gui.frmMTR_Entry.txtNi.BackColor(15658734)
+Gui.frmMTR_Entry.txtCr.Enabled(False)
+Gui.frmMTR_Entry.txtCr.BackColor(15658734)
+Gui.frmMTR_Entry.txtMo.Enabled(False)
+Gui.frmMTR_Entry.txtMo.BackColor(15658734)
+Gui.frmMTR_Entry.txtCu.Enabled(False)
+Gui.frmMTR_Entry.txtCu.BackColor(15658734)
+Gui.frmMTR_Entry.txtV.Enabled(False)
+Gui.frmMTR_Entry.txtV.BackColor(15658734)
+Gui.frmMTR_Entry.txtAl.Enabled(False)
+Gui.frmMTR_Entry.txtAl.BackColor(15658734)
+Gui.frmMTR_Entry.txtSn.Enabled(False)
+Gui.frmMTR_Entry.txtSn.BackColor(15658734)
+Gui.frmMTR_Entry.txtNb.Enabled(False)
+Gui.frmMTR_Entry.txtNb.BackColor(15658734)
+Gui.frmMTR_Entry.txtTi.Enabled(False)
+Gui.frmMTR_Entry.txtTi.BackColor(15658734)
+Gui.frmMTR_Entry.txtAs.Enabled(False)
+Gui.frmMTR_Entry.txtAs.BackColor(15658734)
+Gui.frmMTR_Entry.txtCa.Enabled(False)
+Gui.frmMTR_Entry.txtCa.BackColor(15658734)
+Gui.frmMTR_Entry.txtB.Enabled(False)
+Gui.frmMTR_Entry.txtB.BackColor(15658734)
+Gui.frmMTR_Entry.txtN.Enabled(False)
+Gui.frmMTR_Entry.txtN.BackColor(15658734)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(False)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtPb.Enabled(False)
+Gui.frmMTR_Entry.txtPb.BackColor(15658734)
+Gui.frmMTR_Entry.txtSb.Enabled(False)
+Gui.frmMTR_Entry.txtSb.BackColor(15658734)
+Gui.frmMTR_Entry.txtBi.Enabled(False)
+Gui.frmMTR_Entry.txtBi.BackColor(15658734)
+Gui.frmMTR_Entry.txtBsol.Enabled(False)
+Gui.frmMTR_Entry.txtBSol.BackColor(15658734)
+Gui.frmMTR_Entry.txtO.Enabled(False)
+Gui.frmMTR_Entry.txtO.BackColor(15658734)
+Gui.frmMTR_Entry.txtMg.Enabled(False)
+Gui.frmMTR_Entry.txtMg.BackColor(15658734)
+Gui.frmMTR_Entry.txtH.Enabled(False)
+Gui.frmMTR_Entry.txtH.BackColor(15658734)
+Gui.frmMTR_Entry.txtCo.Enabled(False)
+Gui.frmMTR_Entry.txtCo.BackColor(15658734)
+
+
+Program.Sub.cmdFlame.End
+
+Program.Sub.F_EnableComp.Start
+Gui.frmMTR_Entry.txtC.Enabled(True)
+Gui.frmMTR_Entry.txtC.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtSi.Enabled(True)
+Gui.frmMTR_Entry.txtSi.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtMn.Enabled(True)
+Gui.frmMTR_Entry.txtMn.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtNi.Enabled(True)
+Gui.frmMTR_Entry.txtNi.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtCr.Enabled(True)
+Gui.frmMTR_Entry.txtCr.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtS.Enabled(True)
+Gui.frmMTR_Entry.txtS.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtP.Enabled(True)
+Gui.frmMTR_Entry.txtP.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtMo.Enabled(True)
+Gui.frmMTR_Entry.txtMo.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtCu.Enabled(True)
+Gui.frmMTR_Entry.txtCu.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtV.Enabled(True)
+Gui.frmMTR_Entry.txtV.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtAl.Enabled(True)
+Gui.frmMTR_Entry.txtAl.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtSi.Enabled(True)
+Gui.frmMTR_Entry.txtSi.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtSn.Enabled(True)
+Gui.frmMTR_Entry.txtSn.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtNb.Enabled(True)
+Gui.frmMTR_Entry.txtNb.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtTi.Enabled(True)
+Gui.frmMTR_Entry.txtTi.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtAs.Enabled(True)
+Gui.frmMTR_Entry.txtAs.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtCa.Enabled(True)
+Gui.frmMTR_Entry.txtCa.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtB.Enabled(True)
+Gui.frmMTR_Entry.txtB.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtN.Enabled(True)
+Gui.frmMTR_Entry.txtN.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtAlinSol.Enabled(True)
+Gui.frmMTR_Entry.txtAlinSol.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtPb.Enabled(True)
+Gui.frmMTR_Entry.txtPb.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtSb.Enabled(True)
+Gui.frmMTR_Entry.txtSb.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtBi.Enabled(True)
+Gui.frmMTR_Entry.txtBi.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtBsol.Enabled(True)
+Gui.frmMTR_Entry.txtBsol.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtO.Enabled(True)
+Gui.frmMTR_Entry.txtO.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtMg.Enabled(True)
+Gui.frmMTR_Entry.txtMg.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtH.Enabled(True)
+Gui.frmMTR_Entry.txtH.BackColor(-2147483643)
+Gui.frmMTR_Entry.txtCo.Enabled(True)
+Gui.frmMTR_Entry.txtCo.BackColor(-2147483643)
+
+Program.Sub.F_EnableComp.End
+
+Program.Sub.brwMill.Start
+V.Local.sTitles.Declare(String)
+V.Local.iWidths.Declare(Long)
+V.Local.sRet.Declare(String)
+
+'Browser for select Mill from table
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+V.Local.sTitles.Set("Mill")
+V.Local.iWidths.Set("4600")
+F.Intrinsic.UI.MiniBrowser("Select a Mill Name",conx,"Select MillName From GAB_Cert_Mill",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,"=","***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Mill was selected")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.frmMTR_Entry.txtMill.Text(V.Local.sRet)
+F.Intrinsic.Control.EndIf
+F.ODBC.Connection!conx.Close
+
+F.Intrinsic.Control.CallSub(F_autoselmill)
+
+Program.Sub.brwMill.End
+
+Program.Sub.F_AutoSelMill.Start
+'Check if the Mill is valid for Mill setup
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMill.Text,=,"Flame")
+	F.Intrinsic.Control.CallSub(Cmdflame)
+F.Intrinsic.Control.ElseIf(V.Screen.frmMTR_Entry!txtMill.Text,=,"NSS")
+	F.Intrinsic.Control.CallSub(Cmdnssvm)
+F.Intrinsic.Control.ElseIf(V.Screen.frmMTR_Entry!txtMill.Text,=,"Koppel")
+	F.Intrinsic.Control.CallSub(Cmdkoppel)
+F.Intrinsic.Control.ElseIf(V.Screen.frmMTR_Entry!txtMill.Text,=,"Nippon")
+	F.Intrinsic.Control.CallSub(Cmdnippon)
+F.Intrinsic.Control.ElseIf(V.Screen.frmMTR_Entry!txtMill.Text,=,"PetroTub")
+	F.Intrinsic.Control.CallSub(Cmdpetrotub)
+F.Intrinsic.Control.ElseIf(V.Screen.frmMTR_Entry!txtMill.Text,=,"SilcoTub")
+	F.Intrinsic.Control.CallSub(Cmdsilcotub)
+F.Intrinsic.Control.ElseIf(V.Screen.frmMTR_Entry!txtMill.Text,=,"TAMSA")
+	F.Intrinsic.Control.CallSub(Cmdtamsa)
+F.Intrinsic.Control.ElseIf(V.Screen.frmMTR_Entry!txtMill.Text,=,"USS")
+	F.Intrinsic.Control.CallSub(Cmduss)
+F.Intrinsic.Control.EndIf
+
+Program.Sub.F_AutoSelMill.End
+
+Program.Sub.brwGrade.Start
+V.Local.sTitles.Declare(String)
+V.Local.iWidths.Declare(Long)
+V.Local.sRet.Declare(String)
+
+'Browser for select Grade from table
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+V.Local.sTitles.Set("Grade Type")
+V.Local.iWidths.Set("4600")
+F.Intrinsic.UI.MiniBrowser("Select a Grade Type",conx,"Select GradeType From GAB_Cert_Grade",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,"=","***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Grade Type was selected")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.frmMTR_Entry.txtGrade.Text(V.Local.sRet)
+F.Intrinsic.Control.EndIf
+F.ODBC.Connection!conx.Close
+
+
+Program.Sub.brwGrade.End
+
+Program.Sub.F_Calc_CharpyAVG.Start
+V.Local.fCharpy1.Declare(Float)
+V.Local.fCharpy2.Declare(Float)
+V.Local.fCharpy3.Declare(Float)
+V.Local.fCharpyAvg.Declare(Float)
+V.Local.fCharpy1.Set(V.Screen.frmMTR_Entry!txtCharpy1.Text)
+V.Local.fCharpy2.Set(V.Screen.frmMTR_Entry!txtCharpy2.Text)
+V.Local.fCharpy3.Set(V.Screen.frmMTR_Entry!txtCharpy3.Text)
+
+Gui.frmMTR_Entry.txtCharpyAvg.Text("")
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCharpy1.Text,<>,"")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCharpy2.Text,<>,"")
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCharpy3.Text,<>,"")
+			F.Intrinsic.Math.Add(V.Local.fCharpy1,V.Local.fCharpy2,V.Local.fCharpy3,V.Local.fCharpyAvg)
+			F.Intrinsic.Math.Div(V.Local.fCharpyAvg,3,V.Local.fCharpyAvg)
+			F.Intrinsic.Math.Round(V.Local.fCharpyAvg,1,V.Local.fCharpyAvg)
+			Gui.frmMTR_Entry.txtCharpyAvg.Text(V.Local.fCharpyAvg)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.F_Calc_CharpyAVG.End
+
+Program.Sub.F_Calc_ShearAVG.Start
+V.Local.fShear1.Declare(Float)
+V.Local.fShear2.Declare(Float)
+V.Local.fShear3.Declare(Float)
+V.Local.fShearAvg.Declare(Float)
+V.Local.fShear1.Set(V.Screen.frmMTR_Entry!txtShear1.Text)
+V.Local.fShear2.Set(V.Screen.frmMTR_Entry!txtShear2.Text)
+V.Local.fShear3.Set(V.Screen.frmMTR_Entry!txtShear3.Text)
+
+Gui.frmMTR_Entry.txtShearAvg.Text("")
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtShear1.Text,<>,"")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtShear2.Text,<>,"")
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtShear3.Text,<>,"")
+			F.Intrinsic.Math.Add(V.Local.fShear1,V.Local.fShear2,V.Local.fShear3,V.Local.fShearAvg)
+			F.Intrinsic.Math.Div(V.Local.fShearAvg,3,V.Local.fShearAvg)
+			F.Intrinsic.Math.Round(V.Local.fShearAvg,1,V.Local.fShearAvg)
+			Gui.frmMTR_Entry.txtShearAvg.Text(V.Local.fShearAvg)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+Program.Sub.F_Calc_ShearAVG.End
+
+Program.Sub.F_Calc_AvgHardness.Start
+V.Local.lMwid.Declare(Long)
+V.Local.fMW1.Declare(Float)
+V.Local.fMW2.Declare(Float)
+V.Local.fMW3.Declare(Float)
+V.Local.fMWSum.Declare(Float)
+V.Local.fOD1.Declare(Float)
+V.Local.fOD2.Declare(Float)
+V.Local.fOD3.Declare(Float)
+V.Local.lOdid.Declare(Long)
+V.Local.fODSum.Declare(Float)
+V.Local.fID1.Declare(Float)
+V.Local.fID2.Declare(Float)
+V.Local.fID3.Declare(Float)
+V.Local.lIdid.Declare(Long)
+V.Local.fIDSum.Declare(Float)
+V.Local.fAvgHardness1.Declare(Float)
+V.Local.fAvgHardnessDiv.Declare(Long)
+
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAvgHardness.Text,=,"")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTMW1.Text,<>,"")
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTMW2.Text,<>,"")
+			F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTMW3.Text,<>,"")
+				V.Local.fMW1.Set(V.Screen.frmMTR_Entry!txtHTMW1.Text)
+				V.Local.fMW2.Set(V.Screen.frmMTR_Entry!txtHTMW2.Text)
+				V.Local.fMW3.Set(V.Screen.frmMTR_Entry!txtHTMW3.Text)
+				F.Intrinsic.Math.Add(V.Local.fMW1,V.Local.fMW2,V.Local.fMW3,V.Local.fMWSum)
+				V.Local.lMwid.Set(1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTOD1.Text,<>,"")
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTOD2.Text,<>,"")
+			F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTOD3.Text,<>,"")
+				V.Local.fMW1.Set(V.Screen.frmMTR_Entry!txtHTOD1.Text)
+				V.Local.fMW2.Set(V.Screen.frmMTR_Entry!txtHTOD2.Text)
+				V.Local.fMW3.Set(V.Screen.frmMTR_Entry!txtHTOD3.Text)
+				F.Intrinsic.Math.Add(V.Local.fOD1,V.Local.fOD2,V.Local.fOD3,V.Local.fODSum)
+				V.Local.lOdid.Set(1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTID1.Text,<>,"")
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTID2.Text,<>,"")
+			F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtHTID3.Text,<>,"")
+				V.Local.fMW1.Set(V.Screen.frmMTR_Entry!txtHTID1.Text)
+				V.Local.fMW2.Set(V.Screen.frmMTR_Entry!txtHTID2.Text)
+				V.Local.fMW3.Set(V.Screen.frmMTR_Entry!txtHTID3.Text)
+				F.Intrinsic.Math.Add(V.Local.fID1,V.Local.fID2,V.Local.fID3,V.Local.fIDSum)
+				V.Local.lIdid.Set(1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.If(V.Local.lMwid,=,1)
+	F.Intrinsic.Control.If(V.Local.lOdid,=,1)
+			F.Intrinsic.Control.If(V.Local.lIdid,=,1)
+				F.Intrinsic.Math.Add(V.Local.fIDSum,V.Local.fODSum,V.Local.fMWSum,V.Local.fAvgHardness1)
+				F.Intrinsic.Math.Div(V.Local.fAvgHardness1,9,V.Local.fAvgHardness1)
+				F.Intrinsic.Math.Round(V.Local.fAvgHardness1,2,V.Local.fAvgHardness1)
+				Gui.frmMTR_Entry.txtAvgHardness.Text(V.Local.fAvgHardness1)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Math.Add(V.Local.fODSum,V.Local.fMWSum,V.Local.fAvgHardness1)
+				F.Intrinsic.Math.Div(V.Local.fAvgHardness1,6,V.Local.fAvgHardness1)
+				F.Intrinsic.Math.Round(V.Local.fAvgHardness1,2,V.Local.fAvgHardness1)
+				Gui.frmMTR_Entry.txtAvgHardness.Text(V.Local.fAvgHardness1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Else
+			F.Intrinsic.Control.If(V.Local.lIdid,=,1)
+				F.Intrinsic.Math.Add(V.Local.fIDSum,V.Local.fMWSum,V.Local.fAvgHardness1)
+				F.Intrinsic.Math.Div(V.Local.fAvgHardness1,6,V.Local.fAvgHardness1)
+				F.Intrinsic.Math.Round(V.Local.fAvgHardness1,2,V.Local.fAvgHardness1)
+				Gui.frmMTR_Entry.txtAvgHardness.Text(V.Local.fAvgHardness1)
+			F.Intrinsic.Control.Else
+				V.Local.fAvgHardness1.Set(V.Local.fMWSum)
+				F.Intrinsic.Math.Div(V.Local.fAvgHardness1,3,V.Local.fAvgHardness1)
+				F.Intrinsic.Math.Round(V.Local.fAvgHardness1,2,V.Local.fAvgHardness1)
+				Gui.frmMTR_Entry.txtAvgHardness.Text(V.Local.fAvgHardness1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Incomplete Harness Data. Please input a minimun of 3 mid-wall readings.")
+	F.Intrinsic.Control.EndIF
+F.Intrinsic.Control.EndIF
+
+Program.Sub.F_Calc_AvgHardness.End
+
+Program.Sub.cmdSave.Start
+V.Local.sSql.Declare(String)
+V.Local.lRec.Declare(Long)
+V.Local.lRec.set(1)
+V.Local.sComment.Declare(String)
+
+F.ODBC.Connection!connect.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+'Search for the last Record in the GAB_Cert_MillCert table and get the next number
+V.Local.sSql.Set("Select MAX(Record) AS 'REC' FROM GAB_Cert_MillCert")
+F.ODBC.connection!connect.OpenRecordsetRO("Result",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.connect!Result.EOF,=,False)
+	V.Local.lRec.Set(V.ODBC.connect!Result.FieldVal!REC)
+	F.Intrinsic.Math.Add(V.Local.lRec,1,V.Local.lRec)
+F.Intrinsic.Control.EndIf
+F.ODBC.connect!Result.Close
+
+'Save Values to the table
+V.Local.sSql.Set("SELECT * FROM GAB_Cert_MillCert")
+F.ODBC.Connection!connect.OpenRecordsetRW("Result",V.Local.sSql)
+F.ODBC.connect!Result.AddNew
+F.ODBC.connect!Result.Set!Mill(V.Screen.frmMTR_Entry!txtMill.Text)
+F.ODBC.connect!Result.Set!TestOrderNumber(V.Screen.frmMTR_Entry!txtOrderNo.Text)
+F.ODBC.connect!Result.Set!Grade(V.Screen.frmMTR_Entry!txtGrade.Text)
+F.ODBC.connect!Result.Set!OD(V.Screen.frmMTR_Entry!txtOD.Text)
+F.ODBC.connect!Result.Set!Wall(V.Screen.frmMTR_Entry!txtWall.Text)
+F.ODBC.connect!Result.Set!LincolnHeat(V.Screen.frmMTR_Entry!txtLinHeatNo.Text)
+F.ODBC.connect!Result.Set!HeatNumber(V.Screen.frmMTR_Entry!txtHeatNo.Text)
+F.ODBC.connect!Result.Set!YieldStrength(V.Screen.frmMTR_Entry!txtYieldStrength.Text)
+F.ODBC.connect!Result.Set!YieldStrengthV(V.Screen.frmMTR_Entry!comboYieldStrengV.Text)
+F.ODBC.connect!Result.Set!TensileStrength(V.Screen.frmMTR_Entry!txtTensileStrength.Text)
+F.ODBC.connect!Result.Set!PercentElongation(V.Screen.frmMTR_Entry!txtPercElong.Text)
+F.ODBC.connect!Result.Set!GrainSize(V.Screen.frmMTR_Entry!txtGrainSize.Text)
+F.ODBC.connect!Result.Set!CharpyImpactDirec(V.Screen.frmMTR_Entry!comboDirection.Text)
+F.ODBC.connect!Result.Set!CharpyImpactSpecSize(V.Screen.frmMTR_Entry!comboSize.Text)
+F.ODBC.connect!Result.Set!CharpyImpactNotchTyp(V.Screen.frmMTR_Entry!txtNotch.Text)
+F.ODBC.connect!Result.Set!CharpyImpactTemp(V.Screen.frmMTR_Entry!txtTemp.Text)
+F.ODBC.connect!Result.Set!CharpyImpactTempScal(V.Screen.frmMTR_Entry!comboTempScale.Text)
+F.ODBC.connect!Result.Set!CharpyImpactRead1(V.Screen.frmMTR_Entry!txtCharpy1.Text)
+F.ODBC.connect!Result.Set!CharpyImpactRead2(V.Screen.frmMTR_Entry!txtCharpy2.Text)
+F.ODBC.connect!Result.Set!CharpyImpactRead3(V.Screen.frmMTR_Entry!txtCharpy3.Text)
+F.ODBC.connect!Result.Set!CharpyImpactShear1(V.Screen.frmMTR_Entry!txtShear1.Text)
+F.ODBC.connect!Result.Set!CharpyImpactShear2(V.Screen.frmMTR_Entry!txtShear2.Text)
+F.ODBC.connect!Result.Set!CharpyImpactShear3(V.Screen.frmMTR_Entry!txtShear3.Text)
+F.ODBC.connect!Result.Set!Hardness(V.Screen.frmMTR_Entry!txtAvgHardness.Text)
+F.ODBC.connect!Result.Set!HardnessScale(V.Screen.frmMTR_Entry!comboHardnessScale.Text)
+F.ODBC.connect!Result.Set!Carbon(V.Screen.frmMTR_Entry!txtC.Text)
+F.ODBC.connect!Result.Set!Silicon(V.Screen.frmMTR_Entry!txtSi.Text)
+F.ODBC.connect!Result.Set!Manganese(V.Screen.frmMTR_Entry!txtMn.Text)
+F.ODBC.connect!Result.Set!Nickel(V.Screen.frmMTR_Entry!txtNi.Text)
+F.ODBC.connect!Result.Set!Chromium(V.Screen.frmMTR_Entry!txtCr.Text)
+F.ODBC.connect!Result.Set!Sulfur(V.Screen.frmMTR_Entry!txtS.Text)
+F.ODBC.connect!Result.Set!Phosphorus(V.Screen.frmMTR_Entry!txtP.Text)
+F.ODBC.connect!Result.Set!Molybdenum(V.Screen.frmMTR_Entry!txtMo.Text)
+F.ODBC.connect!Result.Set!Copper(V.Screen.frmMTR_Entry!txtCu.Text)
+F.ODBC.connect!Result.Set!Vanadium(V.Screen.frmMTR_Entry!txtV.Text)
+F.ODBC.connect!Result.Set!Aluminum(V.Screen.frmMTR_Entry!txtAl.Text)
+F.ODBC.connect!Result.Set!Tin(V.Screen.frmMTR_Entry!txtSn.Text)
+F.ODBC.connect!Result.Set!Niobium(V.Screen.frmMTR_Entry!txtNb.Text)
+F.ODBC.connect!Result.Set!Titanium(V.Screen.frmMTR_Entry!txtTi.Text)
+F.ODBC.connect!Result.Set!Arsenic(V.Screen.frmMTR_Entry!txtAs.Text)
+F.ODBC.connect!Result.Set!Calcium(V.Screen.frmMTR_Entry!txtCa.Text)
+F.ODBC.connect!Result.Set!Boron(V.Screen.frmMTR_Entry!txtB.Text)
+F.ODBC.connect!Result.Set!Nitrogen(V.Screen.frmMTR_Entry!txtN.Text)
+F.ODBC.connect!Result.Set!Aluminum_sol(V.Screen.frmMTR_Entry!txtAlinSol.Text)
+F.ODBC.connect!Result.Set!Lead(V.Screen.frmMTR_Entry!txtPb.Text)
+F.ODBC.connect!Result.Set!Antimony(V.Screen.frmMTR_Entry!txtSb.Text)
+F.ODBC.connect!Result.Set!Bismuth(V.Screen.frmMTR_Entry!txtBi.Text)
+F.ODBC.connect!Result.Set!Boron_sol(V.Screen.frmMTR_Entry!txtBsol.Text)
+F.ODBC.connect!Result.Set!Oxygen(V.Screen.frmMTR_Entry!txtO.Text)
+F.ODBC.connect!Result.Set!Magnesium(V.Screen.frmMTR_Entry!txtMg.Text)
+F.ODBC.connect!Result.Set!Hydrogen(V.Screen.frmMTR_Entry!txtH.Text)
+F.ODBC.connect!Result.Set!Cobalt(V.Screen.frmMTR_Entry!txtCo.Text)
+F.ODBC.connect!Result.Set!Comments(V.Screen.frmMTR_Entry!mltxtComments.Text)
+F.ODBC.connect!Result.Set!Record(V.Local.lRec)
+
+F.ODBC.connect!Result.Update
+F.Intrinsic.String.Concat("Saved - Record No:",V.Local.lRec,V.Local.sComment)
+Gui.frmMTR_Entry.lblRecord.Caption(V.Local.lRec)
+F.Intrinsic.UI.Msgbox(V.Local.sComment)
+F.ODBC.Connection!connect.Close
+
+Program.Sub.cmdSave.End
+
+Program.Sub.F_Load_Form.Start
+V.Local.sSql.Declare(String)
+Gui.frmMTR_Entry.txtCharpyAvg.Text("")
+Gui.frmMTR_Entry.txtShearAVG.Text("")
+Gui.frmMTR_Entry.txtHTID1.Text("")
+Gui.frmMTR_Entry.txtHTID2.Text("")
+Gui.frmMTR_Entry.txtHTID3.Text("")
+Gui.frmMTR_Entry.txtHTOD1.Text("")
+Gui.frmMTR_Entry.txtHTOD2.Text("")
+Gui.frmMTR_Entry.txtHTOD3.Text("")
+Gui.frmMTR_Entry.txtHTMW1.Text("")
+Gui.frmMTR_Entry.txtHTMW2.Text("")
+Gui.frmMTR_Entry.txtHTMW3.Text("")
+F.ODBC.Connection!connect.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.Intrinsic.String.Concat("SELECT * FROM GAB_Cert_MillCert WHERE RECORD='",V.Screen.frmMTR_Entry!lblRecord.Caption,"'",V.Local.sSql)
+F.ODBC.Connection!connect.OpenRecordsetRO("Result",V.Local.sSql)
+Gui.frmMTR_Entry.txtOrderNo.Text(V.ODBC.connect!Result.FieldVal!TestOrderNumber)
+Gui.frmMTR_Entry.txtMill.Text(V.ODBC.connect!Result.FieldVal!Mill)
+Gui.frmMTR_Entry.txtHeatNo.Text(V.ODBC.connect!Result.FieldVal!HeatNumber)
+Gui.frmMTR_Entry.txtLinHeatNo.Text(V.ODBC.connect!Result.FieldVal!LincolnHeat)
+Gui.frmMTR_Entry.txtGrade.Text(V.ODBC.connect!Result.FieldVal!Grade)
+Gui.frmMTR_Entry.txtOD.Text(V.ODBC.connect!Result.FieldVal!OD)
+Gui.frmMTR_Entry.txtWall.Text(V.ODBC.connect!Result.FieldVal!Wall)
+Gui.frmMTR_Entry.txtYieldStrength.Text(V.ODBC.connect!Result.FieldVal!YieldStrength)
+Gui.frmMTR_Entry.comboYieldStrengV.Text(V.ODBC.connect!Result.FieldVal!YieldStrengthV)
+Gui.frmMTR_Entry.txtTensileStrength.Text(V.ODBC.connect!Result.FieldVal!TensileStrength)
+Gui.frmMTR_Entry.txtPercElong.Text(V.ODBC.connect!Result.FieldVal!PercentElongation)
+Gui.frmMTR_Entry.txtAvgHardness.Text(V.ODBC.connect!Result.FieldVal!Hardness)
+Gui.frmMTR_Entry.comboHardnessScale.Text(V.ODBC.connect!Result.FieldVal!HardnessScale)
+Gui.frmMTR_Entry.comboDirection.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactDirec)
+Gui.frmMTR_Entry.comboSize.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactSpecSize)
+Gui.frmMTR_Entry.txtNotch.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactNotchTyp)
+Gui.frmMTR_Entry.txtTemp.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactTemp)
+Gui.frmMTR_Entry.comboTempScale.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactTempScal)
+Gui.frmMTR_Entry.txtCharpy1.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactRead1)
+Gui.frmMTR_Entry.txtShear1.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactShear1)
+Gui.frmMTR_Entry.txtCharpy2.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactRead2)
+Gui.frmMTR_Entry.txtShear2.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactShear2)
+Gui.frmMTR_Entry.txtCharpy3.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactRead3)
+Gui.frmMTR_Entry.txtShear3.Text(V.ODBC.connect!Result.FieldVal!CharpyImpactShear3)
+Gui.frmMTR_Entry.txtGrainSize.Text(V.ODBC.connect!Result.FieldVal!GrainSize)
+Gui.frmMTR_Entry.txtC.Text(V.ODBC.connect!Result.FieldVal!Carbon)
+Gui.frmMTR_Entry.txtMn.Text(V.ODBC.connect!Result.FieldVal!Manganese)
+Gui.frmMTR_Entry.txtP.Text(V.ODBC.connect!Result.FieldVal!Phosphorus)
+Gui.frmMTR_Entry.txtSi.Text(V.ODBC.connect!Result.FieldVal!Silicon)
+Gui.frmMTR_Entry.txtS.Text(V.ODBC.connect!Result.FieldVal!Sulfur)
+Gui.frmMTR_Entry.txtAl.Text(V.ODBC.connect!Result.FieldVal!Aluminum)
+Gui.frmMTR_Entry.txtAlinSol.Text(V.ODBC.connect!Result.FieldVal!Aluminum_sol)
+Gui.frmMTR_Entry.txtAs.Text(V.ODBC.connect!Result.FieldVal!Arsenic)
+Gui.frmMTR_Entry.txtSb.Text(V.ODBC.connect!Result.FieldVal!Antimony)
+Gui.frmMTR_Entry.txtBi.Text(V.ODBC.connect!Result.FieldVal!Bismuth)
+Gui.frmMTR_Entry.txtB.Text(V.ODBC.connect!Result.FieldVal!Boron)
+Gui.frmMTR_Entry.txtBSol.Text(V.ODBC.connect!Result.FieldVal!Boron_sol)
+Gui.frmMTR_Entry.txtCa.Text(V.ODBC.connect!Result.FieldVal!Calcium)
+Gui.frmMTR_Entry.txtCo.Text(V.ODBC.connect!Result.FieldVal!Cobalt)
+Gui.frmMTR_Entry.txtCr.Text(V.ODBC.connect!Result.FieldVal!Chromium)
+Gui.frmMTR_Entry.txtCu.Text(V.ODBC.connect!Result.FieldVal!Copper)
+Gui.frmMTR_Entry.txtH.Text(V.ODBC.connect!Result.FieldVal!Hydrogen)
+Gui.frmMTR_Entry.txtPb.Text(V.ODBC.connect!Result.FieldVal!Lead)
+Gui.frmMTR_Entry.txtMg.Text(V.ODBC.connect!Result.FieldVal!Magnesium)
+Gui.frmMTR_Entry.txtMo.Text(V.ODBC.connect!Result.FieldVal!Molybdenum)
+Gui.frmMTR_Entry.txtNi.Text(V.ODBC.connect!Result.FieldVal!Nickel)
+Gui.frmMTR_Entry.txtNb.Text(V.ODBC.connect!Result.FieldVal!Niobium)
+Gui.frmMTR_Entry.txtN.Text(V.ODBC.connect!Result.FieldVal!Nitrogen)
+Gui.frmMTR_Entry.txtO.Text(V.ODBC.connect!Result.FieldVal!Oxygen)
+Gui.frmMTR_Entry.txtSn.Text(V.ODBC.connect!Result.FieldVal!Tin)
+Gui.frmMTR_Entry.txtTi.Text(V.ODBC.connect!Result.FieldVal!Titanium)
+Gui.frmMTR_Entry.txtV.Text(V.ODBC.connect!Result.FieldVal!Vanadium)
+Gui.frmMTR_Entry.mltxtComments.Text(V.ODBC.connect!Result.FieldVal!Comments)
+
+F.ODBC.Connection!connect.Close
+F.Intrinsic.Control.CallSub("F_Calc_CharpyAVG")
+F.Intrinsic.Control.CallSub("F_Calc_ShearAVG")
+
+Gui.frmMTR_Entry.cmdSave.Caption("Update")
+
+Program.Sub.F_Load_Form.End
+
+Program.Sub.brwRecord.Start
+V.Local.sTitles.Declare(String)
+V.Local.iWidths.Declare(Long)
+V.Local.sRet.Declare(String)
+
+'Browser for select Record from table
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.Intrinsic.String.Split("Record*!*Order Number*!*Mill*!*Lincoln Heat No*!*Heat Number","*!*",V.Local.sTitles)
+'V.Local.sTitles.Set("Mill")
+F.Intrinsic.String.Split("1000*!*2500!*2500*!*2000*!*2000","*!*",V.Local.iWidths)
+
+'V.Local.iWidths.Set("2000")
+F.Intrinsic.UI.Browser("Select a Record",conx,"Select Record,TestOrderNumber,Mill,LincolnHeat,HeatNumber From GAB_Cert_MillCert Order by Record Desc",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+F.ODBC.Connection!conx.Close
+F.Intrinsic.Control.If(V.Local.sRet,"=","***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Record was selected")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.frmMTR_Entry.lblRecord.Caption(V.Local.sRet(0))
+	F.Intrinsic.Control.CallSub(F_load_form)
+F.Intrinsic.Control.EndIf
+
+Program.Sub.brwRecord.End
+
+Program.Sub.F_New_Form.Start
+Gui.frmMTR_Entry.comboDirection.Text("TRAN")
+Gui.frmMTR_Entry.comboSize.Text("10mmX10mm")
+Gui.frmMTR_Entry.comboHardnessScale.Text("HRC")
+Gui.frmMTR_Entry.comboYieldStrengV.Text("0.50")
+Gui.frmMTR_Entry.comboTempScale.Text("F")
+Gui.frmMTR_Entry.txtOrderNo.Text("")
+Gui.frmMTR_Entry.txtMill.Text("")
+Gui.frmMTR_Entry.txtHeatNo.Text("")
+Gui.frmMTR_Entry.txtLinHeatNo.Text("")
+Gui.frmMTR_Entry.txtGrade.Text("")
+Gui.frmMTR_Entry.txtOD.Text("")
+Gui.frmMTR_Entry.txtWall.Text("")
+Gui.frmMTR_Entry.txtYieldStrength.Text("")
+Gui.frmMTR_Entry.txtTensileStrength.Text("")
+Gui.frmMTR_Entry.txtPercElong.Text("")
+Gui.frmMTR_Entry.txtAvgHardness.Text("")
+Gui.frmMTR_Entry.txtNotch.Text("")
+Gui.frmMTR_Entry.txtTemp.Text("")
+Gui.frmMTR_Entry.txtCharpy1.Text("")
+Gui.frmMTR_Entry.txtShear1.Text("")
+Gui.frmMTR_Entry.txtCharpy2.Text("")
+Gui.frmMTR_Entry.txtShear2.Text("")
+Gui.frmMTR_Entry.txtCharpy3.Text("")
+Gui.frmMTR_Entry.txtShear3.Text("")
+Gui.frmMTR_Entry.txtGrainSize.Text("")
+Gui.frmMTR_Entry.txtC.Text("")
+Gui.frmMTR_Entry.txtMn.Text("")
+Gui.frmMTR_Entry.txtP.Text("")
+Gui.frmMTR_Entry.txtSi.Text("")
+Gui.frmMTR_Entry.txtS.Text("")
+Gui.frmMTR_Entry.txtAl.Text("")
+Gui.frmMTR_Entry.txtAlinSol.Text("")
+Gui.frmMTR_Entry.txtAs.Text("")
+Gui.frmMTR_Entry.txtSb.Text("")
+Gui.frmMTR_Entry.txtBi.Text("")
+Gui.frmMTR_Entry.txtB.Text("")
+Gui.frmMTR_Entry.txtBSol.Text("")
+Gui.frmMTR_Entry.txtCa.Text("")
+Gui.frmMTR_Entry.txtCo.Text("")
+Gui.frmMTR_Entry.txtCr.Text("")
+Gui.frmMTR_Entry.txtCu.Text("")
+Gui.frmMTR_Entry.txtH.Text("")
+Gui.frmMTR_Entry.txtPb.Text("")
+Gui.frmMTR_Entry.txtMg.Text("")
+Gui.frmMTR_Entry.txtMo.Text("")
+Gui.frmMTR_Entry.txtNi.Text("")
+Gui.frmMTR_Entry.txtNb.Text("")
+Gui.frmMTR_Entry.txtN.Text("")
+Gui.frmMTR_Entry.txtO.Text("")
+Gui.frmMTR_Entry.txtSn.Text("")
+Gui.frmMTR_Entry.txtTi.Text("")
+Gui.frmMTR_Entry.txtV.Text("")
+Gui.frmMTR_Entry.lblRecord.Caption("-")
+Gui.frmMTR_Entry.txtCharpyAvg.Text("")
+Gui.frmMTR_Entry.txtShearAVG.Text("")
+Gui.frmMTR_Entry.txtHTID1.Text("")
+Gui.frmMTR_Entry.txtHTID2.Text("")
+Gui.frmMTR_Entry.txtHTID3.Text("")
+Gui.frmMTR_Entry.txtHTOD1.Text("")
+Gui.frmMTR_Entry.txtHTOD2.Text("")
+Gui.frmMTR_Entry.txtHTOD3.Text("")
+Gui.frmMTR_Entry.txtHTMW1.Text("")
+Gui.frmMTR_Entry.txtHTMW2.Text("")
+Gui.frmMTR_Entry.txtHTMW3.Text("")
+Gui.frmMTR_Entry.mltxtComments.Text("")
+
+
+Gui.frmMTR_Entry.cmdSave.Caption("Save")
+
+Program.Sub.F_New_Form.End
+
+Program.Sub.cmdUpdate.Start
+V.Local.sSql.Declare(String)
+V.Local.sComment.Declare(String)
+
+'Update Values to the table
+F.ODBC.Connection!connect.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+V.Local.sSql.Set("SELECT * FROM GAB_Cert_MillCert")
+F.Intrinsic.String.Concat(V.Local.sSql," Where Record='",V.Screen.frmMTR_Entry!lblRecord.Caption,"'",V.Local.sSql)
+F.ODBC.Connection!connect.OpenRecordsetRW("Result",V.Local.sSql)
+F.ODBC.connect!Result.Set!Mill(V.Screen.frmMTR_Entry!txtMill.Text)
+F.ODBC.connect!Result.Set!TestOrderNumber(V.Screen.frmMTR_Entry!txtOrderNo.Text)
+F.ODBC.connect!Result.Set!Grade(V.Screen.frmMTR_Entry!txtGrade.Text)
+F.ODBC.connect!Result.Set!OD(V.Screen.frmMTR_Entry!txtOD.Text)
+F.ODBC.connect!Result.Set!Wall(V.Screen.frmMTR_Entry!txtWall.Text)
+F.ODBC.connect!Result.Set!LincolnHeat(V.Screen.frmMTR_Entry!txtLinHeatNo.Text)
+F.ODBC.connect!Result.Set!HeatNumber(V.Screen.frmMTR_Entry!txtHeatNo.Text)
+F.ODBC.connect!Result.Set!YieldStrength(V.Screen.frmMTR_Entry!txtYieldStrength.Text)
+F.ODBC.connect!Result.Set!YieldStrengthV(V.Screen.frmMTR_Entry!comboYieldStrengV.Text)
+F.ODBC.connect!Result.Set!TensileStrength(V.Screen.frmMTR_Entry!txtTensileStrength.Text)
+F.ODBC.connect!Result.Set!PercentElongation(V.Screen.frmMTR_Entry!txtPercElong.Text)
+F.ODBC.connect!Result.Set!GrainSize(V.Screen.frmMTR_Entry!txtGrainSize.Text)
+F.ODBC.connect!Result.Set!CharpyImpactDirec(V.Screen.frmMTR_Entry!comboDirection.Text)
+F.ODBC.connect!Result.Set!CharpyImpactSpecSize(V.Screen.frmMTR_Entry!comboSize.Text)
+F.ODBC.connect!Result.Set!CharpyImpactNotchTyp(V.Screen.frmMTR_Entry!txtNotch.Text)
+F.ODBC.connect!Result.Set!CharpyImpactTemp(V.Screen.frmMTR_Entry!txtTemp.Text)
+F.ODBC.connect!Result.Set!CharpyImpactTempScal(V.Screen.frmMTR_Entry!comboTempScale.Text)
+F.ODBC.connect!Result.Set!CharpyImpactRead1(V.Screen.frmMTR_Entry!txtCharpy1.Text)
+F.ODBC.connect!Result.Set!CharpyImpactRead2(V.Screen.frmMTR_Entry!txtCharpy2.Text)
+F.ODBC.connect!Result.Set!CharpyImpactRead3(V.Screen.frmMTR_Entry!txtCharpy3.Text)
+F.ODBC.connect!Result.Set!CharpyImpactShear1(V.Screen.frmMTR_Entry!txtShear1.Text)
+F.ODBC.connect!Result.Set!CharpyImpactShear2(V.Screen.frmMTR_Entry!txtShear2.Text)
+F.ODBC.connect!Result.Set!CharpyImpactShear3(V.Screen.frmMTR_Entry!txtShear3.Text)
+F.ODBC.connect!Result.Set!Hardness(V.Screen.frmMTR_Entry!txtAvgHardness.Text)
+F.ODBC.connect!Result.Set!HardnessScale(V.Screen.frmMTR_Entry!comboHardnessScale.Text)
+F.ODBC.connect!Result.Set!Carbon(V.Screen.frmMTR_Entry!txtC.Text)
+F.ODBC.connect!Result.Set!Silicon(V.Screen.frmMTR_Entry!txtSi.Text)
+F.ODBC.connect!Result.Set!Manganese(V.Screen.frmMTR_Entry!txtMn.Text)
+F.ODBC.connect!Result.Set!Nickel(V.Screen.frmMTR_Entry!txtNi.Text)
+F.ODBC.connect!Result.Set!Chromium(V.Screen.frmMTR_Entry!txtCr.Text)
+F.ODBC.connect!Result.Set!Sulfur(V.Screen.frmMTR_Entry!txtS.Text)
+F.ODBC.connect!Result.Set!Phosphorus(V.Screen.frmMTR_Entry!txtP.Text)
+F.ODBC.connect!Result.Set!Molybdenum(V.Screen.frmMTR_Entry!txtMo.Text)
+F.ODBC.connect!Result.Set!Copper(V.Screen.frmMTR_Entry!txtCu.Text)
+F.ODBC.connect!Result.Set!Vanadium(V.Screen.frmMTR_Entry!txtV.Text)
+F.ODBC.connect!Result.Set!Aluminum(V.Screen.frmMTR_Entry!txtAl.Text)
+F.ODBC.connect!Result.Set!Tin(V.Screen.frmMTR_Entry!txtSn.Text)
+F.ODBC.connect!Result.Set!Niobium(V.Screen.frmMTR_Entry!txtNb.Text)
+F.ODBC.connect!Result.Set!Titanium(V.Screen.frmMTR_Entry!txtTi.Text)
+F.ODBC.connect!Result.Set!Arsenic(V.Screen.frmMTR_Entry!txtAs.Text)
+F.ODBC.connect!Result.Set!Calcium(V.Screen.frmMTR_Entry!txtCa.Text)
+F.ODBC.connect!Result.Set!Boron(V.Screen.frmMTR_Entry!txtB.Text)
+F.ODBC.connect!Result.Set!Nitrogen(V.Screen.frmMTR_Entry!txtN.Text)
+F.ODBC.connect!Result.Set!Aluminum_sol(V.Screen.frmMTR_Entry!txtAlinSol.Text)
+F.ODBC.connect!Result.Set!Lead(V.Screen.frmMTR_Entry!txtPb.Text)
+F.ODBC.connect!Result.Set!Antimony(V.Screen.frmMTR_Entry!txtSb.Text)
+F.ODBC.connect!Result.Set!Bismuth(V.Screen.frmMTR_Entry!txtBi.Text)
+F.ODBC.connect!Result.Set!Boron_sol(V.Screen.frmMTR_Entry!txtBsol.Text)
+F.ODBC.connect!Result.Set!Oxygen(V.Screen.frmMTR_Entry!txtO.Text)
+F.ODBC.connect!Result.Set!Magnesium(V.Screen.frmMTR_Entry!txtMg.Text)
+F.ODBC.connect!Result.Set!Hydrogen(V.Screen.frmMTR_Entry!txtH.Text)
+F.ODBC.connect!Result.Set!Cobalt(V.Screen.frmMTR_Entry!txtCo.Text)
+F.ODBC.connect!Result.Set!Comments(V.Screen.frmMTR_Entry!mltxtComments.Text)
+
+F.ODBC.connect!Result.Update
+F.Intrinsic.String.Concat("Updated - Record No:",V.Screen.frmMTR_Entry!lblRecord.Caption,V.Local.sComment)
+F.Intrinsic.UI.Msgbox(V.Local.sComment)
+F.ODBC.Connection!connect.Close
+
+
+
+Program.Sub.cmdUpdate.End
+
+Program.Sub.cmdSelSaveUpd.Start
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!cmdSave.Caption,=,"Save")
+	F.Intrinsic.Control.CallSub(Cmdsave)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.CallSub(Cmdupdate)
+F.Intrinsic.Control.EndIf
+
+Program.Sub.cmdSelSaveUpd.End
+
+Program.Sub.cmdMaint.Start
+Gui.frmMTR_Entry..Visible("False")
+Gui.FormMaint..Visible("True")
+
+Program.Sub.cmdMaint.End
+
+Program.Sub.cmdMaintExit.Start
+Gui.FormMaint.txtMGrade.Text("")
+Gui.FormMaint.txtMMill.Text("")
+
+Gui.FormMaint..Visible("False")
+Gui.frmMTR_Entry..Visible("True")
+
+Program.Sub.cmdMaintExit.End
+
+Program.Sub.cmdMaintBrwMill.Start
+V.Local.sTitles.Declare(String)
+V.Local.iWidths.Declare(Long)
+V.Local.sRet.Declare(String)
+
+'Browser for select Mill from table
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+V.Local.sTitles.Set("Mill")
+V.Local.iWidths.Set("4600")
+F.Intrinsic.UI.MiniBrowser("Select a Mill Name",conx,"Select MillName From GAB_Cert_Mill",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,"=","***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Mill was selected")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.FormMaint.txtMMill.Text(V.Local.sRet)
+F.Intrinsic.Control.EndIf
+F.ODBC.Connection!conx.Close
+
+
+
+Program.Sub.cmdMaintBrwMill.End
+
+Program.Sub.cmdMaintBrwGrade.Start
+V.Local.sTitles.Declare(String)
+V.Local.iWidths.Declare(Long)
+V.Local.sRet.Declare(String)
+
+'Browser for select Grade from table
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+V.Local.sTitles.Set("Grade Type")
+V.Local.iWidths.Set("4600")
+F.Intrinsic.UI.MiniBrowser("Select a Grade Type",conx,"Select GradeType From GAB_Cert_Grade",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,"=","***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Grade Type was selected")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.FormMaint.txtMGrade.Text(V.Local.sRet)
+F.Intrinsic.Control.EndIf
+F.ODBC.Connection!conx.Close
+
+
+
+Program.Sub.cmdMaintBrwGrade.End
+
+Program.Sub.cmdMaintSaveMill.Start
+V.Local.sSql.Declare(String)
+V.Local.sComment.Declare(String)
+
+F.ODBC.Connection!connect.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.ODBC.Connection!connect2.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+
+'Search if the Mill Exist and if not Save it
+V.Local.sSql.Set("Select * FROM GAB_Cert_Mill")
+F.Intrinsic.String.Concat(V.Local.sSql," Where MillName='",V.Screen.FormMaint!txtMMill.Text,"'",V.Local.sSql)
+F.ODBC.connection!connect.OpenRecordsetRO("Result",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.connect!Result.EOF,=,True)
+	V.Local.sSql.Set("SELECT * FROM GAB_Cert_Mill")
+	F.ODBC.Connection!connect2.OpenRecordsetRW("Result2",V.Local.sSql)
+	F.ODBC.connect2!Result2.AddNew
+	F.ODBC.connect2!Result2.Set!MillName(V.Screen.FormMaint!txtMMill.Text)
+	F.ODBC.connect2!Result2.Update
+	F.Intrinsic.String.Concat("Mill:",V.Screen.FormMaint!txtMMill.Text," Saved",V.Local.sComment)
+	F.Intrinsic.UI.Msgbox(V.Local.sComment)
+	F.ODBC.connect2!Result2.Close
+F.Intrinsic.Control.EndIf
+F.ODBC.connect!Result.Close
+F.ODBC.Connection!connect2.Close
+F.ODBC.Connection!connect.Close
+
+Program.Sub.cmdMaintSaveMill.End
+
+Program.Sub.cmdMaintSaveGrade.Start
+V.Local.sSql.Declare(String)
+V.Local.sComment.Declare(String)
+
+F.ODBC.Connection!connect.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.ODBC.Connection!connect2.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+
+'Search if the Grade Type Exist and if not Save it
+V.Local.sSql.Set("Select * FROM GAB_Cert_Grade")
+F.Intrinsic.String.Concat(V.Local.sSql," Where GradeType='",V.Screen.FormMaint!txtMGrade.Text,"'",V.Local.sSql)
+F.ODBC.connection!connect.OpenRecordsetRO("Result",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.connect!Result.EOF,=,True)
+	V.Local.sSql.Set("SELECT * FROM GAB_Cert_Grade")
+	F.ODBC.Connection!connect2.OpenRecordsetRW("Result2",V.Local.sSql)
+	F.ODBC.connect2!Result2.AddNew
+	F.ODBC.connect2!Result2.Set!GradeType(V.Screen.FormMaint!txtMGrade.Text)
+	F.ODBC.connect2!Result2.Update
+	F.Intrinsic.String.Concat("Grade Type:",V.Screen.FormMaint!txtMGrade.Text," Saved",V.Local.sComment)
+	F.Intrinsic.UI.Msgbox(V.Local.sComment)
+	F.ODBC.connect2!Result2.Close
+F.Intrinsic.Control.EndIf
+F.ODBC.connect!Result.Close
+F.ODBC.Connection!connect2.Close
+F.ODBC.Connection!connect.Close
+
+
+Program.Sub.cmdMaintSaveGrade.End
+
+Program.Sub.cmdMaintDelGrade.Start
+V.Local.sSql.Declare(String)
+V.Local.sComment.Declare(String)
+
+F.ODBC.Connection!connect.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.ODBC.Connection!connect2.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+
+'Search if the Grade Type Exist and Delete it
+V.Local.sSql.Set("Select * FROM GAB_Cert_Grade")
+F.Intrinsic.String.Concat(V.Local.sSql," Where GradeType='",V.Screen.FormMaint!txtMGrade.Text,"'",V.Local.sSql)
+F.ODBC.connection!connect.OpenRecordsetRO("Result",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.connect!Result.EOF,=,False)
+	F.ODBC.Connection!connect2.OpenRecordsetRW("Result2",V.Local.sSql)
+	F.ODBC.connect2!Result2.Delete
+	F.ODBC.connect2!Result2.Update
+	F.Intrinsic.String.Concat("Grade Type:",V.Screen.FormMaint!txtMGrade.Text," Deleted",V.Local.sComment)
+	F.Intrinsic.UI.Msgbox(V.Local.sComment)
+	Gui.FormMaint.txtMGrade.Text("")
+	F.ODBC.connect2!Result2.Close
+F.Intrinsic.Control.EndIf
+F.ODBC.connect!Result.Close
+F.ODBC.Connection!connect2.Close
+F.ODBC.Connection!connect.Close
+
+
+
+Program.Sub.cmdMaintDelGrade.End
+
+Program.Sub.cmdMaintDelMill.Start
+V.Local.sSql.Declare(String)
+V.Local.sComment.Declare(String)
+
+F.ODBC.Connection!connect.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.ODBC.Connection!connect2.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+
+'Search if the Mill Exist and delete it
+V.Local.sSql.Set("Select * FROM GAB_Cert_Mill")
+F.Intrinsic.String.Concat(V.Local.sSql," Where MillName='",V.Screen.FormMaint!txtMMill.Text,"'",V.Local.sSql)
+F.ODBC.connection!connect.OpenRecordsetRO("Result",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.connect!Result.EOF,=,False)
+	F.ODBC.Connection!connect2.OpenRecordsetRW("Result2",V.Local.sSql)
+	F.ODBC.connect2!Result2.Delete
+	F.ODBC.connect2!Result2.Update
+	F.Intrinsic.String.Concat("Mill:",V.Screen.FormMaint!txtMMill.Text," Deleted",V.Local.sComment)
+	F.Intrinsic.UI.Msgbox(V.Local.sComment)
+	Gui.FormMaint.txtMMill.Text("")
+	F.ODBC.connect2!Result2.Close
+F.Intrinsic.Control.EndIf
+F.ODBC.connect!Result.Close
+F.ODBC.Connection!connect2.Close
+F.ODBC.Connection!connect.Close
+
+
+
+Program.Sub.cmdMaintDelMill.End
+
+Program.Sub.Val_OD.Start
+V.Local.fTemp.Declare(Float)
+
+' Validate OD Field
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtOD.Text,"<>","")
+	F.Intrinsic.Math.Round(V.Screen.frmMTR_Entry!txtOD.Text,3,V.Local.fTemp)
+	F.Intrinsic.String.Format(V.Local.fTemp,"###.000",Variable.Local.fTemp)
+	Gui.frmMTR_Entry.txtOD.Text(V.Local.fTemp)
+F.Intrinsic.Control.EndIf
+' Validate Wall Thickness
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtWall.Text,"<>","")
+	F.Intrinsic.Math.Round(V.Screen.frmMTR_Entry!txtWall.Text,3,V.Local.fTemp)
+	F.Intrinsic.String.Format(V.Local.fTemp,"###.000",Variable.Local.fTemp)
+	Gui.frmMTR_Entry.txtWall.Text(V.Local.fTemp)
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_OD.End
+
+Program.Sub.Val_YieldStrength.Start
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtYieldStrength.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtYieldStrength.Text,">",10000)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtYieldStrength.Text,"=>",300000)
+			F.Intrinsic.UI.Msgbox("Yield Strength value isn't valid, is greater, must be > 10000 and <300000")
+			Gui.frmMTR_Entry.txtYieldStrength.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Yield Strength value isn't valid, is lower, must be > 10000 and <300000")
+		Gui.frmMTR_Entry.txtYieldStrength.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_YieldStrength.End
+
+Program.Sub.Val_TensileStrength.Start
+'Validate Tensile Strength
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtTensileStrength.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtTensileStrength.Text,">",10000)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtTensileStrength.Text,"=>",300000)
+			F.Intrinsic.UI.Msgbox("Tensile Strength value must fall between > 10000 and <300000, is higher.")
+			Gui.frmMTR_Entry.txtTensileStrength.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Tensile Strength value must fall between > 10000 and <300000, is lower.")
+		Gui.frmMTR_Entry.txtTensileStrength.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+'Validate Yield and Tensile Strength
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtTensileStrength.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtYieldStrength.Text,"<>","")
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtYieldStrength.Text,>,V.Screen.frmMTR_Entry!txtTensileStrength.Text)
+			F.Intrinsic.UI.Msgbox("Check your tensile values. Yield strength should be lower than tensile strength.")
+			Gui.frmMTR_Entry.txtYieldStrength.Text("")
+			Gui.frmMTR_Entry.txtYieldStrength.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+Program.Sub.Val_TensileStrength.End
+
+Program.Sub.Val_PerctElong.Start
+'Validate Percent Elongation
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtPercElong.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtPercElong.Text,"<",0)
+		F.Intrinsic.UI.Msgbox("Percent Elongation value must >= 0, is negative.")
+		Gui.frmMTR_Entry.txtTensileStrength.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_PerctElong.End
+
+Program.Sub.Val_GrainSize.Start
+'Validate Grain Size
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtGrainSize.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtGrainSize.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtGrainSize.Text,"=>",15)
+			F.Intrinsic.UI.Msgbox("Grain Size value must fall between 0 and 14, is higher.")
+			Gui.frmMTR_Entry.txtGrainSize.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Grain Size value must fall between 0 and 14, is lower.")
+		Gui.frmMTR_Entry.txtGrainSize.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_GrainSize.End
+
+Program.Sub.Val_C.Start
+'Validate C
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtC.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtC.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtC.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Carbon (C) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtC.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Carbon (C) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtC.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_C.End
+
+Program.Sub.Val_Si.Start
+'Validate Si
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSi.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSi.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSi.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Silicon (Si) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtSi.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Silicon (Si) must fall between 0 and 1")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Si.End
+
+Program.Sub.Val_Mn.Start
+'Validate Mn
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMn.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMn.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMn.Text,"=>",20)
+			F.Intrinsic.UI.Msgbox("Manganese (Mn) must fall between 0 and 20")
+			Gui.frmMTR_Entry.txtMn.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Manganese (Mn) must fall between 0 and 20")
+		Gui.frmMTR_Entry.txtMn.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Mn.End
+
+Program.Sub.Val_Ni.Start
+'Validate Ni
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtNi.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtNi.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtNi.Text,"=>",20)
+			F.Intrinsic.UI.Msgbox("Nickel (Ni) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtNi.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Nickel (Ni) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtNi.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Ni.End
+
+Program.Sub.Val_Cr.Start
+'Validate Cr
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCr.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCr.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCr.Text,"=>",20)
+			F.Intrinsic.UI.Msgbox("Chromium (Cr) must fall between 0 and 20")
+			Gui.frmMTR_Entry.txtCr.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Chromium (Cr) must fall between 0 and 20")
+		Gui.frmMTR_Entry.txtCr.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Cr.End
+
+Program.Sub.Val_S.Start
+'Validate S
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtS.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtS.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtS.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Sulfur (S) must fall between 0 and 10")
+			Gui.frmMTR_Entry.txtS.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Sulfur (S) must fall between 0 and 10")
+		Gui.frmMTR_Entry.txtS.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_S.End
+
+Program.Sub.Val_P.Start
+'Validate P
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtP.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtP.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtP.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Phosphorus (P) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtP.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Phosphorus (P) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtP.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_P.End
+
+Program.Sub.Val_Mo.Start
+'Validate Mo
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMo.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMo.Text,"=>",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMo.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Molybdenum (Mo) must fall between 0 and 10")
+			Gui.frmMTR_Entry.txtMo.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Molybdenum (Mo) must fall between 0 and 10")
+		Gui.frmMTR_Entry.txtMo.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Mo.End
+
+Program.Sub.Val_Cu.Start
+'Validate Cu
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCu.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCu.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCu.Text,"=>",20)
+			F.Intrinsic.UI.Msgbox("Copper (Cu) must fall between 0 and 10")
+			Gui.frmMTR_Entry.txtCu.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Copper (Cu) must fall between 0 and 10")
+		Gui.frmMTR_Entry.txtCu.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Cu.End
+
+Program.Sub.Val_V.Start
+'Validate V
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtV.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtV.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtV.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Vanadium (V) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtV.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Vanadium (V) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtV.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_V.End
+
+Program.Sub.Val_Al.Start
+'Validate Al
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAl.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAl.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAl.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Aluminum (Al) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtC.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Aluminum (Al) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtAl.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Al.End
+
+Program.Sub.Val_Sn.Start
+'Validate Sn
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSn.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSn.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSn.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Tin (Sn) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtSn.SetFocus
+			F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Tin (Sn) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtSn.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Sn.End
+
+Program.Sub.Val_Nb.Start
+'Validate Nb
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtNb.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtNb.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtNb.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Niobium (Nb) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtNb.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Niobium (Nb) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtNb.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Nb.End
+
+Program.Sub.Val_Ti.Start
+'Validate Ti
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtTi.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtTi.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtTi.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Titanium (Ti) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtTi.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Titanium (Ti) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtTi.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Ti.End
+
+Program.Sub.Val_As.Start
+'Validate As
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAs.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAs.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAs.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Arsenic (As) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtAs.SetFocus
+			F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Arsenic (As) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtAs.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_As.End
+
+Program.Sub.Val_Ca.Start
+'Validate Ca
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCa.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCa.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCa.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Calcium (Ca) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtCa.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Calcium (Ca) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtCa.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Ca.End
+
+Program.Sub.Val_B.Start
+'Validate B
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtB.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtB.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtB.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Boron (B) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtB.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Boron (B) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtB.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_B.End
+
+Program.Sub.Val_N.Start
+'Validate N
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtN.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtN.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtN.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Nitrogen (N) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtN.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Nitrogen (N) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtN.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_N.End
+
+Program.Sub.Val_AlinSol.Start
+'Validate Al in sol
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAlinSol.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAlinSol.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtAlinSol.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Aluminium Sol (Al in Sol) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtAlinSol.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Aluminium Sol (Al in Sol) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtAlinSol.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+Program.Sub.Val_AlinSol.End
+
+Program.Sub.Val_Pb.Start
+'Validate Pb
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtPb.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtPb.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtPb.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Lead (Pb) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtPb.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Lead (Pb) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtPb.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Pb.End
+
+Program.Sub.Val_Sb.Start
+'Validate Sb
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSb.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSb.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtSb.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Antimony (Sb) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtSb.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Antimony (Sb) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtSb.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Sb.End
+
+Program.Sub.Val_Bi.Start
+'Validate Bi
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtBi.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtBi.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtBi.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Bismuth (Bi) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtBi.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Bismuth (Bi) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtBi.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Bi.End
+
+Program.Sub.Val_Bsol.Start
+'Validate Bsol
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtBSol.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtBSol.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtBSol.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Boron Sol (Bsol) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtBSol.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Boron Sol (Bsol) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtBSol.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Bsol.End
+
+Program.Sub.Val_O.Start
+'Validate O
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtO.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtO.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtO.Text,"=>",10)
+			F.Intrinsic.UI.Msgbox("Oxygen (O) must fall between 0 and 10")
+			Gui.frmMTR_Entry.txtO.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Oxygen (O) must fall between 0 and 10")
+		Gui.frmMTR_Entry.txtO.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_O.End
+
+Program.Sub.Val_Mg.Start
+'Validate Mg
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMg.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMg.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtMg.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Magnesium (Mg) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtMg.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Magnesium (Mg) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtMg.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Mg.End
+
+Program.Sub.Val_H.Start
+'Validate H
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtH.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtH.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtH.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Hydrogen (H) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtH.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Hydrogen (H) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtH.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_H.End
+
+Program.Sub.Val_Co.Start
+'Validate Co
+F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCo.Text,"<>","")
+	F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCo.Text,">",0)
+		F.Intrinsic.Control.If(V.Screen.frmMTR_Entry!txtCo.Text,"=>",1)
+			F.Intrinsic.UI.Msgbox("Cobalt (Co) must fall between 0 and 1")
+			Gui.frmMTR_Entry.txtCo.SetFocus
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Cobalt (Co) must fall between 0 and 1")
+		Gui.frmMTR_Entry.txtCo.SetFocus
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Val_Co.End
+
+
