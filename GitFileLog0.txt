@@ -1,0 +1,2 @@
+Remote 'origin' commit list. System.Collections.Generic.List`1[System.ValueTuple`4[System.String,System.String,System.String,System.String]]
+File is unaltered in 'C:\Websites\Git\BBrambila\6293' nothing was committed.
