@@ -6,3 +6,7 @@ Remote 'origin' commit list. System.Collections.Generic.List`1[System.ValueTuple
 Remote 'origin' commit list. System.Collections.Generic.List`1[System.ValueTuple`4[System.String,System.String,System.String,System.String]]
 File is unaltered in 'C:\Websites\Git\BBrambila\6293' nothing was committed.
 Changes in 'C:\Websites\Git\BBrambila\6293' committed. New commit created: f3018d833a667986450c5ce1384df0d243f6b160
+Remote 'origin' commit list. System.Collections.Generic.List`1[System.ValueTuple`4[System.String,System.String,System.String,System.String]]
+File has been deleted successfully on Git repository.
+File 'C:\Websites\Git\BBrambila\6293\test.xlsx' does not exist.
+File has been deleted successfully on Git repository.
