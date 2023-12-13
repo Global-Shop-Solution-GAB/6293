@@ -1,0 +1,312 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Testing Wizard")
+gui.SS_Form1..size(8105, 5060)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.chk1.create(checkbox)
+gui.SS_Form1.chk1.Caption("Testing")
+gui.SS_Form1.chk1.visible(True)
+gui.SS_Form1.chk1.size(1800, 300)
+gui.SS_Form1.chk1.position(100, 135)
+gui.SS_Form1.chk1.enabled(True)
+gui.SS_Form1.chk1.fontname("Arial")
+gui.SS_Form1.chk1.fontsize(8)
+
+gui.SS_Form1.lbl_txtpart.create(label,"Part",True,1800,200,1,100,605,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtpart.LabelStretch(True)
+gui.SS_Form1.txtpart.create(textbox,"",True,3600,330,1,100,805,True,0,Arial,8,16777215,1)
+
+Gui.SS_Form1.cmd_txtpart.create(button)
+gui.SS_Form1.cmd_txtpart.Caption("^")
+gui.SS_Form1.cmd_txtpart.visible(True)
+gui.SS_Form1.cmd_txtpart.size(330, 330)
+gui.SS_Form1.cmd_txtpart.position(3785, 805)
+gui.SS_Form1.cmd_txtpart.enabled(True)
+gui.SS_Form1.cmd_txtpart.fontname("Arial")
+gui.SS_Form1.cmd_txtpart.fontsize(8)
+
+gui.SS_Form1.chk2.create(checkbox)
+gui.SS_Form1.chk2.Caption("Testing")
+gui.SS_Form1.chk2.visible(True)
+gui.SS_Form1.chk2.size(1800, 300)
+gui.SS_Form1.chk2.position(1985, 135)
+gui.SS_Form1.chk2.enabled(True)
+gui.SS_Form1.chk2.fontname("Arial")
+gui.SS_Form1.chk2.fontsize(8)
+
+gui.SS_Form1.lbl_lvw1.create(label,"LVW test",True,1800,200,1,4255,605,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lvw1.create(listview)
+gui.SS_Form1.lvw1.view(3)
+gui.SS_Form1.lvw1.visible(True)
+gui.SS_Form1.lvw1.size(7755, 2000)
+gui.SS_Form1.lvw1.position(4255, 805)
+gui.SS_Form1.lvw1.enabled(True)
+gui.SS_Form1.lvw1.fontname("Arial")
+gui.SS_Form1.lvw1.fontsize(8)
+gui.SS_Form1.lbl_lvw1.LabelStretch(True)
+
+gui.SS_Form1.chk1.tabstop(true)
+gui.SS_Form1.chk1.tabindex(1)
+gui.SS_Form1.txtpart.tabstop(true)
+gui.SS_Form1.txtpart.tabindex(2)
+gui.SS_Form1.cmd_txtpart.tabstop(true)
+gui.SS_Form1.cmd_txtpart.tabindex(3)
+gui.SS_Form1.chk2.tabstop(true)
+gui.SS_Form1.chk2.tabindex(4)
+gui.F_Activity6..create
+gui.F_Activity6..caption("Activity 6")
+gui.F_Activity6..size(5025,7005)
+gui.F_Activity6..position(0,0)
+gui.F_Activity6..event(unload,unload)
+gui.F_Activity6..alwaysontop(False)
+gui.F_Activity6..fontname("Tahoma")
+gui.F_Activity6..fontsize(8)
+gui.F_Activity6..forecolor(0)
+gui.F_Activity6..fontstyle(False,False,False,False,)
+gui.F_Activity6..BackColor(-2147483633)
+gui.F_Activity6..controlbox(True)
+gui.F_Activity6..maxbutton(False)
+gui.F_Activity6..minbutton(True)
+gui.F_Activity6..mousepointer(0)
+gui.F_Activity6..moveable(True)
+gui.F_Activity6..sizeable(False)
+gui.F_Activity6..ShowInTaskBar(True)
+gui.F_Activity6..titlebar(True)
+gui.F_Activity6.lblPartNo.create(label,"Part Number",True,1935,255,1,200,200,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.lblRev.create(label,"REV",True,1935,255,1,2600,200,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.cmdBrowser.create(button)
+gui.F_Activity6.cmdBrowser.caption("^")
+gui.F_Activity6.cmdBrowser.visible(True)
+gui.F_Activity6.cmdBrowser.size(350,315)
+gui.F_Activity6.cmdBrowser.zorder(0)
+gui.F_Activity6.cmdBrowser.position(1985,400)
+gui.F_Activity6.cmdBrowser.enabled(True)
+gui.F_Activity6.cmdBrowser.fontname("Tahoma")
+gui.F_Activity6.cmdBrowser.fontsize(8)
+gui.F_Activity6.cmdBrowser.event(click,cmdbrowser_click)
+gui.F_Activity6.txtPrtNo.create(textbox,"",True,1500,300,0,200,400,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtPrtNo.maxLength(20)
+gui.F_Activity6.txtRev.create(textbox,"",True,1500,300,0,2600,400,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtRev.maxLength(3)
+gui.F_Activity6.lblLocation.create(label,"Location",True,1935,255,1,200,900,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.lblUM.create(label,"Unit Of Measure",True,1935,255,1,2600,900,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.txtLoc.create(textbox,"",True,1500,300,0,200,1100,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtLoc.maxLength(2)
+gui.F_Activity6.txtUM.create(textbox,"",True,1500,300,0,2600,1100,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtUM.maxLength(3)
+gui.F_Activity6.lblDesc.create(label,"Description",True,1935,255,1,200,1600,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.txtDesc.create(textbox,"",True,3900,300,0,200,1800,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtDesc.maxLength(30)
+gui.F_Activity6.lblProdLine.create(label,"Product Line",True,1935,255,1,200,2300,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.lblSrcCode.create(label,"Source Code",True,1935,255,1,2600,2300,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.txtPrdLine.create(textbox,"",True,1500,270,0,200,2500,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtPrdLine.maxLength(2)
+gui.F_Activity6.txtSrcCode.create(textbox,"",True,1500,300,0,2600,2500,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtSrcCode.maxLength(12)
+gui.F_Activity6.lblAltD1.create(label,"Alt Description1",True,1935,255,1,200,3000,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.txtAltD1.create(textbox,"",True,3900,300,0,200,3200,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtAltD1.maxLength(30)
+gui.F_Activity6.lblAltD2.create(label,"Alt Description2",True,1935,255,1,200,3700,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.txtAltD2.create(textbox,"",True,3900,300,0,200,3900,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtAltD2.maxLength(30)
+gui.F_Activity6.lblPrice.create(label,"Price",True,1935,255,1,200,4400,True,0,Tahoma,8,-2147483633,0)
+gui.F_Activity6.txtPrice.create(textbox,"",True,1500,300,0,200,4600,True,0,Tahoma,8,-2147483643,1)
+gui.F_Activity6.txtPrice.maxLength(12)
+gui.F_Activity6.cmdSubmit.create(button)
+gui.F_Activity6.cmdSubmit.caption("Submit")
+gui.F_Activity6.cmdSubmit.visible(True)
+gui.F_Activity6.cmdSubmit.size(1200,375)
+gui.F_Activity6.cmdSubmit.zorder(0)
+gui.F_Activity6.cmdSubmit.position(200,5585)
+gui.F_Activity6.cmdSubmit.enabled(True)
+gui.F_Activity6.cmdSubmit.fontname("Tahoma")
+gui.F_Activity6.cmdSubmit.fontsize(8)
+gui.F_Activity6.cmdSubmit.event(click,cmdsubmit_click)
+gui.F_Activity6.chkBrowser.create(checkbox)
+gui.F_Activity6.chkBrowser.caption("Browser")
+gui.F_Activity6.chkBrowser.visible(False)
+gui.F_Activity6.chkBrowser.size(1935,255)
+gui.F_Activity6.chkBrowser.zorder(0)
+gui.F_Activity6.chkBrowser.position(2000,4600)
+gui.F_Activity6.chkBrowser.enabled(True)
+gui.F_Activity6.chkBrowser.alignment(0)
+gui.F_Activity6.chkBrowser.fontname("Tahoma")
+gui.F_Activity6.chkBrowser.fontsize(8)
+gui.F_Activity6.cmdClear.create(button)
+gui.F_Activity6.cmdClear.caption("Clear")
+gui.F_Activity6.cmdClear.visible(True)
+gui.F_Activity6.cmdClear.size(1200,375)
+gui.F_Activity6.cmdClear.zorder(0)
+gui.F_Activity6.cmdClear.position(2140,5585)
+gui.F_Activity6.cmdClear.enabled(True)
+gui.F_Activity6.cmdClear.fontname("Tahoma")
+gui.F_Activity6.cmdClear.fontsize(8)
+gui.F_Activity6.cmdClear.event(click,cmdclear_click)
+gui.F_Activity6.txtPrtNo.tabstop(True)
+gui.F_Activity6.txtPrtNo.tabindex(1)
+gui.F_Activity6.cmdBrowser.tabstop(True)
+gui.F_Activity6.cmdBrowser.tabindex(2)
+gui.F_Activity6.txtRev.tabstop(True)
+gui.F_Activity6.txtRev.tabindex(3)
+gui.F_Activity6.txtLoc.tabstop(True)
+gui.F_Activity6.txtLoc.tabindex(4)
+gui.F_Activity6.txtUM.tabstop(True)
+gui.F_Activity6.txtUM.tabindex(5)
+gui.F_Activity6.txtDesc.tabstop(True)
+gui.F_Activity6.txtDesc.tabindex(6)
+gui.F_Activity6.txtPrdLine.tabstop(True)
+gui.F_Activity6.txtPrdLine.tabindex(7)
+gui.F_Activity6.txtSrcCode.tabstop(True)
+gui.F_Activity6.txtSrcCode.tabindex(8)
+gui.F_Activity6.txtAltD1.tabstop(True)
+gui.F_Activity6.txtAltD1.tabindex(9)
+gui.F_Activity6.txtAltD2.tabstop(True)
+gui.F_Activity6.txtAltD2.tabindex(10)
+gui.F_Activity6.txtPrice.tabstop(True)
+gui.F_Activity6.txtPrice.tabindex(11)
+gui.F_Activity6.cmdSubmit.tabstop(True)
+gui.F_Activity6.cmdSubmit.tabindex(12)
+gui.F_Activity6.cmdClear.tabstop(True)
+gui.F_Activity6.cmdClear.tabindex(47)
+Program.Sub.ScreenSU.end
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Coded by: SUPERVSR
+'Project Start Date: 3/3/2011
+f.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+Gui.F_Activity6..Show
+
+Program.Sub.Main.End
+
+program.sub.cmdbrowser_click.start
+
+V.Local.sTitles.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.iWidth.Declare(Long)
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.String.Split("Part-Rev*!*Location*!*Description*!*ProductLine*!*UM*!*Proce","*!*",V.Local.sTitles)
+F.Intrinsic.String.Split("2000*!*2000*!*2000*!*0*!*0*!*0","*!*",V.Local.iWidth)
+V.Local.ssql.Set("select Part, Location, Description,Product_Line, UM_Inventory, AMT_Price  from INVENTORY_MSTR")
+
+F.Intrinsic.UI.Browser("Part Browser","con",V.Local.sSql,V.Local.sTitles,V.Local.iWidth,V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Local.sRet,=,"***CANCEL***")
+	F.Intrinsic.UI.Msgbox("No Part is selected")
+F.Intrinsic.Control.Else
+	Gui.F_Activity6.chkBrowser.Value(1)
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.F_Activity6.txtPrtNo.Text(V.Local.sRet(0))
+	Gui.F_Activity6.txtLoc.Text(V.Local.sRet(1))
+	Gui.F_Activity6.txtDesc.Text(V.Local.sRet(2))
+	Gui.F_Activity6.txtPrdLine.Text(V.Local.sRet(3))
+	Gui.F_Activity6.txtUM.Text(V.Local.sRet(4))
+	Gui.F_Activity6.txtPrice.Text(V.Local.sRet(5))
+	F.Intrinsic.string.Concat("select Code_Source, Description_2, Description_3 from Inventory_Mst2 where Part = ",V.Local.sRet(0),V.Local.sSql)
+	F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+		Gui.F_Activity6.txtSrcCode.Text(V.ODBC.con!rst.FieldVal!Code_Source)
+		Gui.F_Activity6.txtAltD1.Text(V.ODBC.con!rst.FieldVal!Description_2)
+		Gui.F_Activity6.txtAltD1.Text(V.ODBC.con!rst.FieldVal!Description_3)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+F.Intrinsic.Control.EndIf
+
+program.sub.cmdbrowser_click.end
+
+program.sub.cmdsubmit_click.start
+V.Local.sError.Declare(String)
+V.Local.bTemp.Declare(Boolean)
+V.Local.sPart.Declare(String)
+V.Local.bTemp.Set(True)
+
+F.Intrinsic.Control.SetErrorHandler("SubmitClick_ERR")
+F.Intrinsic.Control.ClearErrors
+
+F.Intrinsic.Control.If(V.Screen.F_Activity6!txtPrtNo.Text,=,"")
+	V.Local.bTemp.Set(False)
+	F.Intrinsic.UI.Msgbox("Part # is missing")
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.If(V.Screen.F_Activity6!txtUM.Text,=,"")
+	V.Local.bTemp.Set(False)
+	F.Intrinsic.UI.Msgbox("Unit of Measure is missing")
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.If(V.Screen.F_Activity6!txtDesc.Text,=,"")
+	V.Local.bTemp.Set(False)
+	F.Intrinsic.UI.Msgbox("Description is missing")
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.If(V.Screen.F_Activity6!txtPrice.Text,=,"")
+	V.Local.bTemp.Set(False)
+	F.Intrinsic.UI.Msgbox("Price is missing")
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Debug.Stop
+F.Intrinsic.Control.If(V.Screen.F_Activity6!chkBrowser.Value,<>,1)
+	F.Intrinsic.Control.If(V.Local.bTemp,=,True)
+		'this needs to only happen when there is a new part not a part selected from the browser.
+		F.Intrinsic.String.GSSPartString(V.Screen.F_Activity6!txtPrtNo.Text,V.Screen.F_Activity6!txtRev.Text,V.Local.sPart)
+		'creatpart
+		F.Global.Inventory.CreatePart(V.Local.sPart,V.Screen.F_Activity6!txtUM.Text,V.Screen.F_Activity6!txtDesc.Text,V.Screen.F_Activity6!txtLoc.Text,V.Screen.F_Activity6!txtPrdLine.Text,V.Screen.F_Activity6!txtSrcCode.Text,V.Screen.F_Activity6!txtAltD1.Text,V.Screen.F_Activity6!txtAltD2.Text,V.Screen.F_Activity6!txtPrice.Text)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("Part exists")
+F.Intrinsic.Control.Endif
+'F.Intrinsic.Control.CallSub(Cmdclear_click)
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Label("SubmitClick_ERR")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Concat("Error Occured ",V.Ambient.ErrorNumber,"With Description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+F.Intrinsic.Control.EndIf
+
+program.sub.cmdsubmit_click.end
+
+Program.Sub.unload.Start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+Program.Sub.unload.End
+
+program.sub.cmdclear_click.start
+Gui.F_Activity6.txtAltD1.Text(" ")
+Gui.F_Activity6.txtAltD2.Text(" ")
+Gui.F_Activity6.txtDesc.Text(" ")
+Gui.F_Activity6.txtLoc.Text(" ")
+Gui.F_Activity6.txtPrdLine.Text(" ")
+Gui.F_Activity6.txtPrice.Text(" ")
+Gui.F_Activity6.txtPrtNo.Text(" ")
+Gui.F_Activity6.txtRev.Text(" ")
+Gui.F_Activity6.txtSrcCode.Text(" ")
+Gui.F_Activity6.txtUM.Text(" ")
+Gui.F_Activity6.chkBrowser.Value(0)
+
+program.sub.cmdclear_click.end
+
+
+
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Testing Wizard
+SS_Form1.CTRL{{NAME::chk1\\TYPE::9\\CAPTION::Testing\\VALUE::true\\TABSTOP::1\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtpart\\TYPE::2\\CAPTION::Part\\TABSTOP::2\\GROUP::2\\BROWSER::1\\SIZE::2
+SS_Form1.CTRL{{NAME::chk2\\TYPE::9\\CAPTION::Testing\\VALUE::true\\TABSTOP::3\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::lvw1\\TYPE::7\\CAPTION::LVW test\\GROUP::2\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
