@@ -1,0 +1,39 @@
+﻿Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.Try
+'TJS, Mar 2021
+'Cardinal Systems, Inc
+'Quote 12555
+'This project will allow the customer to open the RMA update screen for an existing RMA selected from GCG_6293_RMADashboard.g2u.
+'Hook 35601, passed variable 000001.
+V.Local.sValue.Declare
+
+F.Intrinsic.Control.If(V.Passed.000001,=,"")
+	F.Global.Registry.ReadValue(V.Caller.Caller,V.Caller.CompanyCode,"GCG_6293",6293,0,5,"",V.Local.sValue)
+
+	V.Passed.000001.Set(V.Local.sValue)
+	
+	F.Global.Registry.AddValue(V.Caller.Caller,V.Caller.CompanyCode,"GCG_6293",6293,0,False,"",0,0,0,"1900-01-01","1900-01-01")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.Error.Start
+V.Local.sError.Declare
+V.Local.iRet.Declare
+V.Local.sSep.Declare
+
+F.Intrinsic.String.Build("-------------------------------------------------------------------------------------",,V.Local.sSep)
+F.Intrinsic.String.Build("({5}-{6}){0}{7}{0}Project: {4}{0}{7}{0}Sub: {1}{0}Error: {2}, {3}", V.Ambient.NewLine, V.Args.SubRoutine, V.Args.eNumber, V.Args.eDescription,V.Caller.ScriptFile,V.Ambient.Date, V.Ambient.Time,V.Local.sSep,V.Local.sError)
+F.Intrinsic.UI.Msgbox(V.Local.sError,"Error",V.Local.iRet)
+Program.Sub.Error.End
+
+Program.Sub.Comments.Start
+${$5$}$2.0.0.0$}$2
+${$6$}$tsmith$}$20210315091037282$}$xqPbj9atw05FglvzeFsZ9cqXP+qvG6tX88A9bphf8Y6LdgXL3jBETuKfvzhBA2AM8L/RJGSvagM=
+Program.Sub.Comments.End
