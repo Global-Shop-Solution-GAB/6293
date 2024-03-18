@@ -1,0 +1,1391 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.FormRMADashboard..Create
+Gui.FormRMADashboard..Caption("RMA Dashboard")
+Gui.FormRMADashboard..Size(16095,11160)
+Gui.FormRMADashboard..MinX(0)
+Gui.FormRMADashboard..MinY(0)
+Gui.FormRMADashboard..Position(0,0)
+Gui.FormRMADashboard..BackColor(-2147483633)
+Gui.FormRMADashboard..MousePointer(0)
+Gui.FormRMADashboard..Event(UnLoad,FormRMADashboard_UnLoad)
+Gui.FormRMADashboard.gsgcRMAs.Create(GsGridControl)
+Gui.FormRMADashboard.gsgcRMAs.Size(16005,10185)
+Gui.FormRMADashboard.gsgcRMAs.Position(0,705)
+Gui.FormRMADashboard.gsgcRMAs.Anchor(15)
+Gui.FormRMADashboard.gsgcRMAs.Event(RowCellClick,gsgcRMAs_RowCellClick)
+Gui.FormRMADashboard.cmdRefresh.Create(Button)
+Gui.FormRMADashboard.cmdRefresh.Size(855,375)
+Gui.FormRMADashboard.cmdRefresh.Position(15105,135)
+Gui.FormRMADashboard.cmdRefresh.Anchor(9)
+Gui.FormRMADashboard.cmdRefresh.Caption("Refresh")
+Gui.FormRMADashboard.cmdRefresh.Event(Click,cmdRefresh_Click)
+Gui.FormRMADashboard.pbLoading.Create(ProgressBar)
+Gui.FormRMADashboard.pbLoading.Visible(False)
+Gui.FormRMADashboard.pbLoading.Size(3735,255)
+Gui.FormRMADashboard.pbLoading.Position(30,360)
+Gui.FormRMADashboard.lblFromDate.Create(Label,"From :",True,570,255,0,9840,285,True,0,"Arial",8,-2147483633,0)
+Gui.FormRMADashboard.lblFromDate.Anchor(9)
+Gui.FormRMADashboard.dtpFrom.Create(DatePicker)
+Gui.FormRMADashboard.dtpFrom.Size(1935,285)
+Gui.FormRMADashboard.dtpFrom.Position(10425,180)
+Gui.FormRMADashboard.dtpFrom.Anchor(9)
+Gui.FormRMADashboard.lblStatus.Create(Label,"***STATUS***",False,3675,255,0,60,105,True,0,"Arial",8,-2147483633,0)
+Gui.FormRMADashboard.lblToDate.Create(Label,"To :",True,375,255,0,12510,285,True,0,"Arial",8,-2147483633,0)
+Gui.FormRMADashboard.lblToDate.Anchor(9)
+Gui.FormRMADashboard.dtpTo.Create(DatePicker)
+Gui.FormRMADashboard.dtpTo.Size(1935,285)
+Gui.FormRMADashboard.dtpTo.Position(12930,180)
+Gui.FormRMADashboard.dtpTo.Anchor(9)
+Gui.fmNotes..Create
+Gui.fmNotes..Size(7860,3810)
+Gui.fmNotes..MinX(0)
+Gui.fmNotes..MinY(0)
+Gui.fmNotes..Position(0,0)
+Gui.fmNotes..BackColor(-2147483633)
+Gui.fmNotes..MousePointer(0)
+Gui.fmNotes..Event(UnLoad,fmNotes_UnLoad)
+Gui.fmNotes.txtSvcLnNote.Create(TextboxM)
+Gui.fmNotes.txtSvcLnNote.Size(7470,2640)
+Gui.fmNotes.txtSvcLnNote.Position(75,75)
+Gui.fmNotes.cmdNoteSv.Create(Button)
+Gui.fmNotes.cmdNoteSv.Size(855,375)
+Gui.fmNotes.cmdNoteSv.Position(6690,2820)
+Gui.fmNotes.cmdNoteSv.Caption("Save")
+Gui.fmNotes.cmdNoteSv.Event(Click,cmdNoteSv_Click)
+Gui.fmNotes.lblHist.Create(Label,"RMA in history.  Editting disabled.",False,3075,255,0,3570,2940,True,1,"Arial",8,-2147483633,0)
+Gui.fmNotes.txtRMAID.Create(TextBox,"",False,1215,300,0,1200,300,True,0,"Arial",8,-2147483643,1)
+Gui.fmNotes.txtOriOrd.Create(TextBox,"",False,1215,300,0,1200,645,True,0,"Arial",8,-2147483643,1)
+Gui.fmNotes.txtOriOrdSuf.Create(TextBox,"",False,1215,300,0,1200,1005,True,0,"Arial",8,-2147483643,1)
+Gui.fmNotes.txtRMALn.Create(TextBox,"",False,1215,300,0,1200,1365,True,0,"Arial",8,-2147483643,1)
+Gui.fmNotes.txtIndex.Create(TextBox,"",False,1215,300,0,1200,1725,True,0,"Arial",8,-2147483643,1)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.iConnections.Declare(Long, 0)
+V.Global.bError.Declare(Boolean, False)
+V.Global.bReset.Declare(Boolean, False)
+V.Global.bLoading.Declare(Boolean, False)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.Try
+'TJS, Mar 2021
+'Cardinal Systems, Inc
+'Quote 12555
+'Business Case: The customer is looking to add additional columns to ARC 5552.  Additional Columns to be added:
+'1. Product Line
+'2. Credit Memo No
+'3. Credit Memo Date
+'4. Credit Amount
+'5. Editable Notes Column
+
+'*****************************Original Project******************************
+'GCG_5552_RMADashboard.g2u
+'Trey S
+'For Winesburg Chair
+'Quote 11270-0
+'Ticket WIN130-52120191257-6
+'This script is for a dashboard to view RMAs and their total cost
+'/**************************************************************************
+
+'6293 - Setting form icon for 2018.1 customers
+F.Intrinsic.Control.CallSub(SetIcon)
+
+F.Intrinsic.Control.CallSub(CreateContextMenu)
+GUI.FormRMADashboard..Show
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.FormRMADashboard_UnLoad.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.If(V.DataTable.dtRMAs.Exists)
+	F.Intrinsic.Control.If(V.Global.bLoading.Not)
+		F.Intrinsic.Control.CallSub(Serialize, "FORM", "FormRMADashboard", "GRIDCONTROL", "gsgcRMAs", "GRIDVIEW", "gvRMAs", "REGID", "6293")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.CallSub(CloseDataTable)
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.FormRMADashboard_UnLoad.End
+
+Program.Sub.cmdRefresh_Click.Start
+F.Intrinsic.Control.Try
+
+GUI.FormRMADashboard.cmdRefresh.Enabled(False)
+GUI.FormRMADashboard.pbLoading.Visible(True)
+GUI.FormRMADashboard.pbLoading.Min(0)
+GUI.FormRMADashboard.pbLoading.Max(18)
+GUI.FormRMADashboard.lblStatus.Text("Loading RMA info...")
+GUI.FormRMADashboard.lblStatus.Visible(True)
+
+F.Intrinsic.Control.CallSub(OpenConnection)
+
+GUI.FormRMADashboard.gsgcRMAs.Visible(False)
+GUI.FormRMADashboard.gsgcRMAs.SuspendLayout
+
+F.Intrinsic.Control.If(V.Global.bReset.Not)
+	F.Intrinsic.Control.If(V.DataTable.dtRMAs.Exists)
+			F.Intrinsic.Control.CallSub(Serialize, "FORM", "FormRMADashboard", "GRIDCONTROL", "gsgcRMAs", "GRIDVIEW", "gvRMAs", "REGID", "6293")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+V.Global.bLoading.Set(True)
+F.Intrinsic.Control.CallSub(LoadRMAs)
+F.Intrinsic.Control.CallSub(LoadNewJobs)
+F.Intrinsic.Control.CallSub(LoadCost)
+F.Intrinsic.Control.CallSub(LoadExtraData)
+F.Intrinsic.Control.CallSub(LoadGrid)
+V.Global.bLoading.Set(False)
+
+F.Intrinsic.Control.CallSub(Deserialize, "FORM", "FormRMADashboard", "GRIDCONTROL", "gsgcRMAs", "GRIDVIEW", "gvRMAs", "REGID", "6293")
+
+GUI.FormRMADashboard.gsgcRMAs.ResumeLayout
+GUI.FormRMADashboard.gsgcRMAs.Visible(True)
+
+F.Intrinsic.Control.CallSub(CloseConnection)
+
+GUI.FormRMADashboard.lblStatus.Visible(False)
+GUI.FormRMADashboard.pbLoading.Visible(False)
+
+GUI.FormRMADashboard.cmdRefresh.Enabled(True)
+
+F.Intrinsic.Control.CallSub(Blink, "FORM", "FormRMADashboard")
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdRefresh_Click.End
+
+Program.Sub.LoadRMAs.Start
+F.Intrinsic.Control.Try
+
+V.Local.sSQL.Declare(String)
+V.Local.sFilter.Declare(String)
+V.Local.sColumns.Declare(String)
+V.Local.sRMAFilter.Declare(String)
+V.Local.dDate.Declare(Date)
+V.Local.dDate2.Declare(Date)
+
+F.Intrinsic.Control.CallSub(CloseDataTable)
+
+V.Local.dDate.Set(V.Screen.FormRMADashboard!dtpFrom.Value)
+V.Local.dDate2.Set(V.Screen.FormRMADashboard!dtpTo.Value)
+F.Intrinsic.String.Build("where DATE_ISSUED between '{0}' and '{1}'", V.Local.dDate.PervasiveDate, V.Local.dDate2.PervasiveDate, V.Local.sFilter)
+
+'get current RMAs
+F.Intrinsic.String.Build("Select RTRIM(RMA_ID) as RMA_ID, RTRIM(ORDER_NO) as ORDER_NO, RTRIM(ORDER_SUFFIX) as ORDER_SUFFIX, RTRIM(CUSTOMER) as CUSTOMER, RTRIM(NAME_CUSTOMER) as NAME_CUSTOMER, RTRIM(CUSTOMER_PO) as CUSTOMER_PO, RTRIM(INVOICE) as INVOICE, DATE_ISSUED, TIME_ISSUED, RTRIM(ISSUED_USER) as ISSUED_USER, RTRIM(WRNTY_CUST) as WRNTY_CUST, 'N' as RMA_CLOSED from V_RMA_HEADER {0}", V.Local.sFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtRMAHead", "Con", V.Local.sSQL)
+GUI.FormRMADashboard.pbLoading.Value(1)
+
+'get history RMA header
+F.Intrinsic.String.Build("Select RTRIM(RMA_ID) as RMA_ID, RTRIM(ORDER_NO) as ORDER_NO, RTRIM(ORDER_SUFFIX) as ORDER_SUFFIX, RTRIM(CUSTOMER) as CUSTOMER, RTRIM(NAME_CUSTOMER) as NAME_CUSTOMER, RTRIM(CUSTOMER_PO) as CUSTOMER_PO, RTRIM(INVOICE) as INVOICE, DATE_ISSUED, TIME_ISSUED, RTRIM(ISSUED_USER) as ISSUED_USER, RTRIM(WRNTY_CUST) as WRNTY_CUST, 'Y' as RMA_CLOSED from V_RMA_HIST_HEADER {0}", V.Local.sFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtHistoryRMAHead", "Con", V.Local.sSQL)
+GUI.FormRMADashboard.pbLoading.Value(2)
+
+F.Data.DataTable.Merge("dtHistoryRMAHead", "dtRMAHead", False, 3)
+F.Data.DataTable.Close("dtHistoryRMAHead")
+
+'get current rma lines
+V.Local.sSQL.Set("select RTRIM(RMA_ID) as RMA_ID, RTRIM(ORDER_NO) as ORDER_NO, RTRIM(ORDER_SUFFIX) as ORDER_SUFFIX, RTRIM(RMA_LINE) as RMA_LINE, RTRIM(PART) as PART, RTRIM(LOCATION) as LOCATION, RTRIM(PART_DESCRIPTION) as PART_DESCRIPTION, RTRIM(CUSTOMER_PART) as CUSTOMER_PART, QTY_SHIPPED, QTY_RETURNED, QTY_RECEIVED, DATE_RECEIVED, RTRIM(SERVICE_REQUESTED) as SERVICE_REQUESTED, RTRIM(ORDER_LINE) as ORDER_LINE, QTY_PERF_COMPLETE, QTY_PERF_SCHED from V_RMA_LINES")
+F.Data.DataTable.CreateFromSQL("dtRMALines", "Con", V.Local.sSQL)
+GUI.FormRMADashboard.pbLoading.Value(3)
+
+'get history RMA lines
+V.Local.sSQL.Set("select RTRIM(RMA_ID) as RMA_ID, RTRIM(ORDER_NO) as ORDER_NO, RTRIM(ORDER_SUFFIX) as ORDER_SUFFIX, RTRIM(RMA_LINE) as RMA_LINE, RTRIM(PART) as PART, RTRIM(LOCATION) as LOCATION, RTRIM(PART_DESCRIPTION) as PART_DESCRIPTION, RTRIM(CUSTOMER_PART) as CUSTOMER_PART, QTY_SHIPPED, QTY_RETURNED, QTY_RECEIVED, DATE_RECEIVED, RTRIM(SERVICE_REQUESTED) as SERVICE_REQUESTED, RTRIM(ORDER_LINE) as ORDER_LINE, QTY_PERF_COMPLETE, QTY_PERF_SCHED from V_RMA_HIST_LINES")
+F.Data.DataTable.CreateFromSQL("dtHistoryRMALines", "Con", V.Local.sSQL)
+GUI.FormRMADashboard.pbLoading.Value(3)
+
+F.Data.DataTable.Merge("dtHistoryRMALines", "dtRMALines", False, 3)
+F.Data.DataTable.Close("dtHistoryRMALines")
+
+'get current rma services
+V.Local.sSQL.Set("select RTRIM(RMA_ID) as RMA_ID, RTRIM(ORDER_NO) as ORDER_NO, RTRIM(ORDER_SUFFIX) as ORDER_SUFFIX, RTRIM(RMA_LINE) as RMA_LINE, RTRIM(SVC_PERF_SEQ) as SVC_PERF_SEQ, RTRIM(NOTES_SEQ) as NOTES_SEQ, QTY_SERVICED, RTRIM(P_ORDER_LINE) as P_ORDER_LINE, UNIT_COST, RTRIM(LOT) as LOT, RTRIM(BIN) as BIN, RTRIM(HEAT) as HEAT, RTRIM(SERIAL) as SERIAL, RTRIM(SERVICE_PERFORMED) as SERVICE_PERFORMED, RTRIM(SCRAP_CODE) as SCRAP_CODE, Cast(ACTION_CODE as INTEGER) as ACTION_CODE, RTRIM(ACTION_TAKEN) as ACTION_TAKEN, DATE_ACTION, TIME_ACTION, RTRIM(FLAG_CLOSED) as SERVICE_CLOSED, LBHS_COST, LBHS_COST_MATL, LBHS_COST_LABOR, LBHS_COST_OVHD, LBHS_COST_OUTS, LBHS_COST_FRGT, LBHS_COST_OTH from V_RMA_SVC_PERFORM")
+F.Intrinsic.String.Build("{0} where ACTION_CODE in (13, 14, 15, 28, 30)", V.Local.sSQL, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtRMAService", "Con", V.Local.sSQL)
+GUI.FormRMADashboard.pbLoading.Value(5)
+
+'get history rma services
+V.Local.sSQL.Set("select RTRIM(RMA_ID) as RMA_ID, RTRIM(ORDER_NO) as ORDER_NO, RTRIM(ORDER_SUFFIX) as ORDER_SUFFIX, RTRIM(RMA_LINE) as RMA_LINE, RTRIM(SVC_PERF_SEQ) as SVC_PERF_SEQ, RTRIM(NOTES_SEQ) as NOTES_SEQ, QTY_SERVICED, RTRIM(P_ORDER_LINE) as P_ORDER_LINE, UNIT_COST, RTRIM(LOT) as LOT, RTRIM(BIN) as BIN, RTRIM(HEAT) as HEAT, RTRIM(SERIAL) as SERIAL, RTRIM(SERVICE_PERFORMED) as SERVICE_PERFORMED, RTRIM(SCRAP_CODE) as SCRAP_CODE, Cast(ACTION_CODE as INTEGER) as ACTION_CODE, RTRIM(ACTION_TAKEN) as ACTION_TAKEN, DATE_ACTION, TIME_ACTION, RTRIM(FLAG_CLOSED) as SERVICE_CLOSED, LBHS_COST, LBHS_COST_MATL, LBHS_COST_LABOR, LBHS_COST_OVHD, LBHS_COST_OUTS, LBHS_COST_FRGT, LBHS_COST_OTH from V_RMA_H_SVC_PERFORM")
+F.Intrinsic.String.Build("{0} where ACTION_CODE in (13, 14, 15, 28, 30)", V.Local.sSQL, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtHistoryRMAService", "Con", V.Local.sSQL)
+GUI.FormRMADashboard.pbLoading.Value(6)
+
+F.Data.DataTable.Merge("dtHistoryRMAService", "dtRMAService", False, 3)
+F.Data.DataTable.Close("dtHistoryRMAService")
+
+'join all the rma data together
+V.Local.sColumns.Set("H.RMA_ID*!*L.RMA_LINE*!*S.SVC_PERF_SEQ*!*H.ORDER_NO as ORIGINAL_ORDER*!*H.ORDER_SUFFIX as ORIGINAL_SUFFIX*!*L.ORDER_LINE as ORIGINAL_LINE*!*H.CUSTOMER*!*H.NAME_CUSTOMER*!*H.CUSTOMER_PO*!*H.INVOICE as ORIGINAL_INVOICE*!*H.DATE_ISSUED*!*H.TIME_ISSUED*!*H.ISSUED_USER*!*H.WRNTY_CUST*!*L.PART*!*L.LOCATION*!*L.PART_DESCRIPTION*!*S.LOT*!*S.BIN*!*S.HEAT*!*S.SERIAL*!*L.CUSTOMER_PART*!*L.QTY_SHIPPED*!*L.QTY_RETURNED*!*L.QTY_RECEIVED*!*L.DATE_RECEIVED*!*L.SERVICE_REQUESTED*!*L.QTY_PERF_COMPLETE*!*L.QTY_PERF_SCHED*!*S.QTY_SERVICED*!*S.P_ORDER_LINE*!*S.UNIT_COST*!*S.SERVICE_PERFORMED*!*S.SCRAP_CODE*!*S.ACTION_CODE*!*S.ACTION_TAKEN*!*S.DATE_ACTION*!*S.TIME_ACTION*!*S.SERVICE_CLOSED*!*S.LBHS_COST*!*S.LBHS_COST_MATL*!*S.LBHS_COST_LABOR*!*S.LBHS_COST_OVHD*!*S.LBHS_COST_OUTS*!*S.LBHS_COST_FRGT*!*S.LBHS_COST_OTH*!*H.RMA_CLOSED")
+'F.Data.Linq.Join("InnerJoin", "DataTable", "dtRMAHead*!*H", "DataTable", "dtRMALines*!*L", "H.RMA_ID = L.RMA_ID", "DataTable", "dtRMAService*!*S", "L.RMA_ID = S.RMA_ID and L.RMA_LINE = S.RMA_LINE", V.Local.sColumns, "", "", "", "dtRMAs", True)
+F.Data.Linq.Join("LeftJoin", "DataTable", "dtRMAHead*!*H", "DataTable", "dtRMALines*!*L", "H.RMA_ID = L.RMA_ID", "DataTable", "dtRMAService*!*S", "L.RMA_ID = S.RMA_ID and L.RMA_LINE = S.RMA_LINE", V.Local.sColumns, "", "", "", "dtRMAs", True)
+GUI.FormRMADashboard.pbLoading.Value(10)
+
+F.Data.DataTable.Close("dtRMAHead")
+F.Data.DataTable.Close("dtRMALines")
+F.Data.DataTable.Close("dtRMAService")
+
+F.Data.DataView.Create("dtRMAs", "dvRMAs", 22, "", "RMA_ID desc, RMA_LINE desc, SVC_PERF_SEQ desc")
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.LoadRMAs.End
+
+Program.Sub.LoadNewJobs.Start
+F.Intrinsic.Control.Try
+
+V.Local.sSQL.Declare(String)
+V.Local.sOrderLineFilter.Declare(String)
+V.Local.sFilter.Declare(String)
+V.Local.iCounter.Declare(Long)
+V.Local.sOrderLiness.Declare(String)
+V.Local.sOrderFilter.Declare(String)
+
+GUI.FormRMADashboard.lblStatus.Text("Getting attached sales orders and work orders...")
+
+'keys
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "ORIGINAL-ORDER-LINE", "String", "Trim([ORIGINAL_ORDER]) + Trim([ORIGINAL_LINE])")
+
+'get order number filter
+F.Data.DataView.ToDataTableDistinct("dtRMAs", "dvRMAs", "dtDistinct", "ORIGINAL-ORDER-LINE")
+F.Data.DataView.Create("dtDistinct", "dvToString", 22)
+F.Data.DataView.ToString("dtDistinct", "dvToString", "ORIGINAL-ORDER-LINE", "&@^#", "','", V.Local.sOrderLineFilter)
+F.Data.DataView.Close("dtDistinct", "dvToString")
+F.Data.DataTable.Close("dtDistinct")
+
+'get closed order info
+F.Intrinsic.String.Build("select RTRIM(ORDER_NO) + RTRIM(ORDER_LINE) as ORDERLINE, RTRIM(ORDER_NO) as ORDER_NO, RTRIM(ORDER_SUFFIX) as ORDER_SUFFIX, RTRIM(INVOICE) as INVOICE, RTRIM(CUSTOMER_PO) as CUSTOMER_PO, DATE_SHIPPED, DATE_INVOICE from V_ORDER_HIST_LINE where CREDIT_MEMO_FLAG <> 'Y' and ORDERLINE in ('{0}')", V.Local.sOrderLineFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtOrderHistory", "Con", V.Local.sSQL)
+GUI.FormRMADashboard.pbLoading.Value(11)
+
+'some distinct tables for looping below, and filters
+F.Data.DataView.ToDataTableDistinct("dtRMAs", "dvRMAs", "dtDistinctOrderSuffixes", "ORIGINAL_ORDER*!*ORIGINAL_SUFFIX")
+F.Data.DataView.Create("dtDistinctOrderSuffixes", "dvDistinctOrderSuffixes", 22, "", "ORIGINAL_ORDER, ORIGINAL_SUFFIX")
+F.Data.DataView.ToDataTableDistinct("dtRMAs", "dvRMAs", "dtDistinctOrders", "ORIGINAL_ORDER")
+F.Data.DataView.Create("dtDistinctOrders", "dvDistinctOrders", 22)
+F.Data.DataView.ToString("dtDistinctOrders", "dvDistinctOrders", "ORIGINAL_ORDER", "&#@*!", "','", V.Local.sOrderFilter)
+F.Data.DataView.Close("dtDistinctOrders", "dvDistinctOrders")
+F.Data.DataTable.Close("dtDistinctOrders")
+F.Data.DataView.Close("dtDistinctOrderSuffixes", "dvDistinctOrderSuffixes")
+F.Data.DataTable.Close("dtDistinctOrderSuffixes")
+
+'get open orders, merge into main order datatable
+F.Intrinsic.String.Build("select ORDER_NO, ORDER_SUFFIX, RTRIM(CUSTOMER_PO) as CUSTOMER_PO from V_ORDER_HEADER where ORDER_NO in ('{0}')", V.Local.sOrderFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtOpenOrders", "Con", V.Local.sSQL)
+F.Data.DataTable.Merge("dtOpenOrders", "dtOrderHistory", False, 2)
+F.Data.DataTable.Close("dtOpenOrders")
+GUI.FormRMADashboard.pbLoading.Value(12)
+
+'more tables, views for loop below
+F.Data.DataView.Create("dtOrderHistory", "dvOrderHistory", 22, "", "ORDER_NO, ORDER_SUFFIX")
+F.Data.DataView.ToDataTableDistinct("dtOrderHistory", "dvOrderHistory", "dtDistinctOrderHistorySuffixes", "ORDER_NO*!*ORDER_SUFFIX")
+F.Data.DataView.ToDataTableDistinct("dtOrderHistory", "dvOrderHistory", "dtAllDistinctOrders", "ORDER_NO")
+F.Data.DataView.Create("dtAllDistinctOrders", "dvAllDistinctOrders", 22)
+F.Data.DataView.ToString("dtAllDistinctOrders", "dvAllDistinctOrders", "ORDER_NO", "&#@*!", "','", V.Local.sOrderFilter)
+F.Data.DataView.Close("dtAllDistinctOrders", "dvAllDistinctOrders")
+F.Data.DataView.Close("dtOrderHistory", "dvOrderHistory")
+
+'create suffix index
+F.Data.DataTable.AddColumn("dtDistinctOrderHistorySuffixes", "SUFFIX_INDEX", "Long")
+F.Data.DataView.Create("dtDistinctOrderHistorySuffixes", "dvDistinctOrderSuffixes", 22, "", "ORDER_NO, ORDER_SUFFIX")
+F.Intrinsic.Control.For(V.Local.iCounter, 0, V.DataTable.dtAllDistinctOrders.RowCount--, 1)
+	F.Intrinsic.String.Build("[ORDER_NO] = '{0}'", V.DataTable.dtAllDistinctOrders(V.Local.iCounter).ORDER_NO!FieldValTrim, V.Local.sFilter)
+	
+	F.Data.DataView.SetFilter("dtDistinctOrderHistorySuffixes", "dvDistinctOrderSuffixes", V.Local.sFilter)
+	F.Data.DataView.SetSeries("dtDistinctOrderHistorySuffixes", "dvDistinctOrderSuffixes", "SUFFIX_INDEX", 0, 1)
+	
+F.Intrinsic.Control.Next(V.Local.iCounter)
+F.Data.DataTable.Close("dtAllDistinctOrders")
+F.Data.DataView.Close("dtDistinctOrderHistorySuffixes", "dvDistinctOrderSuffixes")
+GUI.FormRMADashboard.pbLoading.Value(13)
+
+'get jobs
+F.Intrinsic.String.Build("select RTRIM(JOB) as JOB, RTRIM(SUFFIX) as SUFFIX, RTRIM(JOB) + RTRIM(SUFFIX) as JOBSUFF, RTRIM(SALES_ORDER) as SALES_ORDER, RTRIM(SALES_ORDER_LINE) as SALES_ORDER_LINE, DATE_OPENED, RTRIM(CUSTOMER_PO) as CUSTOMER_PO from V_JOB_HEADER where SALES_ORDER in ('{0}')", V.Local.sOrderFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtJobs", "Con", V.Local.sSQL)
+
+F.Intrinsic.String.Build("select RTRIM(JOB) as JOB, RTRIM(SUFFIX) as SUFFIX, RTRIM(JOB) + RTRIM(SUFFIX) as JOBSUFF, RTRIM(SALES_ORDER) as SALES_ORDER, RTRIM(SALES_ORDER_LINE) as SALES_ORDER_LINE, DATE_OPENED, RTRIM(CUSTOMER_PO) as CUSTOMER_PO from V_JOB_HIST_MAST where SALES_ORDER in ('{0}')", V.Local.sOrderFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtJobsHist", "Con", V.Local.sSQL)
+
+F.Data.DataTable.Merge("dtJobsHist", "dtJobs", False, 3)
+F.Data.DataTable.Close("dtJobsHist")
+
+'Now fill in the data
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "SERVICE_LINE", "String", "IIF([ACTION_TAKEN] <> '', 'Y', 'N')")
+F.Data.DataTable.AddExpressionColumn("dtDistinctOrderHistorySuffixes", "ORDERSUFFIX", "String", "Trim([ORDER_NO]) + Trim([ORDER_SUFFIX]) + 'Y'")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "ORDERSUFFIX", "String", "Trim([ORIGINAL_ORDER]) + Trim([ORIGINAL_SUFFIX]) + [SERVICE_LINE]")
+
+F.Data.Dictionary.CreateFromDataTable("dictSuffixIndex", "dtDistinctOrderHistorySuffixes", "ORDERSUFFIX", "SUFFIX_INDEX")
+F.Data.Dictionary.SetDefaultReturn("dictSuffixIndex", 0)
+F.Data.DataTable.AddColumn("dtRMAs", "SUFFIX_INDEX", "Long")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictSuffixIndex", "ORDERSUFFIX", "SUFFIX_INDEX")
+F.Data.Dictionary.Close("dictSuffixIndex")
+
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "NEW_SUFFIX_INDEX", "Long", "[SUFFIX_INDEX] + 1")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "NEW_SUFFIX_KEY", "String", "[ORIGINAL_ORDER] + [NEW_SUFFIX_INDEX] + [SERVICE_LINE]")
+F.Data.DataTable.AddExpressionColumn("dtDistinctOrderHistorySuffixes", "NEW_SUFFIX_KEY", "String", "[ORDER_NO] + [SUFFIX_INDEX] + 'Y'")
+
+F.Data.Dictionary.CreateFromDataTable("dictSuffix", "dtDistinctOrderHistorySuffixes", "NEW_SUFFIX_KEY", "ORDER_SUFFIX")
+F.Data.Dictionary.SetDefaultReturn("dictSuffix", "")
+F.Data.DataTable.AddColumn("dtRMAs", "NEW_ORDER_SUFFIX", "String")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictSuffix", "NEW_SUFFIX_KEY", "NEW_ORDER_SUFFIX")
+F.Data.Dictionary.Close("dictSuffix")
+F.Data.DataTable.Close("dtDistinctOrderHistorySuffixes")
+
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "SUFFIX_KEY", "String", "[ORIGINAL_ORDER] + [SUFFIX_INDEX] + [SERVICE_LINE]")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "SUFFIX_KEY_LINE", "String", "[ORIGINAL_ORDER] + [SUFFIX_INDEX] + [ORIGINAL_LINE] + [SERVICE_LINE]")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "NEW_SUFFIX_KEY_LINE", "String", "[ORIGINAL_ORDER] + [NEW_SUFFIX_INDEX] + [ORIGINAL_LINE] + [SERVICE_LINE]")
+
+F.Data.DataTable.AddExpressionColumn("dtJobs", "LINE_PO", "String", "Trim([SALES_ORDER_LINE]) + '0' + Trim([CUSTOMER_PO]) + 'Y'")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "LINE_PO", "String", "Trim([ORIGINAL_LINE]) + Trim([CUSTOMER_PO]) + [SERVICE_LINE]")
+
+F.Data.Dictionary.CreateFromDataTable("dictJob", "dtJobs", "LINE_PO", "JOB")
+F.Data.Dictionary.SetDefaultReturn("dictJob", "")
+F.Data.DataTable.AddColumn("dtRMAs", "ORIGINAL_JOB", "String")
+F.Data.DataTable.AddColumn("dtRMAs", "NEW_JOB", "String")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictJob", "LINE_PO", "ORIGINAL_JOB")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictJob", "LINE_PO", "NEW_JOB")
+F.Data.Dictionary.Close("dictJob")
+
+F.Data.Dictionary.CreateFromDataTable("dictJobSuff", "dtJobs", "LINE_PO", "SUFFIX")
+F.Data.Dictionary.SetDefaultReturn("dictJobSuff", "")
+F.Data.DataTable.AddColumn("dtRMAs", "ORIGINAL_JOB_SUFFIX", "String")
+F.Data.DataTable.AddColumn("dtRMAs", "NEW_JOB_SUFFIX", "String")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictJobSuff", "LINE_PO", "ORIGINAL_JOB_SUFFIX")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictJobSuff", "LINE_PO", "NEW_JOB_SUFFIX")
+F.Data.Dictionary.Close("dictJobSuff")
+F.Data.DataTable.Close("dtJobs")
+
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "NEW_ORDERSUFFIX", "String", "Trim([ORIGINAL_ORDER]) + Trim([NEW_ORDER_SUFFIX]) + [SERVICE_LINE]")
+F.Data.DataTable.AddExpressionColumn("dtOrderHistory", "ORDERSUFFIX", "String", "Trim([ORDER_NO]) + Trim([ORDER_SUFFIX]) + 'Y'")
+F.Data.Dictionary.CreateFromDataTable("dictInvoice", "dtOrderHistory", "ORDERSUFFIX", "INVOICE")
+F.Data.Dictionary.SetDefaultReturn("dictInvoice", "")
+F.Data.DataTable.AddColumn("dtRMAs", "NEW_INVOICE", "String")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictInvoice", "NEW_ORDERSUFFIX", "NEW_INVOICE")
+F.Data.Dictionary.Close("dictInvoice")
+
+'ship date
+F.Data.Dictionary.CreateFromDataTable("dictShipDate", "dtOrderHistory", "ORDERSUFFIX", "DATE_SHIPPED")
+F.Data.Dictionary.SetDefaultReturn("dictShipDate", "1900-01-01")
+F.Data.DataTable.AddColumn("dtRMAs", "NEW_SHIP_DATE", "Date")
+F.Data.DataTable.AddColumn("dtRMAs", "SHIP_DATE", "Date")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictShipDate", "NEW_ORDERSUFFIX", "NEW_SHIP_DATE")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictShipDate", "ORDERSUFFIX", "SHIP_DATE")
+F.Data.Dictionary.Close("dictShipDate")
+
+'invoice date
+F.Data.Dictionary.CreateFromDataTable("dictInvoiceDate", "dtOrderHistory", "ORDERSUFFIX", "DATE_INVOICE")
+F.Data.Dictionary.SetDefaultReturn("dictInvoiceDate", "1900-01-01")
+F.Data.DataTable.AddColumn("dtRMAs", "NEW_INVOICE_DATE", "Date")
+F.Data.DataTable.AddColumn("dtRMAs", "INVOICE_DATE", "Date")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictInvoiceDate", "NEW_ORDERSUFFIX", "NEW_INVOICE_DATE")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictInvoiceDate", "ORDERSUFFIX", "INVOICE_DATE")
+F.Data.Dictionary.Close("dictInvoiceDate")
+
+F.Data.DataTable.Close("dtOrderHistory")
+
+GUI.FormRMADashboard.pbLoading.Value(15)
+
+'remove unneeded columns
+F.Data.DataTable.RemoveColumn("dtRMAs", "LINE_PO")
+F.Data.DataTable.RemoveColumn("dtRMAs", "SUFFIX_KEY_LINE")
+F.Data.DataTable.RemoveColumn("dtRMAs", "NEW_SUFFIX_KEY_LINE")
+F.Data.DataTable.RemoveColumn("dtRMAs", "ORIGINAL-ORDER-LINE")
+F.Data.DataTable.RemoveColumn("dtRMAs", "ORDERSUFFIX")
+F.Data.DataTable.RemoveColumn("dtRMAs", "NEW_SUFFIX_KEY")
+F.Data.DataTable.RemoveColumn("dtRMAs", "NEW_SUFFIX_INDEX")
+F.Data.DataTable.RemoveColumn("dtRMAs", "SUFFIX_KEY")
+F.Data.DataTable.RemoveColumn("dtRMAs", "SUFFIX_INDEX")
+F.Data.DataTable.RemoveColumn("dtRMAs", "NEW_ORDERSUFFIX")
+F.Data.DataTable.RemoveColumn("dtRMAs", "SERVICE_LINE")
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.LoadNewJobs.End
+
+Program.Sub.LoadCost.Start
+'now that we have all the job info, get the actual costs
+
+F.Intrinsic.Control.Try
+
+V.Local.sFilter.Declare(String)
+V.Local.sJobFilter.Declare(String)
+V.Local.sSQL.Declare(String)
+
+GUI.FormRMADashboard.lblStatus.Text("Getting work order costs...")
+
+'create job filter
+F.Data.DataView.ToDataTableDistinct("dtRMAs", "dvRMAs", "dtDistinctJobs", "NEW_JOB")
+F.Data.DataView.Create("dtDistinctJobs", "dvDistinctJobs", 22)
+F.Data.DataView.ToString("dtDistinctJobs", "dvDistinctJobs", "NEW_JOB", "&#*@()#", "','", V.Local.sJobFilter)
+F.Data.DataView.Close("dtDistinctJobs", "dvDistinctJobs")
+F.Data.DataTable.Close("dtDistinctJobs")
+
+F.Intrinsic.String.Build("select RTRIM(JOB) + RTRIM(SUFFIX) as JOBSUFF, sum(MATL_COST * If(QTY = 0, 1, QTY)) as MAT_COST, sum (LABOR_COST * If(QTY = 0, 1, QTY)) as LABOR_COST, sum (OVHD_COST * If(QTY = 0, 1, QTY)) as OVER_COST, sum (OUTS_COST * If(QTY = 0, 1, QTY)) as OUTS_COST, sum (FRGT_COST * If(QTY = 0, 1, QTY)) as FREIGHT_COST, sum (OTH_COST * If(QTY = 0, 1, QTY)) as OTHER_COST  from V_JOB_DTL_SUPP where JOB in ('{0}') and SEQ <> '999999' group by JOBSUFF", V.Local.sJobFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtJobCost", "Con", V.Local.sSQL)
+
+F.Intrinsic.String.Build("select RTRIM(JOB) + RTRIM(SUFFIX) as JOBSUFF, sum(MATL_COST * If(QTY = 0, 1, QTY)) as MAT_COST, sum (LABOR_COST * If(QTY = 0, 1, QTY)) as LABOR_COST, sum (OVHD_COST * If(QTY = 0, 1, QTY)) as OVER_COST, sum (OUTS_COST * If(QTY = 0, 1, QTY)) as OUTS_COST, sum (FRGT_COST * If(QTY = 0, 1, QTY)) as FREIGHT_COST, sum (OTH_COST * If(QTY = 0, 1, QTY)) as OTHER_COST  from V_JOB_DTL_SUPP_H where JOB in ('{0}') and SEQ <> '999999' group by JOBSUFF", V.Local.sJobFilter, V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtJobCostHist", "Con", V.Local.sSQL)
+
+F.Data.DataTable.Merge("dtJobCostHist", "dtJobCost", False, 3)
+
+GUI.FormRMADashboard.pbLoading.Value(16)
+
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "NEW_JOBSUFF", "String", "Trim([NEW_JOB]) + Trim([NEW_JOB_SUFFIX])")
+
+'fill in costs
+F.Data.Dictionary.CreateFromDataTable("dictMatCost", "dtJobCost", "JOBSUFF", "MAT_COST")
+F.Data.Dictionary.SetDefaultReturn("dictMatCost", 0)
+F.Data.DataTable.AddColumn("dtRMAs", "MAT_COST", "Float")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictMatCost", "NEW_JOBSUFF", "MAT_COST")
+F.Data.Dictionary.Close("dictMatCost")
+
+F.Data.Dictionary.CreateFromDataTable("dictLaborCost", "dtJobCost", "JOBSUFF", "LABOR_COST")
+F.Data.Dictionary.SetDefaultReturn("dictLaborCost", 0)
+F.Data.DataTable.AddColumn("dtRMAs", "LABOR_COST", "Float")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictLaborCost", "NEW_JOBSUFF", "LABOR_COST")
+F.Data.Dictionary.Close("dictLaborCost")
+
+F.Data.Dictionary.CreateFromDataTable("dictOverCost", "dtJobCost", "JOBSUFF", "OVER_COST")
+F.Data.Dictionary.SetDefaultReturn("dictOverCost", 0)
+F.Data.DataTable.AddColumn("dtRMAs", "OVER_COST", "Float")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictOverCost", "NEW_JOBSUFF", "OVER_COST")
+F.Data.Dictionary.Close("dictOverCost")
+
+F.Data.Dictionary.CreateFromDataTable("dictOutsCost", "dtJobCost", "JOBSUFF", "OUTS_COST")
+F.Data.Dictionary.SetDefaultReturn("dictOutsCost", 0)
+F.Data.DataTable.AddColumn("dtRMAs", "OUTS_COST", "Float")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictOutsCost", "NEW_JOBSUFF", "OUTS_COST")
+F.Data.Dictionary.Close("dictOutsCost")
+
+F.Data.Dictionary.CreateFromDataTable("dictFreightCost", "dtJobCost", "JOBSUFF", "FREIGHT_COST")
+F.Data.Dictionary.SetDefaultReturn("dictFreightCost", 0)
+F.Data.DataTable.AddColumn("dtRMAs", "FREIGHT_COST", "Float")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictFreightCost", "NEW_JOBSUFF", "FREIGHT_COST")
+F.Data.Dictionary.Close("dictFreightCost")
+
+F.Data.Dictionary.CreateFromDataTable("dictOtherCost", "dtJobCost", "JOBSUFF", "OTHER_COST")
+F.Data.Dictionary.SetDefaultReturn("dictOtherCost", 0)
+F.Data.DataTable.AddColumn("dtRMAs", "OTHER_COST", "Float")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictOtherCost", "NEW_JOBSUFF", "OTHER_COST")
+F.Data.Dictionary.Close("dictOtherCost")
+
+F.Data.DataTable.Close("dtJobCost")
+F.Data.DataTable.RemoveColumn("dtRMAs", "NEW_JOBSUFF")
+
+GUI.FormRMADashboard.pbLoading.Value(17)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.LoadCost.End
+
+Program.Sub.LoadExtraData.Start
+F.Intrinsic.Control.Try
+
+V.Local.sSQL.Declare(String)
+V.Local.sFilter.Declare(String)
+
+GUI.FormRMADashboard.lblStatus.Text("Finishing up...")
+
+V.Local.sSQL.Set("select RTRIM(RMA_SVC_ID), RTRIM(RMA_SVC_DESCR) from V_RMA_SERVICES")
+F.Data.Dictionary.CreateFromSQL("dictServices", "Con", V.Local.sSQL)
+F.Data.Dictionary.SetDefaultReturn("dictServices", "")
+F.Data.DataTable.AddColumn("dtRMAs", "SERVICE_REQUESTED_DESCRIPTION", "String")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictServices", "SERVICE_REQUESTED", "SERVICE_REQUESTED_DESCRIPTION")
+F.Data.DataTable.AddColumn("dtRMAs", "SERVICE_PERFORMED_DESCRIPTION", "String")
+F.Data.DataTable.FillFromDictionary("dtRMAs", "dictServices", "SERVICE_PERFORMED", "SERVICE_PERFORMED_DESCRIPTION")
+F.Data.Dictionary.Close("dictServices")
+
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "FULL_ORIGINAL_JOB", "String", "Trim([ORIGINAL_JOB]) + '-' + Trim([ORIGINAL_JOB_SUFFIX])")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "FULL_NEW_JOB", "String", "Trim([NEW_JOB]) + '-' + Trim([NEW_JOB_SUFFIX])")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "FULL_ORIGINAL_SO", "String", "Trim([ORIGINAL_ORDER]) + '-' + Trim([ORIGINAL_SUFFIX])")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "FULL_NEW_SO", "String", "IIF([ACTION_TAKEN] <> '', Trim([ORIGINAL_ORDER]) + '-' + Trim([NEW_ORDER_SUFFIX]), '')")
+F.Data.DataTable.AddExpressionColumn("dtRMAs", "REWORK_TOTAL_COST", "Float", "[MAT_COST] + [LABOR_COST] + [OVER_COST] + [OTHER_COST] + [FREIGHT_COST] + [OUTS_COST]")
+
+GUI.FormRMADashboard.pbLoading.Value(18)
+
+'6293
+F.Data.DataTable.AddExpressionColumn("dtRMAs","OSL","String","ORIGINAL_ORDER+ORIGINAL_SUFFIX+ORIGINAL_LINE")
+F.Data.DataTable.AddColumn("dtRMAs","PL","String")
+F.Data.DataTable.AddColumn("dtRMAs","CREDIT_MEMO","String")
+F.Data.DataTable.AddColumn("dtRMAs","DATE_CRED_MEMO","String")
+F.Data.DataTable.AddColumn("dtRMAs","AMT_CRED_MEMO","String")
+F.Data.DataTable.AddExpressionColumn("dtRMAs","RIL","String","RMA_ID+ORIGINAL_ORDER+ORIGINAL_SUFFIX+RMA_LINE")
+F.Data.DataTable.AddColumn("dtRMAs","SVRQ_NOTES","String")
+
+F.Data.Dictionary.CreateFromSQL("dictPL","Con","Select ORDER_NO+ORDER_SUFFIX+ORDER_LINE as OSL,PRODUCT_LINE as PL from V_ORDER_HIST_LINE")
+F.Data.Dictionary.SetDefaultReturn("dictPL","")
+F.Data.DataTable.FillFromDictionary("dtRMAs","dictPL","OSL","PL")
+F.Data.Dictionary.Close("dictPL")
+
+F.Data.DataTable.CreateFromSQL("dtAddCol","Con","Select ORDER_NO+ORDER_SUFFIX+ORDER_LINE as OSL,INVOICE as CREDIT_MEMO,DATE_INVOICE as DATE_CRED_MEMO,EXTENSION_ORDER as AMT_CRED_MEMO from ORDER_HIST_LINE where CREDIT_MEMO_FLAG = 'Y' and FLAG_RMA = 'Y';")
+
+F.Data.Dictionary.CreateFromDataTable("dictCredMem","dtAddCol","OSL","CREDIT_MEMO")
+F.Data.Dictionary.SetDefaultReturn("dictCredMem","")
+F.Data.DataTable.FillFromDictionary("dtRMAs","dictCredMem","OSL","CREDIT_MEMO")
+F.Data.Dictionary.Close("dictCredMem")
+
+F.Data.Dictionary.CreateFromDataTable("dictCredMemDt","dtAddCol","OSL","DATE_CRED_MEMO")
+F.Data.Dictionary.SetDefaultReturn("dictCredMemDt","")
+F.Data.DataTable.FillFromDictionary("dtRMAs","dictCredMemDt","OSL","DATE_CRED_MEMO")
+F.Data.Dictionary.Close("dictCredMemDt")
+
+F.Data.Dictionary.CreateFromDataTable("dictCredMemAmt","dtAddCol","OSL","AMT_CRED_MEMO")
+F.Data.Dictionary.SetDefaultReturn("dictCredMemAmt","")
+F.Data.DataTable.FillFromDictionary("dtRMAs","dictCredMemAmt","OSL","AMT_CRED_MEMO")
+F.Data.Dictionary.Close("dictCredMemAmt")
+
+F.Data.DataTable.Close("dtAddCol")
+
+F.Data.DataTable.RemoveColumn("dtRMAs","OSL")
+
+F.Data.Dictionary.CreateFromSQL("dictSVRQNotes","Con","Select RMA_ID+ORDER_NO+SUFFIX+LINE as RIL,TEXT as SVRQ_NOTES from RMA_LN_SVRQ_NOTES union all select RMA_ID+ORDER_NO+SUFFIX+LINE as RIL,TEXT as SVRQ_NOTES from RMA_LNSVRQ_H_NOTE order by RIL,SVRQ_NOTES;")
+F.Data.Dictionary.SetDefaultReturn("dictSVRQNotes","")
+F.Data.DataTable.FillFromDictionary("dtRMAs","dictSVRQNotes","RIL","SVRQ_NOTES")
+F.Data.Dictionary.Close("dictSVRQNotes")
+
+F.Data.DataTable.RemoveColumn("dtRMAs","RIL")
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.LoadExtraData.End
+
+Program.Sub.LoadGrid.Start
+F.Intrinsic.Control.Try
+
+F.Data.DataView.SetFilter("dtRMAs", "dvRMAs", "")
+F.Data.DataView.SetSort("dtRMAs", "dvRMAs", "RMA_ID desc, RMA_LINE desc, SVC_PERF_SEQ desc")
+GUI.FormRMADashboard.gsgcRMAs.AddGridviewFromDataView("gvRMAs", "dtRMAs", "dvRMAs")
+
+GUI.FormRMADashboard.gsgcRMAs.SetGridviewProperty("gvRMAs", "ReadOnly", True)
+GUI.FormRMADashboard.gsgcRMAs.SetGridviewProperty("gvRMAs", "EnableAppearanceOddRow", True)
+GUI.FormRMADashboard.gsgcRMAs.SetGridviewProperty("gvRMAs", "OptionsViewColumnAutoWidth", False)
+F.Intrinsic.Control.CallSub(SetGridViewProperty, "FORM", "FormRMADashboard", "GRIDCONTROL", "gsgcRMAs", "GRIDVIEW", "gvRMAs", "DATATABLE", "dtRMAs", "PROPERTY", "HeaderFontBold", "Value", True)
+F.Intrinsic.Control.CallSub(SetGridViewProperty, "FORM", "FormRMADashboard", "GRIDCONTROL", "gsgcRMAs", "GRIDVIEW", "gvRMAs", "DATATABLE", "dtRMAs", "PROPERTY", "AllowEdit", "Value", False)
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "TIME_ISSUED", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ISSUED_USER", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "WRNTY_CUST", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LOCATION", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER_PART", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_PERF_SCHED", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "P_ORDER_LINE", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SCRAP_CODE", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ACTION_CODE", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "TIME_ACTION", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_MATL", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_LABOR", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OVHD", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OUTS", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_FRGT", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OTH", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_PERFORMED", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_REQUESTED", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_ORDER", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_SUFFIX", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_ORDER_SUFFIX", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_JOB", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_JOB", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_JOB_SUFFIX", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_JOB_SUFFIX", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "INVOICE_DATE", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE_DATE", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SHIP_DATE", "Visible", False)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_SHIP_DATE", "Visible", False)
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_ID", "Caption", "RMA")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_ORDER", "Caption", "RMA SO")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_SUFFIX", "Caption", "RMA SO Suffix")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER", "Caption", "Customer Code")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NAME_CUSTOMER", "Caption", "Customer")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER_PO", "Caption", "Customer PO")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_INVOICE", "Caption", "RMA Invoice")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ISSUED", "Caption", "Date")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "TIME_ISSUED", "Caption", "Time")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ISSUED_USER", "Caption", "User")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "WRNTY_CUST", "Caption", "Warranty Customer")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_LINE", "Caption", "RMA Line")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "PART", "Caption", "Part")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LOCATION", "Caption", "Loc")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "PART_DESCRIPTION", "Caption", "Description")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER_PART", "Caption", "Customer Part")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_SHIPPED", "Caption", "Shipped")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_RETURNED", "Caption", "Returned")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_RECEIVED", "Caption", "Received")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_RECEIVED", "Caption", "Date Received")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_REQUESTED", "Caption", "Request Code")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_LINE", "Caption", "RMA SO Line")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_PERF_COMPLETE", "Caption", "Qty Complete")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_PERF_SCHED", "Caption", "Qty Scheduled")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SVC_PERF_SEQ", "Caption", "Service Line")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_SERVICED", "Caption", "Qty Serviced")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "P_ORDER_LINE", "Caption", "PO Line")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "UNIT_COST", "Caption", "Unit Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LOT", "Caption", "Lot")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "BIN", "Caption", "Bin")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "HEAT", "Caption", "Heat")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERIAL", "Caption", "Serial")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_PERFORMED", "Caption", "Perform Code")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SCRAP_CODE", "Caption", "Scrap Code")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ACTION_CODE", "Caption", "Action Code")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ACTION_TAKEN", "Caption", "Action Taken")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ACTION", "Caption", "Action Date")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "TIME_ACTION", "Caption", "Action Time")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_CLOSED", "Caption", "Service Closed")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST", "Caption", "Return Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_MATL", "Caption", "Return M. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_LABOR", "Caption", "Return L. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OVHD", "Caption", "Return Ov. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OUTS", "Caption", "Return Out. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_FRGT", "Caption", "Return F. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OTH", "Caption", "Return Oth. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_CLOSED", "Caption", "RMA Closed")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_ORDER_SUFFIX", "Caption", "New SO Suff.")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_JOB", "Caption", "RMA Job")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_JOB", "Caption", "New Job")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_JOB_SUFFIX", "Caption", "RMA Job Suff.")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_JOB_SUFFIX", "Caption", "New Job Suff.")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE", "Caption", "New Invoice")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "MAT_COST", "Caption", "Rework M. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LABOR_COST", "Caption", "Rework L. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OVER_COST", "Caption", "Rework Ov. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OUTS_COST", "Caption", "Rework Out. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FREIGHT_COST", "Caption", "Rework F. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OTHER_COST", "Caption", "Rework Oth. Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_REQUESTED_DESCRIPTION", "Caption", "Service Requested")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_PERFORMED_DESCRIPTION", "Caption", "Service Performed")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_JOB", "Caption", "RMA Job")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_JOB", "Caption", "New Job")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_SO", "Caption", "RMA SO")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_SO", "Caption", "New SO")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "REWORK_TOTAL_COST", "Caption", "Rework Cost")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "INVOICE_DATE", "Caption", "Original Invoice Date")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE_DATE", "Caption", "New Invoice Date")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SHIP_DATE", "Caption", "Original Ship Date")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_SHIP_DATE", "Caption", "New Ship Date")
+'6293
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CREDIT_MEMO", "Caption", "Credit Memo #")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_CRED_MEMO", "Caption", "Credit Memo Date")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "AMT_CRED_MEMO", "Caption", "Amount Credit")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SVRQ_NOTES", "Caption", "Svc Req Notes")
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_ID", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_ORDER", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_SUFFIX", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NAME_CUSTOMER", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER_PO", "MinWidth", 100)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_INVOICE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ISSUED", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "TIME_ISSUED", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ISSUED_USER", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "WRNTY_CUST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_LINE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "PART", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LOCATION", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "PART_DESCRIPTION", "MinWidth", 160)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER_PART", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_SHIPPED", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_RETURNED", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_RECEIVED", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_RECEIVED", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_REQUESTED", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_LINE", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_PERF_COMPLETE", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_PERF_SCHED", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SVC_PERF_SEQ", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_SERVICED", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "P_ORDER_LINE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "UNIT_COST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LOT", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "BIN", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "HEAT", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERIAL", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_PERFORMED", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SCRAP_CODE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ACTION_CODE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ACTION_TAKEN", "MinWidth", 180)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ACTION", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "TIME_ACTION", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_CLOSED", "MinWidth", 50)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_MATL", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_LABOR", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OVHD", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OUTS", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_FRGT", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OTH", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_CLOSED", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_ORDER_SUFFIX", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_JOB", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_JOB", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_JOB_SUFFIX", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_JOB_SUFFIX", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "MAT_COST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LABOR_COST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OVER_COST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OUTS_COST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FREIGHT_COST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OTHER_COST", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_REQUESTED_DESCRIPTION", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_PERFORMED_DESCRIPTION", "MinWidth", 120)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_JOB", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_JOB", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_SO", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_SO", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "REWORK_TOTAL_COST", "MinWidth", 80)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "INVOICE_DATE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE_DATE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SHIP_DATE", "MinWidth", 60)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_SHIP_DATE", "MinWidth", 60)
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ISSUED", "DisplayCustomDateTime", "d")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_RECEIVED", "DisplayCustomDateTime", "d")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ACTION", "DisplayCustomDateTime", "d")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "INVOICE_DATE", "DisplayCustomDateTime", "d")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE_DATE", "DisplayCustomDateTime", "d")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SHIP_DATE", "DisplayCustomDateTime", "d")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_SHIP_DATE", "DisplayCustomDateTime", "d")
+'6293
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_CRED_MEMO", "DisplayCustomDateTime", "d")
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ISSUED", "HeaderHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_RECEIVED", "HeaderHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ACTION", "HeaderHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "INVOICE_DATE", "HeaderHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE_DATE", "HeaderHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SHIP_DATE", "HeaderHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_SHIP_DATE", "HeaderHAlignment", "Center")
+'6293
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_CRED_MEMO", "HeaderHAlignment", "Center")
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ISSUED", "CellHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_RECEIVED", "CellHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ACTION", "CellHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "INVOICE_DATE", "CellHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE_DATE", "CellHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SHIP_DATE", "CellHAlignment", "Center")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_SHIP_DATE", "CellHAlignment", "Center")
+'6293
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_CRED_MEMO", "CellHAlignment", "Center")
+
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LBHS_COST", "R Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LBHS_COST_MATL", "R M Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LBHS_COST_LABOR", "R L Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LBHS_COST_OVHD", "R OV Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LBHS_COST_OUTS", "R OS Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LBHS_COST_FRGT", "R F Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LBHS_COST_OTH", "R OTH Cost", "Sum", "Total: ", "", "")
+
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "REWORK_TOTAL_COST", "Rework Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "MAT_COST", "M Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "LABOR_COST", "L Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "OVER_COST", "OV Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "OUTS_COST", "OS Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "FREIGHT_COST", "F Cost", "Sum", "Total: ", "", "")
+GUI.FormRMADashboard.gsgcRMAs.AddSummaryItem("gvRMAs", "OTHER_COST", "OTH Cost", "Sum", "Total: ", "", "")
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "REWORK_TOTAL_COST", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "MAT_COST", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LABOR_COST", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OVER_COST", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OUTS_COST", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FREIGHT_COST", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OTHER_COST", "DisplayCustomNumeric", "#############0.00##")
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_MATL", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_LABOR", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OVHD", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OUTS", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_FRGT", "DisplayCustomNumeric", "#############0.00##")
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LBHS_COST_OTH", "DisplayCustomNumeric", "#############0.00##")
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_SO", "CellForeColor", "Blue")
+'GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_SO", "CellFontUnderline", True)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_SO", "CellForeColor", "Blue")
+'GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_SO", "CellFontUnderline", True)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_JOB", "CellForeColor", "Blue")
+'GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_JOB", "CellFontUnderline", True)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_JOB", "CellForeColor", "Blue")
+'GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_JOB", "CellFontUnderline", True)
+'6293
+Gui.FormRMADashboard.gsgcRMAs.AddStyleFormatCondition("gvRMAs","RMA_ID","LinkRMA","expression","[RMA_CLOSED] = 'N'")
+Gui.FormRMADashboard.gsgcRMAs.SetStyleFormatConditionProperty("gvRMAs","RMA_ID","LinkRMA","ForeColor","Blue")
+
+GUI.FormRMADashboard.gsgcRMAs.MainView("gvRMAs")
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.LoadGrid.End
+
+Program.Sub.OpenConnection.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.If(V.Global.iConnections, =, 0)
+	F.ODBC.Connection!Con.OpenCompanyConnection(500)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Math.Add(V.Global.iConnections, 1, V.Global.iConnections)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.OpenConnection.End
+
+Program.Sub.CloseConnection.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.If(V.Global.iConnections, >, 0)
+	F.Intrinsic.Math.Sub(V.Global.iConnections, 1, V.Global.iConnections)
+	
+	F.Intrinsic.Control.If(V.Global.iConnections, =, 0)
+		F.ODBC.Connection!Con.Close
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.CloseConnection.End
+
+Program.Sub.ErrorMessage.Start
+F.Intrinsic.Control.Try
+
+V.Local.iError.Declare(Long)
+V.Local.sErrorDescription.Declare(String)
+V.Local.sSubroutine.Declare(String)
+V.Local.sError.Declare(String)
+V.Local.bExists.Declare(Boolean)
+V.Local.sCallback.Declare(String)
+
+'make sure we aren't in an error loop
+F.Intrinsic.Control.If(V.Global.bError)
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+V.Global.bError.Set(True)
+
+V.Local.iError.Set(V.Args.ErrorNumber)
+V.Local.sErrorDescription.Set(V.Args.ErrorDescription)
+V.Local.sSubroutine.Set(V.Args.Subroutine)
+
+F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}", V.Caller.ScriptFile, V.Ambient.Newline, V.Local.sSubroutine, V.Local.iError, V.Local.sErrorDescription, V.Ambient.GABVersion, V.Local.sError)
+F.Intrinsic.UI.Msgbox(V.Local.sError)
+
+F.Intrinsic.Variable.ArgExists("Callback", V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists)
+	V.Local.sCallback.Set(V.Args.Callback.Trim)
+	F.Intrinsic.Control.CallSub(V.Local.sCallback)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Caller.ScriptFile,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndTry
+Program.Sub.ErrorMessage.End
+
+Program.Sub.Serialize.Start
+F.Intrinsic.Control.Try
+
+V.Local.sSerialize.Declare(String)
+V.Local.sForm.Declare(String)
+V.Local.sGridControl.Declare(String)
+V.Local.sGridView.Declare(String)
+V.Local.sREGID.Declare(String)
+
+V.Local.sForm.Set(V.Args.Form.Trim)
+V.Local.sGridControl.Set(V.Args.GridControl.Trim)
+V.Local.sGridView.Set(V.Args.GridView.Trim)
+V.Local.sREGID.Set(V.Args.REGID.Trim)
+
+GUI.[V.Local.sForm].[V.Local.sGridControl].Serialize(V.Local.sGridView, V.Local.sSerialize)
+F.Global.Registry.AddValue(V.Caller.User, V.Caller.CompanyCode, V.Local.sGridView, V.Local.sREGID, 1000, False, "Serialize", False, 0, -999.0 , 1/1/1980, 12:00:00 AM, V.Local.sSerialize)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+F.Intrinsic.Control.Try
+
+V.Local.sSerialize.Declare(String)
+V.Local.sForm.Declare(String)
+V.Local.sGridControl.Declare(String)
+V.Local.sGridView.Declare(String)
+V.Local.sREGID.Declare(String)
+
+V.Local.sForm.Set(V.Args.Form.Trim)
+V.Local.sGridControl.Set(V.Args.GridControl.Trim)
+V.Local.sGridView.Set(V.Args.GridView.Trim)
+V.Local.sREGID.Set(V.Args.REGID.Trim)
+
+F.Global.Registry.ReadValue(V.Caller.User, V.Caller.CompanyCode, V.Local.sGridView, V.Local.sREGID, 1000, 6, "", V.Local.sSerialize)
+F.Intrinsic.Control.If(V.Local.sSerialize.Trim,<>,"")
+	Gui.[V.Local.sForm].[V.Local.sGridControl].Deserialize(V.Local.sSerialize)
+F.Intrinsic.Control.Else
+	'only set visible index the first time they load the dashboard...
+	'it doesn't seem to always play nice with serialization
+	F.Intrinsic.Control.CallSub(SetVisibleIndex)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.ResetSerialization.Start
+F.Intrinsic.Control.Try
+
+V.Local.sSQL.Declare(String)
+V.Local.iUserID.Declare(Long)
+V.Local.sREGID.Declare(String)
+
+V.Local.sREGID.Set(V.Args.REGID.Trim)
+
+F.Global.Security.GetUserId(V.Caller.User, V.Caller.CompanyCode, V.Local.iUserID)
+F.Intrinsic.String.Build("delete from GS_REGISTRY where REG_ID = '{0}' and USER_ID = {1}", V.Local.sREGID, V.Local.iUserID, V.Local.sSQL)
+
+F.ODBC.Connection!Comm.OpenCommonConnection
+F.ODBC.Connection!Comm.Execute(V.Local.sSQL)
+F.ODBC.Connection!Comm.Close
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.ResetSerialization.End
+
+Program.Sub.Export.Start
+F.Intrinsic.Control.Try
+
+'generic export
+'pass Form, GridControl, and Filename base
+
+V.Local.sFileExport.Declare(String)
+V.Local.bExcel.Declare(Boolean)
+V.Local.bFileLocked.Declare(Boolean)
+V.Local.sMessage.Declare(String)
+V.Local.sType.Declare(String)
+V.Local.sForm.Declare(String)
+V.Local.sGridControl.Declare(String)
+V.Local.sFileName.Declare(String)
+V.Local.bExists.Declare(Boolean)
+
+V.Local.sForm.Set(V.Args.Form)
+V.Local.sGridControl.Set(V.Args.GridControl)
+V.Local.sFileName.Set(V.Args.FileName)
+
+F.Automation.MSExcel.CheckPresence(V.Local.bExcel)
+F.Intrinsic.Control.If(V.Local.bExcel)
+	V.Local.sType.Set("xlsx")
+F.Intrinsic.Control.Else
+	V.Local.sType.Set("csv")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.File.MakeFilenameFriendly(V.Local.sFileName, V.Local.sFileName)
+F.Intrinsic.String.Build("{0}\{1}_Export_{2}.{3}", V.Caller.LocalGssTempDir, V.Local.sFileName, V.Ambient.Date.FormatMM-DD-YYYY, V.Local.sType, V.Local.sFileExport)
+F.Intrinsic.File.IsFileLocked(V.Local.sFileExport, V.Local.bFileLocked)
+
+F.Intrinsic.Control.If(V.Local.bFileLocked)
+	F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}", V.Ambient.NewLine, V.Local.sFileExport, V.Local.sMessage)
+	F.Intrinsic.UI.Msgbox(V.Local.sMessage,"File In Use")
+F.Intrinsic.Control.Else
+	Gui.[V.Local.sForm].[V.Local.sGridControl].Export(V.Local.sFileExport, V.Local.sType)
+	F.Intrinsic.Task.ShellExec(0, "", V.Local.sFileExport, "", "", 1)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.If(V.Ambient.ErrorNumber, =, 5700)
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.Export.End
+
+Program.Sub.SetGridViewProperty.Start
+F.Intrinsic.Control.Try
+
+V.Local.sForm.Declare(String)
+V.Local.sGridView.Declare(String)
+V.Local.sDataTable.Declare(String)
+V.Local.sProperty.Declare(String)
+V.Local.sValue.Declare(String)
+V.Local.sColumns.Declare(String)
+V.Local.iCounter.Declare(Long)
+V.Local.sGridControl.Declare(String)
+
+V.Local.sForm.Set(V.Args.FORM)
+V.Local.sGridView.Set(V.Args.GRIDVIEW)
+V.Local.sDataTable.Set(V.Args.DATATABLE)
+V.Local.sProperty.Set(V.Args.PROPERTY)
+V.Local.sValue.Set(V.Args.VALUE)
+V.Local.sGridControl.Set(V.Args.GRIDCONTROL)
+
+V.Local.sColumns.Set(V.DataTable.[V.Local.sDataTable].FieldNames)
+F.Intrinsic.String.Split(V.Local.sColumns, "*!*", V.Local.sColumns)
+F.Intrinsic.Control.For(V.Local.iCounter, 0, V.Local.sColumns.UBound, 1)
+	GUI.[V.Local.sForm].[V.Local.sGridControl].SetColumnProperty(V.Local.sGridView, V.Local.sColumns(V.Local.iCounter), V.Local.sProperty, V.Local.sValue)
+F.Intrinsic.Control.Next(V.Local.iCounter)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.SetGridViewProperty.End
+
+Program.Sub.CloseDataTable.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.If(V.DataTable.dtRMAs.Exists)
+	F.Intrinsic.Control.If(V.DataView.dtRMAs!dvRMAs.Exists)
+		F.Data.DataView.Close("dtRMAs", "dvRMAs")
+	F.Intrinsic.Control.EndIf
+	F.Data.DataTable.Close("dtRMAs")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.CloseDataTable.End
+
+Program.Sub.CreateContextMenu.Start
+F.Intrinsic.Control.Try
+
+GUI.FormRMADashboard..ContextMenuCreate("ctxmRMAGrid")
+GUI.FormRMADashboard..ContextMenuAddItem("ctxmRMAGrid", "ctxReset", 0, "Reset")
+GUI.FormRMADashboard..ContextMenuSetItemEventHandler("ctxmRMAGrid", "ctxReset", ctxReset_Click)
+GUI.FormRMADashboard..ContextMenuAddItem("ctxmRMAGrid", "ctxExport", 0, "Export")
+GUI.FormRMADashboard..ContextMenuSetItemEventHandler("ctxmRMAGrid", "ctxExport", ctxExport_Click)
+GUI.FormRMADashboard.gsgcRMAs.ContextMenuAttach("ctxmRMAGrid")
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.CreateContextMenu.End
+
+Program.Sub.ctxReset_Click.Start
+F.Intrinsic.Control.Try
+
+V.Global.bReset.Set(True)
+F.Intrinsic.Control.CallSub(ResetSerialization, "REGID", "6293")
+F.Intrinsic.Control.CallSub(cmdRefresh_Click)
+V.Global.bReset.Set(False)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.ctxReset_Click.End
+
+Program.Sub.ctxExport_Click.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.CallSub(Export, "Form", "FormRMADashboard", "GridControl", "gsgcRMAs", "FileName", "RMADashboard")
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.ctxExport_Click.End
+
+Program.Sub.gsgcRMAs_RowCellClick.Start
+F.Intrinsic.Control.Try
+
+V.Local.sParams.Declare(String)
+V.Local.sValue.Declare(String)
+V.Local.sValue2.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iCallWrapper.Declare(Long)
+V.Local.sMode.Declare(String)
+'6293
+V.Local.sRMAID.Declare
+V.Local.SRMALn.Declare
+V.Local.sOriOrd.Declare
+V.Local.sOriOrdSuf.Declare
+V.Local.sCaption.Declare
+V.Local.sClosed.Declare
+
+F.Intrinsic.Control.SelectCase(V.Args.Column.UCase)
+	
+	F.Intrinsic.Control.CaseAny("FULL_ORIGINAL_SO", "FULL_NEW_SO")
+		
+		GUI.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "ORIGINAL_ORDER", V.Args.RowIndex, V.Local.sValue)
+		GUI.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "CUSTOMER", V.Args.RowIndex, V.Local.sValue2)
+		
+		F.Intrinsic.Control.If(V.Local.sValue.Trim, !=, "", AND, V.Local.sValue2.Trim, !=, "")
+			'check if it's open or not
+			F.Intrinsic.String.Build("select ORDER_NO from V_ORDER_HEADER where ORDER_NO = '{0}'", V.Local.sValue, V.Local.sSQL)
+			F.Intrinsic.Control.CallSub(OpenConnection)
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL, V.Local.sRet)
+			F.Intrinsic.Control.If(V.Ambient.ExecuteAndReturnEOF)
+				F.Intrinsic.String.ConcatCallWrapperArgs(V.Local.sValue, V.Local.sValue2, V.Local.sParams)
+				V.Local.iCallWrapper.Set(7070)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.ConcatCallWrapperArgs(V.Local.sValue, "O", V.Local.sValue2, V.Local.sParams)
+				V.Local.iCallWrapper.Set(200000)
+			F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.CallSub(CloseConnection)
+			
+			GUI.FormRMADashboard..Enabled(False)
+			F.Global.General.CallWrapperSync(V.Local.iCallWrapper, V.Local.sParams)
+			F.Intrinsic.Control.CallSub(Blink, "FORM", "FormRMADashboard")
+			GUI.FormRMADashboard..Enabled(True)
+		F.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.Control.CaseAny("FULL_ORIGINAL_JOB", "FULL_NEW_JOB")
+	
+		GUI.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", V.Args.Column.UCase, V.Args.RowIndex, V.Local.sValue)
+		F.Intrinsic.String.Split(V.Local.sValue, "-", V.Local.sValue)
+		V.Local.sValue2.Set(V.Local.sValue(1).Trim)
+		V.Local.sValue.Set(V.Local.sValue(0).Trim)
+		
+		F.Intrinsic.String.ConcatCallWrapperArgs("7", V.Local.sValue, V.Local.sValue2, "A", V.Local.sParams)
+		
+		F.Intrinsic.Control.If(V.Local.sValue.Trim, !=, "", AND, V.Local.sValue2.Trim, !=, "")
+			GUI.FormRMADashboard..Enabled(False)
+			F.Global.General.CallWrapperSync(450000,V.Local.sParams)
+			F.Intrinsic.Control.CallSub(Blink, "FORM", "FormRMADashboard")
+			GUI.FormRMADashboard..Enabled(True)
+		F.Intrinsic.Control.EndIf
+	'6293 - Bringing Service Request Line Notes	into separate form
+	F.Intrinsic.Control.Case("SVRQ_NOTES")
+		Gui.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "RMA_ID", V.Args.RowIndex, V.Local.sRMAID)
+		Gui.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "RMA_LINE", V.Args.RowIndex, V.Local.SRMALn)
+		Gui.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "ORIGINAL_ORDER", V.Args.RowIndex, V.Local.sOriOrd)
+		Gui.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "ORIGINAL_SUFFIX", V.Args.RowIndex, V.Local.sOriOrdSuf)
+		
+		Gui.fmNotes.txtRMAID.Text(V.Local.sRMAID)
+		Gui.fmNotes.txtRMALn.Text(V.Local.SRMALn)
+		Gui.fmNotes.txtOriOrd.Text(V.Local.sOriOrd)
+		Gui.fmNotes.txtOriOrdSuf.Text(V.Local.sOriOrdSuf)
+		Gui.fmNotes.txtIndex.Text(V.Args.RowIndex)
+		
+		Gui.fmNotes.txtSvcLnNote.Enabled(True)
+		Gui.fmNotes.cmdNoteSv.Enabled(True)
+		Gui.fmNotes.lblHist.Visible(False)
+		
+		F.Intrinsic.Control.CallSub(OpenConnection)
+		
+		F.Intrinsic.String.Build("Select RMA_ID from V_RMA_HIST_LINES where RMA_ID = '{0}' and ORDER_NO = '{1}' and ORDER_SUFFIX = '{2}' and RMA_LINE = '{3}'",V.Local.sRMAID,V.Local.sOriOrd,V.Local.sOriOrdSuf,V.Local.SRMALn,V.Local.sSQL)
+		F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL,V.Local.sSQL)
+		
+		F.Intrinsic.Control.If(V.Local.sSQL.Trim,=,"")
+			F.Intrinsic.String.Build("Select TEXT from RMA_LN_SVRQ_NOTES where RMA_ID = '{0}' and ORDER_NO = '{1}' and SUFFIX = '{2}' and LINE = '{3}'",V.Local.sRMAID,V.Local.sOriOrd,V.Local.sOriOrdSuf,V.Local.SRMALn,V.Local.sSQL)
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL,V.Local.sSQL)
+			
+			Gui.fmNotes.txtSvcLnNote.Text(V.Local.sSQL)
+			F.Intrinsic.String.Build("Service Notes for RMA #{0} Order #{1} Line#{2}",V.Local.sRMAID,V.Local.sOriOrd,V.Local.SRMALn,V.Local.sCaption)
+			Gui.fmNotes..Caption(V.Local.sCaption)
+			
+			Gui.fmNotes..SetFocus(True)
+			Gui.fmNotes..Show
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Build("Select TEXT from RMA_LNSVRQ_H_NOTE where RMA_ID = '{0}' and ORDER_NO = '{1}' and SUFFIX = '{2}' and LINE = '{3}'",V.Local.sRMAID,V.Local.sOriOrd,V.Local.sOriOrdSuf,V.Local.SRMALn,V.Local.sSQL)
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL,V.Local.sSQL)
+			
+			Gui.fmNotes.txtSvcLnNote.Text(V.Local.sSQL)
+			F.Intrinsic.String.Build("Service Notes for RMA #{0} Order #{1} Line#{2}",V.Local.sRMAID,V.Local.sOriOrd,V.Local.SRMALn,V.Local.sCaption)
+			Gui.fmNotes..Caption(V.Local.sCaption)
+			
+			Gui.fmNotes..AlwaysOnTop(True)
+			Gui.fmNotes.txtSvcLnNote.Enabled(False)
+			Gui.fmNotes.cmdNoteSv.Enabled(False)
+			Gui.fmNotes.lblHist.Visible(True)
+			Gui.fmNotes..Show
+		F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.CallSub(CloseConnection)
+	F.Intrinsic.Control.Case("RMA_ID")
+		Gui.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "RMA_ID", V.Args.RowIndex, V.Local.sRMAID)
+		Gui.FormRMADashboard.gsgcRMAs.GetCellValueByColumnName("gvRMAs", "RMA_CLOSED", V.Args.RowIndex, V.Local.sClosed)
+		
+		F.Intrinsic.Control.If(V.Local.sClosed.Trim,=,"Y")
+			F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.EndIf
+		
+		F.Global.Registry.AddValue(V.Caller.Caller,V.Caller.CompanyCode,"GCG_6293",6293,0,False,V.Local.sRMAID,0,0,0,"1900-01-01","1900-01-01")
+		
+		F.Global.General.CallWrapperSync(50,"QL2002")
+		
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.gsgcRMAs_RowCellClick.End
+
+Program.Sub.Blink.Start
+'makes sure a form is on top
+
+F.Intrinsic.Control.Try
+
+V.Local.sForm.Declare(String)
+
+V.Local.sForm.Set(V.Args.FORM.Trim)
+GUI.[V.Local.sForm]..AlwaysOnTop(True)
+GUI.[V.Local.sForm]..AlwaysOnTop(False)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.Blink.End
+
+Program.Sub.SetVisibleIndex.Start
+F.Intrinsic.Control.Try
+
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_ID", "VisibleIndex", 1)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_LINE", "VisibleIndex", 2)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SVC_PERF_SEQ", "VisibleIndex", 3)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "RMA_CLOSED", "VisibleIndex", 4)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NAME_CUSTOMER", "VisibleIndex", 5)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "CUSTOMER_PO", "VisibleIndex", 6)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_INVOICE", "VisibleIndex", 7)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ISSUED", "VisibleIndex", 8)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_SO", "VisibleIndex", 9)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ORIGINAL_LINE", "VisibleIndex", 10)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "PART", "VisibleIndex", 11)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "PART_DESCRIPTION", "VisibleIndex", 12)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LOT", "VisibleIndex", 13)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "BIN", "VisibleIndex", 14)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "HEAT", "VisibleIndex", 15)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERIAL", "VisibleIndex", 16)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_SHIPPED", "VisibleIndex", 17)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_RETURNED", "VisibleIndex", 18)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_RECEIVED", "VisibleIndex", 19)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_RECEIVED", "VisibleIndex", 20)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_PERF_COMPLETE", "VisibleIndex", 21)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "QTY_SERVICED", "VisibleIndex", 22)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "UNIT_COST", "VisibleIndex", 23)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_REQUESTED_DESCRIPTION", "VisibleIndex", 24)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "ACTION_TAKEN", "VisibleIndex", 25)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "DATE_ACTION", "VisibleIndex", 26)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_PERFORMED_DESCRIPTION", "VisibleIndex", 27)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "SERVICE_CLOSED", "VisibleIndex", 28)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_SO", "VisibleIndex", 29)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "NEW_INVOICE", "VisibleIndex", 30)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_ORIGINAL_JOB", "VisibleIndex", 31)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FULL_NEW_JOB", "VisibleIndex", 32)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "MAT_COST", "VisibleIndex", 33)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "LABOR_COST", "VisibleIndex", 34)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OVER_COST", "VisibleIndex", 35)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OUTS_COST", "VisibleIndex", 36)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "FREIGHT_COST", "VisibleIndex", 37)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "OTHER_COST", "VisibleIndex", 38)
+GUI.FormRMADashboard.gsgcRMAs.SetColumnProperty("gvRMAs", "REWORK_TOTAL_COST", "VisibleIndex", 39)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "FormRMADashboard_UnLoad")
+F.Intrinsic.Control.EndTry
+Program.Sub.SetVisibleIndex.End
+
+Program.Sub.cmdNoteSv_Click.Start
+'6293 - Saving Notes.  Not permitted for lines in history
+F.Intrinsic.Control.Try
+V.Local.sRMAID.Declare
+V.Local.SRMALn.Declare
+V.Local.sOriOrd.Declare
+V.Local.sOriOrdSuf.Declare
+V.Local.sText.Declare
+V.Local.sSQL.Declare
+V.Local.iRowIndex.Declare
+
+V.Local.sRMAID.Set(V.Screen.fmNotes!txtRMAID.Value)
+V.Local.SRMALn.Set(V.Screen.fmNotes!txtRMALn.Value)
+V.Local.sOriOrd.Set(V.Screen.fmNotes!txtOriOrd.Value)
+V.Local.sOriOrdSuf.Set(V.Screen.fmNotes!txtOriOrdSuf.Value)
+V.Local.sText.Set(V.Screen.fmNotes!txtSvcLnNote.Value)
+V.Local.iRowIndex.Set(V.Screen.fmNotes!txtIndex.Value)
+
+F.Intrinsic.Control.CallSub(OpenConnection)
+
+F.Intrinsic.String.Build("Select TEXT from RMA_LN_SVRQ_NOTES where RMA_ID = '{0}' and ORDER_NO = '{1}' and SUFFIX = '{2}' and LINE = '{3}'",V.Local.sRMAID,V.Local.sOriOrd,V.Local.sOriOrdSuf,V.Local.SRMALn,V.Local.sSQL)
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL,V.Local.sSQL)
+
+F.Intrinsic.Control.If(V.Local.sSQL.Trim,<>,"")
+	F.Intrinsic.String.Build("Update RMA_LN_SVRQ_NOTES set TEXT = '{0}' where RMA_ID = '{1}' and ORDER_NO = '{2}' and SUFFIX = '{3}' and LINE = '{4}'",V.Local.sText.PSQLFriendly,V.Local.sRMAID,V.Local.sOriOrd,V.Local.sOriOrdSuf,V.Local.SRMALn,V.Local.sSQL)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("Insert into RMA_LN_SVRQ_NOTES (RMA_ID,ORDER_NO,SUFFIX,LINE,TEXT) values('{0}','{1}','{2}','{3}','{4}')",V.Local.sRMAID,V.Local.sOriOrd,V.Local.sOriOrdSuf,V.Local.SRMALn,V.Local.sText.PSQLFriendly,V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!Con.Execute(V.Local.sSQL)
+
+F.Data.DataTable.SetValue("dtRMAs",V.Local.iRowIndex,"SVRQ_NOTES",V.Local.sText)
+
+F.Intrinsic.Control.CallSub(CloseConnection)
+
+F.Intrinsic.Control.CallSub(fmNotes_UnLoad)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "cmdNoteSv_Click")
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdNoteSv_Click.End
+
+Program.Sub.fmNotes_UnLoad.Start
+'6293
+F.Intrinsic.Control.Try
+
+Gui.fmNotes.txtRMAID.Text("")
+Gui.fmNotes.txtRMALn.Text("")
+Gui.fmNotes.txtOriOrd.Text("")
+Gui.fmNotes.txtOriOrdSuf.Text("")
+Gui.fmNotes.txtIndex.Text("")
+
+Gui.fmNotes..AlwaysOnTop(False)
+Gui.fmNotes.txtSvcLnNote.Enabled(True)
+Gui.fmNotes.cmdNoteSv.Enabled(True)
+Gui.fmNotes.lblHist.Visible(False)
+
+Gui.fmNotes..Visible(False)
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "cmdNoteSv_Click")
+F.Intrinsic.Control.EndTry
+Program.Sub.fmNotes_UnLoad.End
+
+Program.Sub.SetIcon.Start
+F.Intrinsic.Control.Try
+V.Local.sForm.Declare
+V.Local.bExists.Declare
+V.Local.sIcon.Declare
+V.Local.iCounter.Declare
+
+F.Intrinsic.String.Build("{0}\ART\gss2.ico",V.Caller.GlobalDir,v.Local.sIcon)
+F.Intrinsic.File.Exists(V.Local.sIcon, V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists.Not)
+    F.Intrinsic.String.Build("{0}\GAB\GAS\gss2.ico",V.Caller.PluginsDir,v.Local.sIcon)
+    F.Intrinsic.File.Exists(V.Local.sIcon, V.Local.bExists)
+    F.Intrinsic.Control.If(V.Local.bExists.Not)
+        F.Intrinsic.Control.ExitSub
+    F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.UI.GetFormList(V.Local.sForm)
+F.Intrinsic.String.Split(V.Local.sForm, "*!*", V.Local.sForm)
+
+F.Intrinsic.Control.For(V.Local.iCounter, 0, V.Local.sForm.UBound, 1)
+    Gui.[V.Local.sForm(V.Local.iCounter)]..Icon(V.Local.sIcon)
+F.Intrinsic.Control.Next(V.Local.iCounter)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMessage, "ErrorNumber", V.Ambient.ErrorNumber, "ErrorDescription", V.Ambient.ErrorDescription, "Subroutine", V.Ambient.CurrentSubroutine, "Callback", "cmdNoteSv_Click")
+F.Intrinsic.Control.EndTry
+Program.Sub.SetIcon.End
+
+Program.Sub.Comments.Start
+${$5$}$2.0.0.0$}$2
+${$6$}$tsmith$}$20210310085022015$}$xqPbj9atw05FglvzeFsZ9cqXP+qvG6tX88A9bphf8Y5Rv+QwIPLpcnwizFaz3iSH+nXReMy5MUs=
+Program.Sub.Comments.End
